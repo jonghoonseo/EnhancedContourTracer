@@ -1,0 +1,30 @@
+[1]	[1] W. A. McQueen, “Contour tracing and boundary detection for object,” United States Patent 6,674,904, Jan. 6, 2004.
+[2]	[2] I. Pitas, Digital Image Processing Algorithms and Applications, John Wiley & Sons, 2000, pp.275-329. 
+[3]	[3] E. Gose,  R. Johnsonbaugh,  S. Jost,  Pattern recognition and Image analysis, Upper Saddle River, NJ: Prentice Hall, 1996, pp.338-346. 
+[4]	[4] M. Das,  M. J. Paulik,  N. K. Loh,  "A bivariate autoregressive modeling technique for analysis and classification of planar shapes," IEEE Trans. on Pattern Analysis and Machine Intelligence, vol. 12, no. 1, pp. 97-103, Jan. 1990. 
+[5]	[5] S. Papert, Uses of Technology to Enhance Education, AI memo 298, AI Lab., MIT, 1973: ftp://publications.ai.mit.edu/ai-publications/pdf/AIM-298.pdf, Apr., 2007. 
+[6]	[6] C. Cheong, T. -D. Han, “Imrpoved simple boundary following algorithm”, Journal of Korea Information Science Society: Software and Applications, vol. 33, no. 4, pp. 427-439, Apr. 2006
+[7]	[7] A. G. Ghuneim, “Contour tracing,”
+http://www.imageprocessingplace.com/DIP/dip_downloads/tutorials/contour_tracing_Abeer_George_Ghuneim/index.html, Apr. 2007.
+[8]	[8] A. Mirante, N. Weingarten. “The radial sweep algorithm for constructing triangular irregular networks,” IEEE Computer Graphics and Applications, pp.11-21, 1982. 
+[9]	[9] T. Pavlidis, Algorithms for Graphics and Image Processing, Rockville, Maryland: Computer Science Press Inc., 1982.
+[10]	[10] C. Cheng, J.-H. Seo, T.-D. Han, "Advanced contour tracing algorithms based on analysis of tracing conditions," in Proc. of the 33rd KISS Fall Conference, vol. 33, no. 2,  Seoul, Korea: Korea Information Science Society, Oct. 2006, pp. 431-436.
+[11]	[11] T. Miyatake, H. Matsushima, M. Ejiri, “Contour Representation of Binary Images using Run-type Direction Codes,” Machine Vision and Applications, pp.193-200, Springer-Verlag, 1997. 
+[12]	[12] P.-E. Danielsson, “An Improvement of Kruses’s segmentation algorithm,” Computer Graphics and Image Processing, vol. 17, Academic Press, pp394-396, 1981.
+[13]	[13] K. Shoji, J. Miyamich, K. Hirano, “Contour following and reconstruction of binary image stored in run format,” System and Computers in Japan, vol. 30, no. 11, Scripta Technica, pp. 1-11. 1999.
+[14]	[14] Image Power, Inc. “Image power compression efficiencies”, http://www.imagepower.com/compress/, Apr. 2007
+[15]	[Stelldinger] Peer Stelldinger, Ullrich Köthe, Hans Meine, Topologically Correct Image Segmentation Using Alpha Shapes, in: A. Kuba, L. Nyul, K. Palagyi (Eds.): Discrete Geometry for Computer Imagery, Proc. DGCI 2006, Lecture Notes in Computer Science 4245, pp. 542-554, Berlin: Springer, 2006.
+[16]	[] [1] S. Marchand-Maillet, Y. M. Sharaiha, Binary Digital Image Processing, Academic Press, 2000, pp.173-180.  
+[17]	[] [5] F. Chang, C.-J. Chen, and C.-J. Lu, "A linear-time component-labeling algorithm using contour tracing technique," Comput. Vis. Image Underst. 93(2), pp. 206-220, 2004. 
+[18]	[Johnson] W. Johnson, H. Jellinek, L. Klotz, R. Rao, and S. Card, "Bridging the paper and electronic worlds: the paper user interface," in Proceedings of Interact ’93 and CHI’93 Conference on Human Factors in Computing Systems, S. Ashlund, K. Mullet, A. Henderson, E. Hollnagel, and T. White, Eds. New York : Association for Computing Machinery Press, 1993, pp. 507-512.
+[19]	[Hecht ] D. L. Hecht, “Printed embedded data graphical user interfaces,” IEEE Computer, vol.  34, no.3, pp.47-55, 2001. 
+[20]	[Nelson] L. Nelson, S. Ichimura, E. R. Pedersen, and L. Adams, “Palette: a paper interface for giving presentations,” in Proceedings of ACM SIGCHI Conference on Human Factors and Computing Systems, M. G. William and M. W. Altom, Eds. New York: Association for Computing Machinery Press, 1999, pp. 354-361.
+[21]	[Hautala ] T. Hautala, J. Kallenbach, M. Nuutinen, L. Salo, T.  Venho, A. Bäck, C. Bäckström, L. Hakola, and T. Järvinen,  “PrintAccess,”  http://www.media.hut.fi/GTTS/GAiF/GAiF2_2005.htm#PrintAccess — Final Report.
+[22]	[Usuda] H. Usuda, M. Suzuku, and Maeda, Research Result Report on Creation and Transmission of Digital Contents Using Image Recognition Technology (Summary Version), Project Code IMS 0359, Japan: Sony Corporation, 2004.
+[23]	[Hunter] K. D. Hunter, “Automatic access of internet content with a camera-enabled cell phone,” US6993573, United States Patent and Trademark Office, 2006.
+[24]	[Rekimoto] J. Rekimoto, and Y. Ayatsuka, "Cyber Code: Designing augmented reality environments with visual tags,” in Proceedings Designing Augmented Reality Environments, W. E. Mackay, Ed. New York: Association for Computing Machinery Press, 2000, pp. 1-10.
+[25]	[vallino] J.R. Vallino, “Interactive augmented reality,” Ph D dissertation, New Ypork: University of Rochester, 1998.
+[26]	[anuma] R. Azuma, Y. Baillot, R. Behringer, S. Feiner, S. Julier, and B. MacIntyre, “Recent advances in augmented reality,” IEEE Computer Graphics and Applications, vol. 21, no. 6, pp. 34-47, 2001. 
+[27]	[ARTOOLKIT] HITLab, ”ARToolKit,” http://www.hitl.washington.edu/artoolkit.
+[28]	[Fiala] M. Fiala, “ARTag, a fiducial marker system using digital techniques,” in Proceedings of IEEE Computer Vision and Pattern Recognition, C. Schmid, S. Soatto, and C. Tomasi, Eds. vol. 2, Los Angeles, CA: IEEE Computer Society, 2005, pp. 590-596. 
+[29]	[colorzip] ColorZip Media, http://www.colorzip.co.jp/en. 
