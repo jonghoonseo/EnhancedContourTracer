@@ -133,3 +133,85 @@ Table \ref{table:proposed_result} describes the tracing results obtained by usin
 \end{table}
 
  In the table, $Code (i)$ represents only one code, the contour pixel type, per contour pixel but it can have several codes, for example, there is an outer corner pixel and an inner-outer corner pixel. 
+
+
+
+%%%%%%%%%%%%%%%%%
+ \subsection{Data compression and restoration}
+ The proposed algorithm saves representation points and the inner-outer corner points in the form of compressed data in order to reduce the data size. The representation points are feature points that are used for storing and restoring contour pixels, while the inner-outer corner points are used for accurately restoring the inner-outer corner pixels. 
+
+ \subsubsection{Data Structure}
+ The representative points and inner-outer corner points are represented as vertices of contour pixels. Figure \textcolor{red}{12 (a)} shows the point types of the proposed algorithm. The representative point is of seven types, namely, two outer corners, two inner corners, and one inner-outer corner. Moreover, the inner-outer corner point has two types. Figure \textcolor{red}{12 (b)} illustrates all cases of contour tracing for the proposed algorithm and their corresponding representative points and inner-outer corner points. 
+
+ These points are saved as a sequence during contour tracing. If an $i$-th representative point $R_i$ is equivalent to $(r_{i,x}, r_{i,y})$, then the set of representative points $R$ is given by $\{R_0, R_1, R_2, … , R_{n-1}\}$ and $R_0 = R_n$ because the starting and ending points are the same. Similarly, if $C_j$ is the $j$-th inner-outer corner point, it can be represented using its coordinate and its type. The type of the point $C_{j,T}$ is assigned to be NW-SE or NE-SW, as shown in figures \textcolor{red}{12 (a)}. Table \ref{table:data_structure} shows the data structure for data compression and restoration of the contour pixels by using the proposed algorithm. 
+
+ \begin{table}[h]
+	\centering
+	\begin{tabularx}{0.7\textwidth}{Y|Y|Y|Y|Y}
+\hline
+\hline
+\multicolumn{2}{|c|}{Representative Points($R_i$)} & 
+\multicolumn{3}{|c|}{Inner-outer Corner($C_i$)} \\
+\hline
+$x$ & $y$ & $x$ & $y$ & Type \\
+\hline
+\hline
+
+$r_{1,x}$ & $r_{1,y}$ & $C_{1,x}$ & $C_{1,y}$ & $C_{1,T}$ \\
+$r_{2,x}$ & $r_{2,y}$ & $C_{2,x}$ & $C_{2,y}$ & $C_{2,T}$ \\
+... & ... & ... & ... & ...\\
+\hline
+\hline
+	\end{tabularx}
+	\caption{Data structure of the proposed contour tracer}
+	\label{table:data_structure}
+\end{table}
+
+\subsubsection{Contour pixel restoration}
+
+For restoration, we proposed a restoration algorithm comprising two stages, namely, contour restoration and inner-outer corner restoration.
+
+\subsubsubection{Contour restoration with representation points}
+
+The sequence of representative points is important information for reconstructing the contour pixels because it represents the contour tracing sequence. Hence, by using the sequence of representative points and the relative location between adjacent representative points in the representative point table, the contour can be restored easily. If there are two sequential representative points $R_i$ and $R_{i+1}$, \textcolor{red}{modify!}$(R_i, R_{i+1})$ as the relative position classifier from $R_i$ to $R_{i+1}$ can be described as 
+
+\textcolor{red}{pp. 21 Eq. 1}
+
+Figure \textcolor{red}{13} shows the contour pixel reconstruction methods using the relative positions from $R_i$ to $R_{i+1}$. In the case of SE or NW, the contour pixels are filled in a clockwise manner and in the other cases, these pixels are filled in a counterclockwise manner.
+
+\textcolor{red}{pp. 21 Fig 13.}
+
+The methods in figure \textcolor{red}{13} are the basic methods for restoring the contour, but they have a problem in reconstructing the inner corner pixel using three or more representative points. Table \ref{table:ex_innerCornerMissing} and figure \textcolor{red}{14} show cases of missing inner corner pixels using sequential representative points $R_i$, $R_{i+1}$, and $R_{i+2}$.
+
+ \begin{table}[h]
+	\centering
+	\begin{tabularx}{0.7\textwidth}{Y|Y|Y}
+\hline
+\hline
+Case & $(R_i, R_{i+1})$ & $(R_{i+1}, R_{i+2})$\\
+\hline
+1 & SE & NE \\
+2 & SE & SE \\
+3 & NE & SW \\
+4 & NE & NW \\
+5 & NW & NW \\
+6 & NW & SW \\
+7 & SW & SE \\
+8 & SW & NE \\
+\hline
+\hline
+	\end{tabularx}
+	\caption{Examples of Inner Corner Missing}
+	\label{table:ex_innerCornerMissing}
+\end{table}
+
+As shown in the figure, the three representative points cannot restore the inner corner pixel $P_m$. Therefore, if the three sequential points form one of the cases in table \ref{table:ex_innerCornerMissing}, $P_m$ of the middle representative point $R_{i+1}$ must be filled with black. 
+
+This reconstruction method is different from the restoration in the RD code method since the proposed method does not need the RD code but requires only representative points, and their saved sequence naturally replaces the RD code. Therefore, it requires a smaller memory size as compared to the RD code method.
+
+\subsubsubection{Inner-outer corner restoration}
+
+The restored contour using only the representative points has no inner-outer corners since the inner-outer corner is not considered. For this reason, if there are inner-outer corner points in the data table, as shown in Table \ref{table:data_structure}, the inner-outer corners are generated by using the data Cj with their point coordinates and types. If a pixel restored using the representative points is $o(x, y)$ and $O$ is restored contour, the function of the inner-outer corner restoration, $R_{IO}$, can be obtained as:
+
+\textcolor{red}{pp. 22 Eq. 2}
+
