@@ -49,84 +49,83 @@ Second, the proposed algorithm reduces some of the redundant operations used for
 The pseudo-code of the proposed algorithm is as below: 
 
 \begin{algorithm}
-\caption{Algorithm of Proposed Algorithm}
-\label{alg:proposed}
-\begin{algorithmic}[1]
-\Procedure{Proposed\_Tracer}{}
-\State $\textit{T(P,d)} \gets \textit{S(P,d)}$, where $P$ is on black, $P_{Rear}$ is on white and $i \gets 1$
-\LineComment{Whenever $T(P,d)$ is updated, $i$ increases $1$ and $T(p',d')$ is saved automatically}
-\Do
-\LineComment{State 1}
-\If {$\textit{P}_{Left-Rear}$ = black}
-	\If {$\textit{P}_{Left}$ = black}
-		\LineComment{Case 1}
-		\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $ and $\textit{Code(i)} \gets ``Inner''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Left}, \textit{d}_{Left})$
+	\caption{Algorithm of Proposed Algorithm}
+	\label{alg:proposed}
+	\begin{algorithmic}[1]
+	\Procedure{Proposed\_Tracer}{}
+	\State $\textit{T(P,d)} \gets \textit{S(P,d)}$, where $P$ is on black, $P_{Rear}$ is on white and $i \gets 1$
+	\LineComment{Whenever $T(P,d)$ is updated, $i$ increases $1$ and $T(p',d')$ is saved automatically}
+	\Do
+	\LineComment{State 1}
+	\If {$\textit{P}_{Left-Rear}$ = black}
+		\If {$\textit{P}_{Left}$ = black}
+			\LineComment{Case 1}
+			\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $ and $\textit{Code(i)} \gets ``Inner''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Left}, \textit{d}_{Left})$
+		\Else
+			\LineComment{Case 2}
+			\State $\textit{Code(i)} \gets ``Inner-outer''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Left-Rear},\textit{d}_{Rear} )  $
+			\State $\textit{Code(i)} \gets ``Inner-outer''$
+		\EndIf
 	\Else
-		\LineComment{Case 2}
-		\State $\textit{Code(i)} \gets ``Inner-outer''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Left-Rear},\textit{d}_{Rear} )  $
-		\State $\textit{Code(i)} \gets ``Inner-outer''$
+		\If {$\textit{P}_{Left}$ = black}
+			\LineComment{Case 3}
+			\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $ and $\textit{Code(i)} \gets ``Straight''$
+		\Else
+			\LineComment{Case 4}
+			\State $\textit{Code(i)} \gets ``Outer''$
+		\EndIf
 	\EndIf
-\Else
-	\If {$\textit{P}_{Left}$ = black}
-		\LineComment{Case 3}
-		\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $ and $\textit{Code(i)} \gets ``Straight''$
+
+
+	\LineComment{Stage 2}
+	\If {$\textit{P}_{Front-Left}$ = black}
+		\If {$\textit{P}_{Front}$ = black}
+			\LineComment{Case 6}
+			\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d}_{Left} )  $ and $\textit{Code(i)} \gets ``Inner''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Front}, \textit{d}_{Right})$
+		\Else
+			\LineComment{Case 5}
+			\State $\textit{Code(i)} \gets ``Inner-outer''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Front-Left},\textit{d} )  $
+			\State $\textit{Code(i)} \gets ``Inner-outer''$
+		\EndIf
+	\ElsIf {$\textit{P}_{Front}$ = black}
+		\LineComment{Case 7}
+		\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d}_{Right} )  $
 	\Else
-		\LineComment{Case 4}
-		\State $\textit{Code(i)} \gets ``Outer''$
+		\LineComment{Case 8}
+		\State $\textit{T(P,d)} \gets \textit{T(P},\textit{d}_{Rear} )  $ and $i \gets i-1$ and $\textit{Code(i)} \gets ``Outer''$
 	\EndIf
-\EndIf
 
 
-\LineComment{Stage 2}
-\If {$\textit{P}_{Front-Left}$ = black}
-	\If {$\textit{P}_{Front}$ = black}
-		\LineComment{Case 6}
-		\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d}_{Left} )  $ and $\textit{Code(i)} \gets ``Inner''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Front}, \textit{d}_{Right})$
-	\Else
-		\LineComment{Case 5}
-		\State $\textit{Code(i)} \gets ``Inner-outer''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Front-Left},\textit{d} )  $
-		\State $\textit{Code(i)} \gets ``Inner-outer''$
-	\EndIf
-\ElsIf {$\textit{P}_{Front}$ = black}
-	\LineComment{Case 7}
-	\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d}_{Right} )  $
-\Else
-	\LineComment{Case 8}
-	\State $\textit{T(P,d)} \gets \textit{T(P},\textit{d}_{Rear} )  $ and $i \gets i-1$ and $\textit{Code(i)} \gets ``Outer''$
-\EndIf
-
-
-\doWhile {$ \textit{T(P,d)}  \neq \textit{S(P,d)}$}
-\EndProcedure
-\end{algorithmic}
+	\doWhile {$ \textit{T(P,d)}  \neq \textit{S(P,d)}$}
+	\EndProcedure
+	\end{algorithmic}
 \end{algorithm}
 
 Table \ref{table:proposed_result} describes the tracing results obtained by using the proposed algorithm up to the stage the tracer enters the 11th pixel. The code represents the contour pixel type and it is classified automatically during tracing. 
 
 \begin{table}[h]
 	\centering
-	% \begin{tabularx}{0.7\textwidth}{*{4}{Y}}
 	\begin{tabularx}{0.7\textwidth}{Y|Y|Y|Y}
-\hline
-\hline
-\multirow{2}{*}{$Sequence(i)$} &  \multicolumn{2}{|c|}{P}  & \multirow{2}{*}{$Code(i)$} \\
-\cline{2-3}
-             &$x$       & $y$ & \\
-\hline
-1 & 1 & 5 & Outer \\
-2 & 2 & 5 & Inner \\
-3 & 2 & 4 & Outer \\
-4 & 3 & 4 & Inner \\
-5 & 3 & 3 & Outer \\
-6 & 4 & 3 & Straight \\
-7 & 5 & 3 & Straight \\
-8 & 6 & 3 & Inner-outer \\
-9 & 7 & 2 & Inner-outer \\
-10 & 7 & 1 & Outer \\
-11 & 8 & 1 & \\
+		\hline
+		\hline
+		\multirow{2}{*}{$Sequence(i)$} &  \multicolumn{2}{|c|}{P}  & \multirow{2}{*}{$Code(i)$} \\
+		\cline{2-3}
+		             &$x$       & $y$ & \\
+		\hline
+		1 & 1 & 5 & Outer \\
+		2 & 2 & 5 & Inner \\
+		3 & 2 & 4 & Outer \\
+		4 & 3 & 4 & Inner \\
+		5 & 3 & 3 & Outer \\
+		6 & 4 & 3 & Straight \\
+		7 & 5 & 3 & Straight \\
+		8 & 6 & 3 & Inner-outer \\
+		9 & 7 & 2 & Inner-outer \\
+		10 & 7 & 1 & Outer \\
+		11 & 8 & 1 & \\
 
-\hline
-\hline
+		\hline
+		\hline
 	\end{tabularx}
 	\caption{Result Table of the Proposed Contour Tracing}
 	\label{table:proposed_result}
@@ -147,21 +146,21 @@ Table \ref{table:proposed_result} describes the tracing results obtained by usin
 
  \begin{table}[h]
 	\centering
-	\begin{tabularx}{0.7\textwidth}{Y|Y|Y|Y|Y}
-\hline
-\hline
-\multicolumn{2}{|c|}{Representative Points($R_i$)} & 
-\multicolumn{3}{|c|}{Inner-outer Corner($C_i$)} \\
-\hline
-$x$ & $y$ & $x$ & $y$ & Type \\
-\hline
-\hline
+	\begin{tabularx}{0.7\textwidth}{YYYYY}
+		\hline
+		\hline
+		\multicolumn{2}{c}{Representative Points($R_i$)} & 
+		\multicolumn{3}{c}{Inner-outer Corner($C_i$)} \\
+		\hline
+		$x$ & $y$ & $x$ & $y$ & Type \\
+		\hline
+		\hline
 
-$r_{1,x}$ & $r_{1,y}$ & $C_{1,x}$ & $C_{1,y}$ & $C_{1,T}$ \\
-$r_{2,x}$ & $r_{2,y}$ & $C_{2,x}$ & $C_{2,y}$ & $C_{2,T}$ \\
-... & ... & ... & ... & ...\\
-\hline
-\hline
+		$r_{1,x}$ & $r_{1,y}$ & $C_{1,x}$ & $C_{1,y}$ & $C_{1,T}$ \\
+		$r_{2,x}$ & $r_{2,y}$ & $C_{2,x}$ & $C_{2,y}$ & $C_{2,T}$ \\
+		... & ... & ... & ... & ...\\
+		\hline
+		\hline
 	\end{tabularx}
 	\caption{Data structure of the proposed contour tracer}
 	\label{table:data_structure}
@@ -171,35 +170,46 @@ $r_{2,x}$ & $r_{2,y}$ & $C_{2,x}$ & $C_{2,y}$ & $C_{2,T}$ \\
 
 For restoration, we proposed a restoration algorithm comprising two stages, namely, contour restoration and inner-outer corner restoration.
 
-\subsubsubection{Contour restoration with representation points}
+% \subsubsubsection{Contour restoration with representation points}
+\subsubsection{Contour restoration with representation points}
 
-The sequence of representative points is important information for reconstructing the contour pixels because it represents the contour tracing sequence. Hence, by using the sequence of representative points and the relative location between adjacent representative points in the representative point table, the contour can be restored easily. If there are two sequential representative points $R_i$ and $R_{i+1}$, \textcolor{red}{modify!}$(R_i, R_{i+1})$ as the relative position classifier from $R_i$ to $R_{i+1}$ can be described as 
+\textcolor{red}{Change the above title to subsubsubsection}
 
-\textcolor{red}{pp. 21 Eq. 1}
+The sequence of representative points is important information for reconstructing the contour pixels because it represents the contour tracing sequence. Hence, by using the sequence of representative points and the relative location between adjacent representative points in the representative point table, the contour can be restored easily. If there are two sequential representative points $R_i$ and $R_{i+1}$, $\Lambda(R_i, R_{i+1})$ as the relative position classifier from $R_i$ to $R_{i+1}$ can be described as 
+
+\begin{equation}
+	\Lambda(R_i, R_{i+1}) = \begin{cases}
+	NE\: \text{where\:} r_{i,x} < r_{i+1,x}\: \text{and\:} r_{i,y} > r_{i+1,y} \\ 
+	SE\: \text{where\:} r_{i,x} < r_{i+1,x}\: \text{and\:} r_{i,y} < r_{i+1,y} \\ 
+	NW\: \text{where\:} r_{i,x} > r_{i+1,x}\: \text{and\:} r_{i,y} > r_{i+1,y} \\ 
+	SW\: \text{where\:} r_{i,x} > r_{i+1,x}\: \text{and\:} r_{i,y} < r_{i+1,y}
+	\end{cases}
+	\label{eq:lambda}
+\end{equation}
 
 Figure \textcolor{red}{13} shows the contour pixel reconstruction methods using the relative positions from $R_i$ to $R_{i+1}$. In the case of SE or NW, the contour pixels are filled in a clockwise manner and in the other cases, these pixels are filled in a counterclockwise manner.
 
 \textcolor{red}{pp. 21 Fig 13.}
 
-The methods in figure \textcolor{red}{13} are the basic methods for restoring the contour, but they have a problem in reconstructing the inner corner pixel using three or more representative points. Table \ref{table:ex_innerCornerMissing} and figure \textcolor{red}{14} show cases of missing inner corner pixels using sequential representative points $R_i$, $R_{i+1}$, and $R_{i+2}$.
+The methods in figure \JHMEMO{13} are the basic methods for restoring the contour, but they have a problem in reconstructing the inner corner pixel using three or more representative points. Table \ref{table:ex_innerCornerMissing} and figure \JHMEMO{14} show cases of missing inner corner pixels using sequential representative points $R_i$, $R_{i+1}$, and $R_{i+2}$.
 
  \begin{table}[h]
 	\centering
 	\begin{tabularx}{0.7\textwidth}{Y|Y|Y}
-\hline
-\hline
-Case & $(R_i, R_{i+1})$ & $(R_{i+1}, R_{i+2})$\\
-\hline
-1 & SE & NE \\
-2 & SE & SE \\
-3 & NE & SW \\
-4 & NE & NW \\
-5 & NW & NW \\
-6 & NW & SW \\
-7 & SW & SE \\
-8 & SW & NE \\
-\hline
-\hline
+		\hline
+		\hline
+		Case & $(R_i, R_{i+1})$ & $(R_{i+1}, R_{i+2})$\\
+		\hline
+		1 & SE & NE \\ \hline
+		2 & SE & SE \\ \hline
+		3 & NE & SW \\ \hline
+		4 & NE & NW \\ \hline
+		5 & NW & NW \\ \hline
+		6 & NW & SW \\ \hline
+		7 & SW & SE \\ \hline
+		8 & SW & NE \\ \hline
+		\hline
+		\hline
 	\end{tabularx}
 	\caption{Examples of Inner Corner Missing}
 	\label{table:ex_innerCornerMissing}
@@ -209,9 +219,18 @@ As shown in the figure, the three representative points cannot restore the inner
 
 This reconstruction method is different from the restoration in the RD code method since the proposed method does not need the RD code but requires only representative points, and their saved sequence naturally replaces the RD code. Therefore, it requires a smaller memory size as compared to the RD code method.
 
-\subsubsubection{Inner-outer corner restoration}
+% \subsubsubsection{Inner-outer corner restoration}
+\subsubsection{Inner-outer corner restoration}
 
-The restored contour using only the representative points has no inner-outer corners since the inner-outer corner is not considered. For this reason, if there are inner-outer corner points in the data table, as shown in Table \ref{table:data_structure}, the inner-outer corners are generated by using the data Cj with their point coordinates and types. If a pixel restored using the representative points is $o(x, y)$ and $O$ is restored contour, the function of the inner-outer corner restoration, $R_{IO}$, can be obtained as:
+\JHMEMO{Change the above title to subsubsubsection}
 
-\textcolor{red}{pp. 22 Eq. 2}
 
+The restored contour using only the representative points has no inner-outer corners since the inner-outer corner is not considered. For this reason, if there are inner-outer corner points in the data table, as shown in Table \ref{table:data_structure}, the inner-outer corners are generated by using the data $C_j$ with their point coordinates and types. If a pixel restored using the representative points is $o(x, y)$ and $O$ is restored contour, the function of the inner-outer corner restoration, $R_{IO}$, can be obtained as:
+
+\begin{equation}
+R_{IO} = \begin{cases}
+O - o(c_{j,x} - 0.5, c_{j,y} - 0.5) - o(c_{j,x} + 0.5, c_{j,y} + 0.5), \text{where\:} c_{j,T} = ``NW-SE'' \\
+O - o(c_{j,x} - 0.5, c_{j,y} + 0.5) - o(c_{j,x} + 0.5, c_{j,y} - 0.5), \text{where\:} c_{j,T} = ``NE-SW'' \\
+\end{cases}
+\label{eq:r_io}
+\end{equation}

@@ -52,7 +52,9 @@
 % Add packages and commands to include here
 % The amsmath, amsthm, amssymb, hyperref, caption, float and color packages are loaded by the MDPI class.
 \usepackage{graphicx}
+\usepackage[caption=false]{subfig}
 %\usepackage{subfigure,psfig}
+
 \usepackage{multirow,tabularx}
 \newcolumntype{Y}{>{\centering\arraybackslash}X}
 
@@ -63,8 +65,7 @@
 \renewcommand{\algorithmiccomment}[1]{\hfill\bgroup//~#1\egroup}
 \algnewcommand{\LineComment}[1]{\State // #1}
 
-
-
+\newcommand{\JHMEMO}[1]{\textcolor{red}{#1}}
 
 %=================================================================
 %% Please use the following mathematics environments:
@@ -140,6 +141,7 @@ $^{1}$ Department of Computer Science, Yonsei University, 134 Sinchon-dong Seoda
 \input{3.Analysis/Analysis.tex}
 \input{4.Proposed/ProposedContourTracingAlgorithm.tex}
 \input{5.ExperimentalResult/Experiments.tex}
+\input{6.Conclusion/Conclusion.tex}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

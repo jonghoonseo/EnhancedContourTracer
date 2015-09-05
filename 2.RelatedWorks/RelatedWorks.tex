@@ -7,24 +7,28 @@ Most conventional contour tracing algorithms run on two-dimensional (2D) binary 
 
 \subsection{Overview}
 
+%%% Image 1
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.95\textwidth]{2.RelatedWorks/contour_tracer.png}
-	\caption{Contour tracer}
-	\label{fig:contour_tracer}
+	\subfloat[]{ \includegraphics[width=0.3\textwidth, height=5cm]{2.RelatedWorks/fig1-a.png} \label{fig:img1-a} }
+	\subfloat[]{ \includegraphics[width=0.3\textwidth, height=5cm]{2.RelatedWorks/fig1-b.png} \label{fig:img1-b} }
+	\subfloat[]{ \includegraphics[width=0.3\textwidth, height=5cm]{2.RelatedWorks/fig1-c.png} \label{fig:img1-c} }
+	 
+	\caption{Contour tracer. \protect\subref{fig:img1-a} Pixel following algorithm \protect\subref{fig:img1-b} Vertex following algorithm \protect\subref{fig:img1-c} Run-data-based following algorithm}
+	\label{fig:image1}
 \end{figure}
 
-Figure \ref{fig:contour_tracer} shows examples of contour traces obtained by using the contour tracing algorithms. The conventional contour algorithms can be categorized typically into three types as follows: pixel following, vertex following, and run-data-based following \cite{Miyatake1997Contour,Danielsson1981Improvement,Shoji1999Contour}. Among these, the pixel following method is most the common.
+Figure \ref{fig:image1} shows examples of contour traces obtained by using the contour tracing algorithms. The conventional contour algorithms can be categorized typically into three types as follows: pixel following, vertex following, and run-data-based following \cite{Miyatake1997Contour,Danielsson1981Improvement,Shoji1999Contour}. Among these, the pixel following method is most the common.
 
 \subsubsection{Pixel Following Method}
 
-The pixel following method traces contour pixels in a predefined manner and then saves their coordinates in the memory according to the trace order. In figure 1 (a), the algorithm traces contour pixels along the clockwise direction from the current pixel, i.e., it sequentially searches adjacent black pixels of the current pixel using a relative directional order such as left, front-left, front, front-right, right, right-rear, and rear. Pixel following methods such as simple boundary follower (SBF) \cite{Pitas2000Digital,Das1990Bivariate,Papert1973Uses}, modified SBF (MSBF)\cite{Gose1996Pattern}, improved SBF (ISBF)\cite{Cheong2006Improved}, Moore-Neighbor tracing (MNT) \cite{Toussaint????Grids}, modified MNT (MMNT) \cite{Pradhan2010Contour}, radial sweep algorithm (RSA) \cite{Mirante1982Radial}, and Theo Pavlidis algorithm (TPA)\cite{Pavlidis2012Algorithms} have simple rules for tracing contour pixels based on a chain code. On the contrary, this method requires frame size memory to trace the contour, and it also generates erroneous images when the contour image is enlarged\cite{Miyatake1997Contour} since it maintains only the pixel coordinates.
+The pixel following method traces contour pixels in a predefined manner and then saves their coordinates in the memory according to the trace order. In figure \ref{fig:img1-a}, the algorithm traces contour pixels along the clockwise direction from the current pixel, i.e., it sequentially searches adjacent black pixels of the current pixel using a relative directional order such as left, front-left, front, front-right, right, right-rear, and rear. Pixel following methods such as simple boundary follower (SBF) \cite{Pitas2000Digital,Das1990Bivariate,Papert1973Uses}, modified SBF (MSBF)\cite{Gose1996Pattern}, improved SBF (ISBF)\cite{Cheong2006Improved}, Moore-Neighbor tracing (MNT) \cite{Toussaint????Grids}, modified MNT (MMNT) \cite{Pradhan2010Contour}, radial sweep algorithm (RSA) \cite{Mirante1982Radial}, and Theo Pavlidis algorithm (TPA)\cite{Pavlidis2012Algorithms} have simple rules for tracing contour pixels based on a chain code. On the contrary, this method requires frame size memory to trace the contour, and it also generates erroneous images when the contour image is enlarged\cite{Miyatake1997Contour} since it maintains only the pixel coordinates.
 
 \subsubsection{Vertex Following Method}
-The vertex following method traces the vertices of the contour pixels that are located on the edges between the contour pixels and the background pixels \cite{Miyatake1997Contour}. Its procedure is similar to that of the pixel following method since it uses a chain code and requires a frame size memory for contour tracing; however, it traces the corners of the contour pixels and their connected edges. Moreover, it stores the corner points of the contour pixels in order to save the traced contour information and the data can be compressed by reducing the number of points in a straight line. For example, in figure 1 (b), five points of the contour from s to t can be stored as just two points such as (2.5, 2.5) and (6.5, 2.5) based on the (x, y) coordinate system. Moreover, when the contour images are enlarged, the vertex following method can provide the correct image \cite{Miyatake1997Contour} since the traced points form the boundaries of the contour.
+The vertex following method traces the vertices of the contour pixels that are located on the edges between the contour pixels and the background pixels \cite{Miyatake1997Contour}. Its procedure is similar to that of the pixel following method since it uses a chain code and requires a frame size memory for contour tracing; however, it traces the corners of the contour pixels and their connected edges. Moreover, it stores the corner points of the contour pixels in order to save the traced contour information and the data can be compressed by reducing the number of points in a straight line. For example, in figure \ref{fig:img1-b}, five points of the contour from s to t can be stored as just two points such as (2.5, 2.5) and (6.5, 2.5) based on the (x, y) coordinate system. Moreover, when the contour images are enlarged, the vertex following method can provide the correct image \cite{Miyatake1997Contour} since the traced points form the boundaries of the contour.
 
 \subsubsection{Run-data based following method}
-The run-data-based following method, involving the edge-point tracing of rundata \cite{Miyatake1997Contour}, [13],  uses run data in pairs consisting of the left and right edges of an object obtained by horizontal scan lines from left to right on an image. The object can have an outer contour and additional inner contours; therefore, the run data has five types: (left edge of outer contour, right edge of outer contour), (left edge of outer contour, left edge of inner contour), (right edge of inner contour, left edge of inner contour), (right edge of inner contour, right edge of outer contour), and (right edge of outer contour, left edge of outer contour). For contour following, the run-data-based following method constructs a run-following relationship between the edge points of two adjacent scan lines. In figure 1 (c), scan line \#3 detects (left edge of 5, right edge of 6) and scan line \#4 detects (left edge of 7, right edge of 8), and subsequently the run-following relationships between 5 and 7 and between 8 and 6 are generated. The method uses only one or two line buffers; therefore, it requires a smaller amount of memory as compared to the pixel following and vertex following methods since it uses only one or two scan lines. Examples of the method are run-type direction code (RD code) method \cite{Miyatake1997Contour} and PXY table based method [13]. 
+The run-data-based following method, involving the edge-point tracing of rundata \cite{Miyatake1997Contour}, \JHMEMO{[13]},  uses run data in pairs consisting of the left and right edges of an object obtained by horizontal scan lines from left to right on an image. The object can have an outer contour and additional inner contours; therefore, the run data has five types: (left edge of outer contour, right edge of outer contour), (left edge of outer contour, left edge of inner contour), (right edge of inner contour, left edge of inner contour), (right edge of inner contour, right edge of outer contour), and (right edge of outer contour, left edge of outer contour). For contour following, the run-data-based following method constructs a run-following relationship between the edge points of two adjacent scan lines. In figure \ref{fig:img1-c}, scan line \#3 detects (left edge of 5, right edge of 6) and scan line \#4 detects (left edge of 7, right edge of 8), and subsequently the run-following relationships between 5 and 7 and between 8 and 6 are generated. The method uses only one or two line buffers; therefore, it requires a smaller amount of memory as compared to the pixel following and vertex following methods since it uses only one or two scan lines. Examples of the method are run-type direction code (RD code) method \cite{Miyatake1997Contour} and PXY table based method \JHMEMO{[13]}. 
 
 \begin{table}[h]
 	\begin{tabular}{l|lll}
@@ -37,7 +41,7 @@ The run-data-based following method, involving the edge-point tracing of rundata
 	\label{table:relatedworks}
 \end{table}
 
-Table \ref{table:relatedworks} lists the characteristics of the contour following methods. The pixel following method and vertex following method trace contours without scanning all the pixels of the image and their transition data such as contour points and the tracing sequence are generated automatically by the contour following process. Therefore, they need not scan all the pixels but only a few pixels for obtaining the first contour pixel for the starting point of the object. Despite these merits, they are not suitable for large images with many objects since they require more operations and a larger memory as compared to the run-data-based following method, i.e., they scan all the pixels with an image buffer size memory to obtain all the objects and have several additional operations to detect whether or not to follow a contour pixel for all the contour pixels and their adjacent background pixels (see figure 8). 
+Table \ref{table:relatedworks} lists the characteristics of the contour following methods. The pixel following method and vertex following method trace contours without scanning all the pixels of the image and their transition data such as contour points and the tracing sequence are generated automatically by the contour following process. Therefore, they need not scan all the pixels but only a few pixels for obtaining the first contour pixel for the starting point of the object. Despite these merits, they are not suitable for large images with many objects since they require more operations and a larger memory as compared to the run-data-based following method, i.e., they scan all the pixels with an image buffer size memory to obtain all the objects and have several additional operations to detect whether or not to follow a contour pixel for all the contour pixels and their adjacent background pixels (see \JHMEMO{figure 8}). 
 
 On the contrary, the run-data-based following method searches the edge points with a smaller memory and constructs run-following relationships between edge points. Therefore, the traced run-following results are changed iteratively while the edge points are updated. The method is not simple but it is faster than the other methods in the case of a large-scale image since it scans all the pixels once, and it does not require any additional operations to be carried out on the pixels. Hence, it is suitable for large-scale-image-based applications involving a large number of objects such as document recognition \cite{Miyatake1997Contour}.
 
@@ -50,47 +54,54 @@ Let $I$ be a binary digital image with $M \times N$ pixels where the coordinate 
 \item If the tracer reaches the start point then the trace procedure is terminated. 
 \end{enumerate}
 
-For determining the next contour point, which could be a contour pixel or pixel corner, the tracer detects the intensity of its adjacent pixel $P_r$ and the new absolute direction $d_r$ for $P_r$ by using relative direction information $r\in\{front, front-left, left, left-rear, rear, right-rear, right, front-right\}$. For example, if the absolute direction of the current tracer $T(P, d)$ is $N$, the left direction of the tracer $d_{Left}$ is $W$. Similarly, the left pixel of tracer PLeft is $(x-1, y)$. Figures \ref{fig:dir_types} (a) and (b) show the directional information of the tracer and figure \ref{fig:dir_types} (c) shows the types of contour pixels. The contour pixels can be classified into four types, namely, straight line, inner corner pixel, outer corner pixel, and inner-outer corner pixel. In figure \ref{fig:dir_types} (c), ``O'' represents the outer corner; ``I'' the inner corner; and ``IO'' the inner-outer corner according to the local pattern of the contour.
+For determining the next contour point, which could be a contour pixel or pixel corner, the tracer detects the intensity of its adjacent pixel $P_r$ and the new absolute direction $d_r$ for $P_r$ by using relative direction information $r\in\{front,\ front-left,\ left,\ left-rear,\ rear,\ right-rear,\ right,\ front-right\}$. For example, if the absolute direction of the current tracer $T(P, d)$ is $N$, the left direction of the tracer $d_{Left}$ is $W$. Similarly, the left pixel of tracer $P_{Left}$ is $(x-1, y)$. Figures \ref{fig:img2-a} and \ref{fig:img2-b} show the directional information of the tracer and figure \ref{fig:img2-c} shows the types of contour pixels. The contour pixels can be classified into four types, namely, straight line, inner corner pixel, outer corner pixel, and inner-outer corner pixel. In figure \ref{fig:img2-c}, ``O'' represents the outer corner; ``I'' the inner corner; and ``IO'' the inner-outer corner according to the local pattern of the contour.
 
 In this study, we focus on a contour tracing algorithm that is suitable for situations involving a relatively small number of objects and requiring real-time tracing such as AR, MR, and recognition image-based code in small scale images, e.g., the mobile computing environment. Hence, we first introduce and briefly describe the conventional contour tracing algorithms that are used in this environment and analyze their tracing accuracy and characteristics.  
 
+%%% Image 2
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.95\textwidth]{2.RelatedWorks/directions_and_types.png}
-	\caption{Directions and types of contour pixels}
-	\label{fig:dir_types}
+	\subfloat[]{ \includegraphics[width=0.3\textwidth, height=5cm]{2.RelatedWorks/fig2-a.png} \label{fig:img2-a} }
+	\subfloat[]{ \includegraphics[width=0.3\textwidth, height=5cm]{2.RelatedWorks/fig2-b.png} \label{fig:img2-b} }
+	\subfloat[]{ \includegraphics[width=0.3\textwidth, height=5cm]{2.RelatedWorks/fig2-c.png} \label{fig:img2-c} }
+	 
+	\caption{Directions and types of contour pixels. \protect\subref{fig:img2-a} Absolute direction $d$ \protect\subref{fig:img2-b} Relative direction $r$ \protect\subref{fig:img2-c} Types of contour pixels}
+	\label{fig:image2}
 \end{figure}
 
 
 \subsubsection{Simple Boundary Follower}
 
-SBF is also known as Papert’s turtle algorithm \cite{Das1990Bivariate} and as square tracing algorithm\cite{Toussaint????Grids}, and it is the simplest contour tracing algorithm. Initially, the location of tracer $S$ is saved, and the tracer moves leftward or rightward; if the pixel tracer is located on a contour pixel, the tracer moves leftward, otherwise it moves rightward. The procedure is as given below.
+SBF is also known as Papert's turtle algorithm \cite{Das1990Bivariate} and as square tracing algorithm\cite{Toussaint????Grids}, and it is the simplest contour tracing algorithm. Initially, the location of tracer $S$ is saved, and the tracer moves leftward or rightward; if the pixel tracer is located on a contour pixel, the tracer moves leftward, otherwise it moves rightward. The procedure is as given below.
 
 \begin{algorithm}
-\caption{Algorithm of Simple Boundary Follower}\label{alg:sbf}
-\begin{algorithmic}[1]
-\Procedure{SBF}{}
-\State $\textit{T(P,d)} \gets \textit{S(P,d)}$
-\Do
-\If {$\textit{P}$ = black}
-\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $
-\Else
-\State $\textit{T(P,d)} \gets \textit{T(P}_{Right},\textit{d}_{Right})$
-\EndIf
-\doWhile {$ \textit{T(P,d)}  \neq \textit{S(P,d)}$}
-\EndProcedure
-\end{algorithmic}
+	\caption{Algorithm of Simple Boundary Follower}\label{alg:sbf}
+	\begin{algorithmic}[1]
+	\Procedure{SBF}{}
+	\State $\textit{T(P,d)} \gets \textit{S(P,d)}$
+	\Do
+	\If {$\textit{P}$ = black}
+	\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $
+	\Else
+	\State $\textit{T(P,d)} \gets \textit{T(P}_{Right},\textit{d}_{Right})$
+	\EndIf
+	\doWhile {$ \textit{T(P,d)}  \neq \textit{S(P,d)}$}
+	\EndProcedure
+	\end{algorithmic}
 \end{algorithm}
 
 \subsubsection{Modified Simple Boundary Follower}
 
-SBF cannot trace an inner-outer corner pixel that is located at the left-rear. MSBF \cite{Gose1996Pattern} was invented to trace these pixels. If the tracer is adjacent to the left-rear inner-outer corner, this condition implies that its left-rear pixel is black (object) and the left and rear pixels are white (background); the tracer will move to the left-rear pixel and its direction is then changed toward the rear direction. After the movement, the tracer goes directly to the left pixel to avoid an infinite loop. Figure \ref{fig:sbf_msbf} shows examples of the SBF and MSBF paths for a left-rear direction inner-outer corner. In the case of the SBF, if the tracer is on pixel $A$ with direction $N$, it misses pixel $B$. On the contrary, the MSBF can detour pixel $B$.
+SBF cannot trace an inner-outer corner pixel that is located at the left-rear. MSBF \cite{Gose1996Pattern} was invented to trace these pixels. If the tracer is adjacent to the left-rear inner-outer corner, this condition implies that its left-rear pixel is black (object) and the left and rear pixels are white (background); the tracer will move to the left-rear pixel and its direction is then changed toward the rear direction. After the movement, the tracer goes directly to the left pixel to avoid an infinite loop. Figure \ref{fig:image3} shows examples of the SBF and MSBF paths for a left-rear direction inner-outer corner. In the case of the SBF, if the tracer is on pixel $A$ with direction $N$, it misses pixel $B$. On the contrary, the MSBF can detour pixel $B$.
 
+%%% Image 3
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.50\textwidth]{2.RelatedWorks/sbf_msbf.png}
-	\caption{Detour of inner-outer corner at left-rear pixel (modified version of \cite{Gose1996Pattern}.}
-	\label{fig:sbf_msbf}
+	\subfloat[]{ \includegraphics[width=0.25\textwidth]{2.RelatedWorks/fig3-a.png} \label{fig:img3-a} }
+	\subfloat[]{ \includegraphics[width=0.25\textwidth]{2.RelatedWorks/fig3-b.png} \label{fig:img3-b} }
+	 
+	\caption{Detour of inner-outer corner at left-rear pixel (modified version of \cite{Gose1996Pattern}). \protect\subref{fig:img3-a} SBF \protect\subref{fig:img3-b} MSBF}
+	\label{fig:image3}
 \end{figure}
 
 \subsubsection{Improved Simple Boundary Follower}
@@ -98,78 +109,94 @@ SBF cannot trace an inner-outer corner pixel that is located at the left-rear. M
 The SBF and MSBF require movement operations for both contour and background pixels; therefore, they waste time during movement on the background pixel and they cannot trace the inner corner pixel in front of the tracer \cite{Cheong2006Improved,Toussaint????Grids}. Hence, the ISBF \cite{Cheong2006Improved} is proposed based on our previous research for overcoming these limitations. The ISBF has six cases for following contour pixels based on the local patterns of the contour pixels. The modified version of \cite{Cheong2006Advanced} is as follows: 
 
 \begin{algorithm}
-\caption{Algorithm of Improved Simple Boundary Follower}\label{alg:isbf}
-\begin{algorithmic}[1]
-\Procedure{ISBF}{}
-\State $\textit{T(P,d)} \gets \textit{S(P,d)}$, where \textit{P} is on black
-\Do
-\If {$\textit{P}_{Left}$ = black}
-	\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $
-\Else
-	\If {$\textit{P}_{Left-Rear}$ = black and $\textit{P}_Rear$ = white}
-		\State $\textit{T(P,d)} \gets \textit{T(P}_{Left-Rear},\textit{d}_{Rear} )  $
+	\caption{Algorithm of Improved Simple Boundary Follower}\label{alg:isbf}
+	\begin{algorithmic}[1]
+	\Procedure{ISBF}{}
+	\State $\textit{T(P,d)} \gets \textit{S(P,d)}$, where \textit{P} is on black
+	\Do
+	\If {$\textit{P}_{Left}$ = black}
+		\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $
 	\Else
-		\If {$\textit{P}_{Front-Left}$ = black}
-			\If {$\textit{P}_{Front}$ = black}
-				\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d} )  $ and $\textit{T(P,d)} \gets \textit{T(P}_{Left}, \textit{d}$
-			\Else
-				\State $\textit{T(P,d)} \gets \textit{T(P}_{Front-Left},\textit{d} )  $
-			\EndIf
-		\ElsIf {$\textit{P}_{Front}$ = black}
-			\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d}_{Right} )  $
+		\If {$\textit{P}_{Left-Rear}$ = black and $\textit{P}_{Rear}$ = white}
+			\State $\textit{T(P,d)} \gets \textit{T(P}_{Left-Rear},\textit{d}_{Rear} )  $
 		\Else
-			\State $\textit{T(P,d)} \gets \textit{T(P},\textit{d}_{Rear} )  $
+			\If {$\textit{P}_{Front-Left}$ = black}
+				\If {$\textit{P}_{Front}$ = black}
+					\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d} )  $ and $\textit{T(P,d)} \gets \textit{T(P}_{Left}, \textit{d})$
+				\Else
+					\State $\textit{T(P,d)} \gets \textit{T(P}_{Front-Left},\textit{d} )  $
+				\EndIf
+			\ElsIf {$\textit{P}_{Front}$ = black}
+				\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d}_{Right} )  $
+			\Else
+				\State $\textit{T(P,d)} \gets \textit{T(P},\textit{d}_{Rear} )  $
+			\EndIf
 		\EndIf
 	\EndIf
-\EndIf
-\doWhile {$ \textit{T(P,d)}  \neq \textit{S(P,d)}$}
-\EndProcedure
-\end{algorithmic}
+	\doWhile {$ \textit{T(P,d)}  \neq \textit{S(P,d)}$}
+	\EndProcedure
+	\end{algorithmic}
 \end{algorithm}
 
-Figure \ref{fig:isbf} represents the tracing path of the ISBF based on the local contour patterns. While the SBF cannot trace in cases (b) and (d), and the MSBF cannot follow in case (d), the ISBF successfully traces in all the cases. In the figure, the way point (dotted line) is subjected to a detection operation for determining whether it is black or white without employing a movement operation.
+Figure \ref{fig:isbf} represents the tracing path of the ISBF based on the local contour patterns. While the SBF cannot trace in cases \ref{fig:img4-b} and \ref{fig:img4-d}, and the MSBF cannot follow in case \ref{fig:img4-d}, the ISBF successfully traces in all the cases. In the figure, the way point (dotted line) is subjected to a detection operation for determining whether it is black or white without employing a movement operation.
 
+%%% Image 4
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=1.0\textwidth]{2.RelatedWorks/isbf.png}
-	\caption{Contour cases of ISBF \cite{Cheong2006Advanced}}
+	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-a.png} \label{fig:img4-a} }
+	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-b.png} \label{fig:img4-b} }
+	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-c.png} \label{fig:img4-c} }
+	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-d.png} \label{fig:img4-d} }
+	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-e.png} \label{fig:img4-e} }
+	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-f.png} \label{fig:img4-f} }
+	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-g.png} \label{fig:img4-g} }
+	 
+	\caption{Contour cases of ISBF \cite{Cheong2006Advanced} \protect\subref{fig:img4-a} Left neighbor \protect\subref{fig:img4-b} Innerouter corner at left-rear \protect\subref{fig:img4-c} Innerouter corner at front-left \protect\subref{fig:img4-d} Inner corner at front \protect\subref{fig:img4-e} Front neighbor \protect\subref{fig:img4-f} Outer corner}
 	\label{fig:isbf}
 \end{figure}
 
 \subsubsection{Moore-Neighbor Tracing}
-MNT finds the next contour pixel using 8 connected chain codes using a clockwise sequence starting from the rear pixel of the tracer, i.e., the tracer first moves toward the rear ($T (P_{Rear}, d_{Rear}))$ and finds the next clockwise contour pixel such as the left-rear, left, font-left, front, front-right, right, and right-rear pixels \cite{Toussaint????Grids}. 
+MNT (see, figure \ref{fig:img5-a}) finds the next contour pixel using 8 connected chain codes using a clockwise sequence starting from the rear pixel of the tracer, i.e., the tracer first moves toward the rear ($T (P_{Rear}, d_{Rear}))$ and finds the next clockwise contour pixel such as the left-rear, left, font-left, front, front-right, right, and right-rear pixels \cite{Toussaint????Grids}. 
 
 \subsubsection{Modified Moore-Neighbor Tracing}
 \textcolor{red}{To be written}
 
 \subsubsection{Radial Sweep Algorithm}
-RSA \cite{Mirante1982Radial} is similar to MNT, but its tracer has no directional information. Therefore, it maintains two points, namely, previous pixel and current pixel for the initial tracing direction. Figure \ref{fig:mnt_rsa} (b) illustrates an example of a tracing path by using RSA from $P_i$ to $P_{i+2}$. In the figure, the direction vector from $P_i$ to $P_{i-1}$ is first generated, and then the tracer searches for the next contour pixel using the previous pixel $P_{i-1}$ for the clockwise direction of the vector.
+RSA \cite{Mirante1982Radial} is similar to MNT, but its tracer has no directional information. Therefore, it maintains two points, namely, previous pixel and current pixel for the initial tracing direction. Figure \ref{fig:img5-b} illustrates an example of a tracing path by using RSA from $P_i$ to $P_{i+2}$. In the figure, the direction vector from $P_i$ to $P_{i-1}$ is first generated, and then the tracer searches for the next contour pixel using the previous pixel $P_{i-1}$ for the clockwise direction of the vector.
+
+%%% Image 5
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=1.0\textwidth]{2.RelatedWorks/rsa.png}
-	\caption{Contour following sequence of MNT and RSA}
+	\subfloat[]{ \includegraphics[width=0.3\textwidth]{2.RelatedWorks/fig5-a.png} \label{fig:img5-a} }
+	\subfloat[]{ \includegraphics[width=0.3\textwidth]{2.RelatedWorks/fig5-b.png} \label{fig:img5-b} }
+	\caption{Contour following sequence of MNT and RSA \protect\subref{fig:img5-a} MNT \protect\subref{fig:img5-b} RSA}
 	\label{fig:mnt_rsa}
 \end{figure}
 
 \subsubsection{Theo Pavlidis Algorithm}
 TPA \cite{Pavlidis2012Algorithms} considers only three adjacent pixels, e.g., front-left, front, and front-right for determining the next contour pixel. If all the three pixels are white, the tracer turns right. Figure \ref{fig:tpa} describes its sequence. 
+
+%%% Image 6
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=1.0\textwidth]{2.RelatedWorks/tpa.png}
-	\caption{Contour following sequence of TPA \cite{Cheong2006Advanced}}
+	\subfloat[]{ \includegraphics[width=0.25\textwidth]{2.RelatedWorks/fig6-a.png} \label{fig:img6-a} }
+	\subfloat[]{ \includegraphics[width=0.25\textwidth]{2.RelatedWorks/fig6-b.png} \label{fig:img6-b} }
+	\subfloat[]{ \includegraphics[width=0.25\textwidth]{2.RelatedWorks/fig6-c.png} \label{fig:img6-c} }
+	\subfloat[]{ \includegraphics[width=0.25\textwidth]{2.RelatedWorks/fig6-d.png} \label{fig:img6-d} }
+	 
+	\caption{Contour following sequence of TPA\cite{Cheong2006Advanced}. \protect\subref{fig:img6-a} Front-Left contour \protect\subref{fig:img6-b} Front contour \protect\subref{fig:img6-c} Front-Right contour \protect\subref{fig:img6-d} Rotation}
 	\label{fig:tpa}
 \end{figure}
 
-
-
-
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \subsection{Conventional Data Compression and Restoration}
-The RD code method \cite{Miyatake1997Contour} comprises two major techniques. One traces the contour on the basis of the hybrid method using vertex following with run data and generates the corresponding RD codes. The other generates compressed contour data that can be used to restore the contour on the basis of representative points and their corresponding RD codes. The representative points are selected from the vertices of contour pixels and they are feature points of the contour. Moreover, the RD code can represent 10 local contour patterns and their corresponding following paths. Therefore, saving the representative points and their corresponding RD codes rather than all the contour points can reduce the memory size used to store the contour data. Figure \ref{fig:rdcode} (a) \cite{Miyatake1997Contour} gives an example of representative points. The representative points in the RD method are of four types, namely, two outer corner points and two inner corner points, as shown in figure \ref{fig:rdcode} (b). Although this technique can save data in small files; it does not consider the inner-outer corner pixel. 
+The RD code method \cite{Miyatake1997Contour} comprises two major techniques. One traces the contour on the basis of the hybrid method using vertex following with run data and generates the corresponding RD codes. The other generates compressed contour data that can be used to restore the contour on the basis of representative points and their corresponding RD codes. The representative points are selected from the vertices of contour pixels and they are feature points of the contour. Moreover, the RD code can represent 10 local contour patterns and their corresponding following paths. Therefore, saving the representative points and their corresponding RD codes rather than all the contour points can reduce the memory size used to store the contour data. Figure \ref{fig:img7-a} \cite{Miyatake1997Contour} gives an example of representative points. The representative points in the RD method are of four types, namely, two outer corner points and two inner corner points, as shown in figure \ref{fig:img7-b}. Although this technique can save data in small files; it does not consider the inner-outer corner pixel. 
 
+%%% Image 7
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=1.0\textwidth]{2.RelatedWorks/rdcode.png}
-	\caption{Representative points for data compression}
+	\subfloat[]{ \includegraphics[height=4.5cm]{2.RelatedWorks/fig7-a.png} \label{fig:img7-a} }
+	\subfloat[]{ \includegraphics[height=4.5cm]{2.RelatedWorks/fig7-b.png} \label{fig:img7-b} }
+	\caption{Representative points for data compression. \protect\subref{fig:img7-a} Representative points \cite{Miyatake1997Contour} \protect\subref{fig:img7-b} Cases of representative points}
 	\label{fig:rdcode}
 \end{figure}
