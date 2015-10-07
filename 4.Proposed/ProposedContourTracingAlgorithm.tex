@@ -107,7 +107,6 @@ Table \ref{table:proposed_result} describes the tracing results obtained by usin
 	\centering
 	\begin{tabularx}{0.7\textwidth}{Y|Y|Y|Y}
 		\hline
-		\hline
 		\multirow{2}{*}{$Sequence(i)$} &  \multicolumn{2}{|c|}{P}  & \multirow{2}{*}{$Code(i)$} \\
 		\cline{2-3}
 		             &$x$       & $y$ & \\
@@ -124,7 +123,6 @@ Table \ref{table:proposed_result} describes the tracing results obtained by usin
 		10 & 7 & 1 & Outer \\
 		11 & 8 & 1 & \\
 
-		\hline
 		\hline
 	\end{tabularx}
 	\caption{Result Table of the Proposed Contour Tracing}
@@ -148,18 +146,15 @@ Table \ref{table:proposed_result} describes the tracing results obtained by usin
 	\centering
 	\begin{tabularx}{0.7\textwidth}{YYYYY}
 		\hline
-		\hline
 		\multicolumn{2}{c}{Representative Points($R_i$)} & 
 		\multicolumn{3}{c}{Inner-outer Corner($C_i$)} \\
 		\hline
 		$x$ & $y$ & $x$ & $y$ & Type \\
 		\hline
-		\hline
 
 		$r_{1,x}$ & $r_{1,y}$ & $C_{1,x}$ & $C_{1,y}$ & $C_{1,T}$ \\
 		$r_{2,x}$ & $r_{2,y}$ & $C_{2,x}$ & $C_{2,y}$ & $C_{2,T}$ \\
 		... & ... & ... & ... & ...\\
-		\hline
 		\hline
 	\end{tabularx}
 	\caption{Data structure of the proposed contour tracer}
@@ -197,18 +192,16 @@ The methods in figure \JHMEMO{13} are the basic methods for restoring the contou
 	\centering
 	\begin{tabularx}{0.7\textwidth}{Y|Y|Y}
 		\hline
-		\hline
 		Case & $(R_i, R_{i+1})$ & $(R_{i+1}, R_{i+2})$\\
 		\hline
-		1 & SE & NE \\ \hline
-		2 & SE & SE \\ \hline
-		3 & NE & SW \\ \hline
-		4 & NE & NW \\ \hline
-		5 & NW & NW \\ \hline
-		6 & NW & SW \\ \hline
-		7 & SW & SE \\ \hline
-		8 & SW & NE \\ \hline
-		\hline
+		1 & SE & NE \\
+		2 & SE & SE \\
+		3 & NE & SW \\
+		4 & NE & NW \\
+		5 & NW & NW \\
+		6 & NW & SW \\
+		7 & SW & SE \\
+		8 & SW & NE \\
 		\hline
 	\end{tabularx}
 	\caption{Examples of Inner Corner Missing}
