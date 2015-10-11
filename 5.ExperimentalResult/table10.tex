@@ -1,0 +1,60 @@
+%!TEX root = ../Fast_Contour_Tracing_Algorithm.tex
+% -*- root: ../Fast_Contour_Tracing_Algorithm.tex -*-
+
+% \begin{table}[]
+% \scriptsize
+% \centering
+% \caption{Comparison Between Total Contour Pixels and Representative Points.}
+% \label{table:table10}
+% \begin{tabularx}{1.0\textwidth}{rR{2.1cm}R{2.0cm}R{2.9cm}R{3.0cm}R{2.5cm}R{2cm}}
+
+% \toprule
+% \multirow{2}{*}{} & \multicolumn{2}{l}{Entire contour pixels} & \multicolumn{3}{l}{Compressed data} & \multirow{2}{*}{Ratio ($\%$) ($E / B \times 100$) }	\\
+% 				  & \multicolumn{1}{l}{Number of contour pixels ($A$)} & Data size ($B = A \times 2$) & Number of representative points ($C$) & Number of Inner outer corner points ($D$) & Data size ($E = C \times 2 + D \times 3$) & \\
+% \midrule
+% \#1               & 81,188                         & 162,376                      & 21,206                                & 61                                        & 42,595  & 26.23 \\
+% \#2               & 50,824                         & 101,648                      & 12,695                                & 21                                        & 25,453  & 25.04 \\
+% \#3               & 152,487                        & 304,974                      & 30,181                                & 53                                        & 60,521  & 19.84 \\
+% \#4               & 312,812                        & 625,624                      & 86,953                                & 442    & 175,232 & 28.01 \\
+% \#5               & 157,374                        & 314,748                      & 37,386                                & 113    & 75,111  & 23.86 \\
+% \#6               & 98,566                         & 197,132                      & 18,464                                & 104    & 37,240  & 18.89 \\
+% \#7               & 283,551                        & 567,102                      & 84,484                                & 1,539  & 173,585 & 30.61 \\
+% \#8               & 97,015                         & 194,030                      & 21,928                                & 104    & 44,168  & 22.76 \\
+% \#10              & 445,975                        & 891,950                      & 158,529                               & 75,425 & 543,333 & 60.92 \\
+% \bottomrule
+
+% \end{tabularx}
+% \end{table}
+
+
+% Please add the following required packages to your document preamble:
+% \usepackage{multirow}
+% \usepackage{graphicx}
+\begin{table}[]
+\centering
+\caption{Comparison Between Total Contour Pixels and Representative Points.}
+\label{table:table10}
+\resizebox{\textwidth}{!}{%
+\begin{tabular}{rrrrrrr}
+
+\toprule
+
+\multicolumn{1}{l}{} & \multicolumn{2}{l}{Entire contour pixels}                                                             & \multicolumn{3}{l}{Compressed data}                                   & \multicolumn{1}{l}{\multirow{2}{*}{\bigcell{Ratio ($\%$)\\($E / B \times 100$)}}} \\
+
+\multicolumn{1}{l}{} & \bigcell{Number of\\contour pixels ($A$)} & \bigcell{Data size\\($B = A \times 2$)} & \bigcell{Number of\\representativepoints ($C$)} & \bigcell{Number of Inner outer\\corner points ($D$)} & \bigcell{Data size\\($E = C \times 2 + D \times 3$)} & \multicolumn{1}{l}{}                            \\
+
+
+\midrule
+\#1                  & 81,188                                             & 162,376                                          & 21,206                & 61                    & 42,595                & 26.23                                           \\
+\#2                  & 50,824                                             & 101,648                                          & 12,695                & 21                    & 25,453                & 25.04                                           \\
+\#3                  & 152,487                                            & 304,974                                          & 30,181                & 53                    & 60,521                & 19.84                                           \\
+\#4                  & 312,812                                            & 625,624                                          & 86,953                & 442                   & 175,232               & 28.01                                           \\
+\#5                  & 157,374                                            & 314,748                                          & 37,386                & 113                   & 75,111                & 23.86                                           \\
+\#6                  & 98,566                                             & 197,132                                          & 18,464                & 104                   & 37,240                & 18.89                                           \\
+\#7                  & 283,551                                            & 567,102                                          & 84,484                & 1,539                 & 173,585               & 30.61                                           \\
+\#8                  & 97,015                                             & 194,030                                          & 21,928                & 104                   & 44,168                & 22.76                                           \\
+\#10                 & 445,975                                            & 891,950                                          & 158,529               & 75,425                & 543,333               & 60.92                                          \\
+\bottomrule
+\end{tabular}
+}
+\end{table}

@@ -17,18 +17,19 @@ The proposed algorithm runs under two assumptions for starting. One is the gener
 
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=1.0\textwidth]{4.Proposed/proposed_cases.png}
-	\caption{Contour Tracing Cases for Proposed Contour-following Algorithm.}
+	\subfloat[]{ \includegraphics[width=0.25\textwidth]{4.Proposed/fig9-a.png} \label{fig:img9-a} }
+	\subfloat[]{ \includegraphics[width=0.73\textwidth]{4.Proposed/fig9-b.png} \label{fig:img9-b} }
+
+	\caption{Contour Tracing Cases for Proposed Contour-following Algorithm. \protect\subref{fig:img9-a} Adjacent pixels \protect\subref{fig:img9-b} Contour cases}
 	\label{fig:image9}
 \end{figure}
-\JHMEMO{Change the image 9}
 
 
 \subsubsection{Procedures}
 
 % The proposed algorithm has two stages. First, the tracer follows the contour pixel on the basis of the intensities of the left-rear and left pixels. After that, the tracer follows the contour pixels on the basis of the intensities of the front and front-left pixels. Figure \ref{fig:image9} shows the contour tracing cases of the proposed contour following algorithm. In the figure, the tracer is first on $N0$ queries states of $N1$ and $N2$, as shown in figure \ref{fig:image9} (a), and then the states determine the corresponding  path to trace among cases (1)-(4), as shown in figure \ref{fig:image9} (b). After stage 1, the moved tracer queries states N3 and N4 and then it traces contour pixels along the corresponding path using the states among cases (5)-(8). 
 
-The proposed algorithm has two stages. First, the tracer follows the contour pixel based on the intensities of the left-rear and left pixels. After that, the tracer follows the contour pixels according to the intensities of the front and front-left pixels.  \ref{fig:image9} shows the contour tracing cases for the proposed contour-following algorithm. In the figure, the tracer is first on $N0$ queries states of $N1$ and $N2$, as shown in  \JHMEMO{\ref{fig:image9}(a)}, and then the states determine the corresponding path to be traced from among cases (1)–(4), as shown in Figure \JHMEMO{\ref{fig:image9}(b)}. After stage 1, the moved tracer queries states N3 and N4, and it then traces contour pixels along the corresponding path using the states from among cases (5)–(8). 
+The proposed algorithm has two stages. First, the tracer follows the contour pixel based on the intensities of the left-rear and left pixels. After that, the tracer follows the contour pixels according to the intensities of the front and front-left pixels. \ref{fig:image9} shows the contour tracing cases for the proposed contour-following algorithm. In the figure, the tracer is first on $N0$ queries states of $N1$ and $N2$, as shown in  \ref{fig:img9-a}, and then the states determine the corresponding path to be traced from among cases (1)-(4), as shown in Figure \ref{fig:img9-b}. After stage 1, the moved tracer queries states $N3$ and $N4$, and it then traces contour pixels along the corresponding path using the states from among cases (5)-(8). 
 
 % Hence, by using the proposed algorithm, the inner corners are traced as case (1) or case (6), the inner-outer corners are traced as case (2) or case (5), the outer corners are determined as case (4) or case (8), and the straight-line pixels are determined as the other cases. Therefore, all the cases are easily classified by using the algorithm. 
 
@@ -48,17 +49,17 @@ Hence, by using the proposed algorithm, the inner corners traced are considered 
 
 % Figure \ref{fig:image10} describes the state transition for the automation of the proposed algorithm. In the figure, the start and termination occur at State 0; the first stage runs using States 1-4 and then it transits to State 5. The second stage continues from State 5 using States 6-11 and then it transits to State 0. For example, case (1) in figure \ref{fig:image9} can be executed by the transit sequence State 1, State 3, and State 5. 
 
-\ref{fig:image10} describes the state transition for the automation of the proposed algorithm. In the figure, the start and termination occur at State 0. The first stage runs using States 1–4, and it then transits to State 5. The second stage continues from State 5 using States 6–11, and it then transits to State 0. For example, case (1) in Figure 9 can be executed using the transit sequence State 1, State 3, and State 5. 
+\ref{fig:image10} describes the state transition for the automation of the proposed algorithm. In the figure, the start and termination occur at State 0. The first stage runs using States 1-4, and it then transits to State 5. The second stage continues from State 5 using States 6-11, and it then transits to State 0. For example, case (1) in Figure \ref{fig:img9-b} can be executed using the transit sequence State 1, State 3, and State 5.
 
 % In figure \ref{fig:image10}, $[N1 N2 N3 N4]$ represents the intensity vector of the tracer's four adjacent pixels shown in figure \ref{fig:image9} (a). In the vector, $d$ implies ``do not care''; $B$, a contour pixel (black); and $W$, the background pixel (white). Moreover, Update $(P,d)$ refers to the movement operation where $P$ is the new contour pixel location and $d$ is the new directional information for the tracer. In State 1 and State 3, the updates occur based on the tracer of State 0, and other updates are based on the tracer information in State 5.
 
-In \ref{fig:image10}, $[N1 N2 N3 N4]$ represents the intensity vector of the tracer’s four adjacent pixels shown in Figure \JHMEMO{\ref{fig:image9}(a)}. In the vector, $d$ implies ``do not care''; $B$ represents a contour pixel (black), and $W$ represents the background pixel (white). Moreover, Update $(P,d)$ refers to the movement operation where $P$ is the new contour-pixel location and $d$ is the new directional information for the tracer. In States 1 and 3, the updates occur based on the tracer of State 0, and other updates are based on the tracer information in State 5.
+In \ref{fig:image10}, $[N1 N2 N3 N4]$ represents the intensity vector of the tracer's four adjacent pixels shown in Figure \JHMEMO{\ref{fig:image9}(a)}. In the vector, $d$ implies ``do not care''; $B$ represents a contour pixel (black), and $W$ represents the background pixel (white). Moreover, Update $(P,d)$ refers to the movement operation where $P$ is the new contour-pixel location and $d$ is the new directional information for the tracer. In States 1 and 3, the updates occur based on the tracer of State 0, and other updates are based on the tracer information in State 5.
 
 \subsubsection{Characteristics of Proposed Algorithm}
 
 % We designed the proposed algorithm based on two stages with two major goals. First, the check operation for stopping occurs only at State 0; therefore, the number of checking operations on black pixels are reduced. In other words, the proposed algorithm examines that the check operation occurs when only the tracer has a white rear pixel. This is more efficient as compared to the check operation occuring for every contour pixel because its start condition and stop criterion also satisfy that the rear pixel of the tracer on the start pixel is white. Therefore, the transition of stage 2 to States 6 to 11 for processing cases (5) to (8) is designed such that it can be returned to State 0 only if the tracer has a white rear pixel, and it reduces any unnecessary operations for checking to stop. Besides, the tracers of cases (2) and (4) have a white rear pixel after movement but their end conditions are not considered. In case (2), at the start the tracer avoids the inner-outer corner pixels as the start and end pixel. Moreover, in case (4), the tracer has no update; therefore, it is unnecessary to perform check operation twice. 
 
-We designed the proposed algorithm based on two stages with two major goals. First, the check operation for stopping occurs only at State 0; therefore, the number of checking operations on black pixels is reduced. In other words, the proposed algorithm verifies that the check operation occurs when only the tracer has a white rear pixel. This is more efficient when compared to the check operation that occurs for every contour pixel because its start condition and stop criterion also satisfy the condition that the rear pixel of the tracer on the start pixel should be white. Therefore, the transition of stage 2 to States 6–11 for processing cases (5) to (8) is designed such that it can be returned to State 0 only if the tracer has a white rear pixel, and it reduces any unnecessary operations that are required to stop the checking. Besides, the tracers of cases (2) and (4) have a white rear pixel after the movement, but their end conditions are not considered. In case (2), at the start, the tracer avoids the inner-outer corner pixels as the start and end pixel. Moreover, in case (4), the tracer has no update; therefore, it is unnecessary to perform the check operation twice. 
+We designed the proposed algorithm based on two stages with two major goals. First, the check operation for stopping occurs only at State 0; therefore, the number of checking operations on black pixels is reduced. In other words, the proposed algorithm verifies that the check operation occurs when only the tracer has a white rear pixel. This is more efficient when compared to the check operation that occurs for every contour pixel because its start condition and stop criterion also satisfy the condition that the rear pixel of the tracer on the start pixel should be white. Therefore, the transition of stage 2 to States 6-11 for processing cases (5) to (8) is designed such that it can be returned to State 0 only if the tracer has a white rear pixel, and it reduces any unnecessary operations that are required to stop the checking. Besides, the tracers of cases (2) and (4) have a white rear pixel after the movement, but their end conditions are not considered. In case (2), at the start, the tracer avoids the inner-outer corner pixels as the start and end pixel. Moreover, in case (4), the tracer has no update; therefore, it is unnecessary to perform the check operation twice. 
 
 % Second, the proposed algorithm reduces some of the redundant operations used for detecting white pixels. The conventional algorithms do not consider white pixels in the previous path; therefore, they sometimes redetect white pixels on the previous tracing during the current tracing. For example, in figure 8, the white pixel at (4, 2) is detected twice while determining contour pixels such as (4, 3) and (5, 3). Moreover, RSA detects (4, 2) three time while determining (4, 3), (5, 3), and (6, 3). On the contrary, the proposed algorithm has two stages and its second stage avoids the previous path. \textcolor{red}{Figure 11} shows the contour tracing results for the proposed algorithm and it detects (4, 2) once for contour tracing. Moreover, the figure shows that the proposed algorithm has fewer operations on the white pixels as compared to conventional pixel following methods, as shown in figure \ref{fig:comparison}, and traces all the types of contours. 
 
@@ -127,12 +128,12 @@ Table \ref{table:table2} describes the tracing results that were obtained by usi
 
 \begin{table}[h]
 	\centering
-	\begin{tabularx}{0.7\textwidth}{Y|Y|Y|Y}
-		\hline
-		\multirow{2}{*}{$Sequence(i)$} &  \multicolumn{2}{|c|}{P}  & \multirow{2}{*}{$Code(i)$} \\
-		\cline{2-3}
+	\begin{tabularx}{0.7\textwidth}{YYYY}
+		\toprule
+		\multirow{2}{*}{$Sequence(i)$} &  \multicolumn{2}{c}{P}  & \multirow{2}{*}{$Code(i)$} \\
+		% \cline{2-3}
 		             &$x$       & $y$ & \\
-		\hline
+		\midrule
 		1 & 1 & 5 & Outer \\
 		2 & 2 & 5 & Inner \\
 		3 & 2 & 4 & Outer \\
@@ -145,7 +146,7 @@ Table \ref{table:table2} describes the tracing results that were obtained by usi
 		10 & 7 & 1 & Outer \\
 		11 & 8 & 1 & \\
 
-		\hline
+		\bottomrule
 	\end{tabularx}
 	\caption{Result Table of the Proposed Contour Tracing}
 	\label{table:table2}
@@ -166,11 +167,11 @@ In the table, $Code (i)$ represents only one code, the contour pixel type per co
  \subsubsection{Data Structure}
  % The representative points and inner-outer corner points are represented as vertices of contour pixels. Figure \textcolor{red}{12 (a)} shows the point types of the proposed algorithm. The representative point is of seven types, namely, two outer corners, two inner corners, and one inner-outer corner. Moreover, the inner-outer corner point has two types. Figure \textcolor{red}{12 (b)} illustrates all cases of contour tracing for the proposed algorithm and their corresponding representative points and inner-outer corner points. 
 
- The representative points and inner-outer corner points are represented as vertices of contour pixels. Figure \JHMEMO{12(a)} shows the point types of the proposed algorithm. There are seven types of representative point. They are two outer corners, two inner corners, and one inner-outer corner. In addition, there are two types of inner-outer corner point. Figure \JHMEMO{12(b)} illustrates all cases of contour tracing for the proposed algorithm and their corresponding representative points and inner-outer corner points. 
+The representative points and inner-outer corner points are represented as vertices of contour pixels. Figure \ref{fig:img11-a} shows the point types of the proposed algorithm. There are seven types of representative point. They are two outer corners, two inner corners, and one inner-outer corner. In addition, there are two types of inner-outer corner point. Figure \ref{fig:img11-b} illustrates all cases of contour tracing for the proposed algorithm and their corresponding representative points and inner-outer corner points. 
 
  % These points are saved as a sequence during contour tracing. If an $i$-th representative point $R_i$ is equivalent to $(r_{i,x}, r_{i,y})$, then the set of representative points $R$ is given by $\{R_0, R_1, R_2, … , R_{n-1}\}$ and $R_0 = R_n$ because the starting and ending points are the same. Similarly, if $C_j$ is the $j$-th inner-outer corner point, it can be represented using its coordinate and its type. The type of the point $C_{j,T}$ is assigned to be NW-SE or NE-SW, as shown in figures \textcolor{red}{12 (a)}. Table \ref{table:data_structure} shows the data structure for data compression and restoration of the contour pixels by using the proposed algorithm. 
 
- These points are saved as a sequence during contour tracing. If the i-th representative point Ri is equivalent to $(r_{i,x}, r_{i,y})$, then the set of representative points $R$ is given by $\{R_0, R_1, R_2, … , R_{n-1}\}$ and $R_0 = R_n$ because the starting and ending points are the same. Similarly, if $C_j$ is the $j$-th inner-outer corner point, it can be represented using its coordinate and its type. The type of point $C_{j,T}$ is assigned to be $NW-SE$ or $NE-SW$, as shown in Figure \JHMEMO{12(a)}. Table \ref{table:data_structure} shows the data structure for data compression and the restoration of the contour pixels using the proposed algorithm. 
+ These points are saved as a sequence during contour tracing. If the $i$-th representative point $R_i$ is equivalent to $(r_{i,x}, r_{i,y})$, then the set of representative points $R$ is given by $\{R_0, R_1, R_2, … , R_{n-1}\}$ and $R_0 = R_n$ because the starting and ending points are the same. Similarly, if $C_j$ is the $j$-th inner-outer corner point, it can be represented using its coordinate and its type. The type of point $C_{j,T}$ is assigned to be $NW-SE$ or $NE-SW$, as shown in Figure \ref{fig:img11-a}. Table \ref{table:data_structure} shows the data structure for data compression and the restoration of the contour pixels using the proposed algorithm. 
 
  %%% Image 11
 \begin{figure}[htbp]
@@ -185,17 +186,17 @@ In the table, $Code (i)$ represents only one code, the contour pixel type per co
  \begin{table}[h]
 	\centering
 	\begin{tabularx}{0.7\textwidth}{YYYYY}
-		\hline
+		\toprule
 		\multicolumn{2}{c}{Representative Points($R_i$)} & 
 		\multicolumn{3}{c}{Inner-outer Corner($C_i$)} \\
-		\hline
+		% \hline
 		$x$ & $y$ & $x$ & $y$ & Type \\
-		\hline
+		\midrule
 
 		$r_{1,x}$ & $r_{1,y}$ & $C_{1,x}$ & $C_{1,y}$ & $C_{1,T}$ \\
 		$r_{2,x}$ & $r_{2,y}$ & $C_{2,x}$ & $C_{2,y}$ & $C_{2,T}$ \\
 		... & ... & ... & ... & ...\\
-		\hline
+		\bottomrule
 	\end{tabularx}
 	\caption{Data Structure of Proposed Contour Tracer.}
 	\label{table:data_structure}
