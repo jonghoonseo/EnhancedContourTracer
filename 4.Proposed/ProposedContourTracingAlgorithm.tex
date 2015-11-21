@@ -15,6 +15,7 @@ In this section, we propose a novel pixel-following algorithm that traces contou
 
 The proposed algorithm runs under two assumptions for starting. One is the general condition for pixel following, where the rear pixel of the tracer on the start pixel is white. The other is that there is no left-rear inner-outer corner for the tracer at the start position, i.e., if the rear and the left pixels are white and the rear-left pixel is black, the start pixel has to be changed. These are the same starting conditions as those used for the MSBF and ISBF. Moreover, the stop criteria of the proposed algorithm is Jacob's stopping criterion, and the tracer is always on a contour pixel. 
 
+% Image 9
 \begin{figure}[htbp]
 	\centering
 	\subfloat[]{ \includegraphics[width=0.25\textwidth]{4.Proposed/fig9-a.png} \label{fig:img9-a} }
@@ -40,6 +41,7 @@ Hence, by using the proposed algorithm, the inner corners traced are considered 
 
 \subsubsection{States}
 
+% Image 10
 \begin{figure}[htbp]
 	\centering
 	\includegraphics[width=1.0\textwidth]{4.Proposed/state.png}
@@ -63,29 +65,38 @@ We designed the proposed algorithm based on two stages with two major goals. Fir
 
 % Second, the proposed algorithm reduces some of the redundant operations used for detecting white pixels. The conventional algorithms do not consider white pixels in the previous path; therefore, they sometimes redetect white pixels on the previous tracing during the current tracing. For example, in figure 8, the white pixel at (4, 2) is detected twice while determining contour pixels such as (4, 3) and (5, 3). Moreover, RSA detects (4, 2) three time while determining (4, 3), (5, 3), and (6, 3). On the contrary, the proposed algorithm has two stages and its second stage avoids the previous path. \textcolor{red}{Figure 11} shows the contour tracing results for the proposed algorithm and it detects (4, 2) once for contour tracing. Moreover, the figure shows that the proposed algorithm has fewer operations on the white pixels as compared to conventional pixel following methods, as shown in figure \ref{fig:image8}, and traces all the types of contours. 
 
-Second, the proposed algorithm eliminates some of the redundant operations that are used to detect white pixels. The conventional algorithms do not consider white pixels in the previous path; therefore, they sometimes redetect white pixels on the previous tracing during the current tracing. For example, in Figure \ref{fig:image8}, the white pixel at $(4, 2)$ is detected twice while determining contour pixels such as $(4, 3)$ and $(5, 3)$. Moreover, RSA detects $(4, 2)$ three times while determining $(4, 3)$, $(5, 3)$, and $(6, 3)$. On the contrary, the proposed algorithm has two stages, and its second stage avoids the previous path. Figure \textcolor{red}{Figure 11} shows the contour-tracing results obtained for the proposed algorithm, and it detects $(4, 2)$ once for contour tracing. Moreover, the figure shows that the proposed algorithm has fewer operations on the white pixels when compared to conventional pixel-following methods, as shown in Figure \ref{fig:image8}, and it traces all types of contours. 
+Second, the proposed algorithm eliminates some of the redundant operations that are used to detect white pixels. The conventional algorithms do not consider white pixels in the previous path; therefore, they sometimes redetect white pixels on the previous tracing during the current tracing. For example, in Figure \ref{fig:image8}, the white pixel at $(4, 2)$ is detected twice while determining contour pixels such as $(4, 3)$ and $(5, 3)$. Moreover, RSA detects $(4, 2)$ three times while determining $(4, 3)$, $(5, 3)$, and $(6, 3)$. On the contrary, the proposed algorithm has two stages, and its second stage avoids the previous path. Figure \ref{fig:image11} shows the contour-tracing results obtained for the proposed algorithm, and it detects $(4, 2)$ once for contour tracing. Moreover, the figure shows that the proposed algorithm has fewer operations on the white pixels when compared to conventional pixel-following methods, as shown in Figure \ref{fig:image8}, and it traces all types of contours. 
+
+% Image 11
+\begin{figure}[htbp]
+	\centering
+	\includegraphics[width=0.4\textwidth]{4.Proposed/fig11.png}
+	\caption{Result of contour tracing using proposed algorithm}
+	\label{fig:image11}
+\end{figure}
 
 % The pseudo-code of the proposed algorithm is as below: 
 
 The pseudocode of the proposed algorithm is given below: 
 
 \begin{algorithm}
-	\caption{Algorithm of Proposed Algorithm}
+	\caption{Procedure of Proposed Tracer}
 	\label{alg:proposed}
 	\begin{algorithmic}[1]
 	\Procedure{Proposed\_Tracer}{}
 	\State $\textit{T(P,d)} \gets \textit{S(P,d)}$, where $P$ is on black, $P_{Rear}$ is on white and $i \gets 1$
 	\LineComment{Whenever $T(P,d)$ is updated, $i$ increases $1$ and $T(p',d')$ is saved automatically}
 	\Do
-	\LineComment{State 1}
+	\LineComment{Stage 1}
 	\If {$\textit{P}_{Left-Rear}$ = black}
 		\If {$\textit{P}_{Left}$ = black}
 			\LineComment{Case 1}
-			\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $ and $\textit{Code(i)} \gets ``Inner''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Left}, \textit{d}_{Left})$
+			\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $ and $\textit{Code(i)} \gets ``Inner''$
+			\State $\textit{T(P,d)} \gets \textit{T(P}_{Left}, \textit{d}_{Left})$
 		\Else
 			\LineComment{Case 2}
-			\State $\textit{Code(i)} \gets ``Inner-outer''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Left-Rear},\textit{d}_{Rear} )  $
 			\State $\textit{Code(i)} \gets ``Inner-outer''$
+			\State $\textit{T(P,d)} \gets \textit{T(P}_{Left-Rear},\textit{d}_{Rear} )  $ and $\textit{Code(i)} \gets ``Inner-outer''$
 		\EndIf
 	\Else
 		\If {$\textit{P}_{Left}$ = black}
@@ -102,11 +113,12 @@ The pseudocode of the proposed algorithm is given below:
 	\If {$\textit{P}_{Front-Left}$ = black}
 		\If {$\textit{P}_{Front}$ = black}
 			\LineComment{Case 6}
-			\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d}_{Left} )  $ and $\textit{Code(i)} \gets ``Inner''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Front}, \textit{d}_{Right})$
+			\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d}_{Left} )  $ and $\textit{Code(i)} \gets ``Inner''$
+			\State $\textit{T(P,d)} \gets \textit{T(P}_{Front}, \textit{d}_{Right})$
 		\Else
 			\LineComment{Case 5}
-			\State $\textit{Code(i)} \gets ``Inner-outer''$ and $\textit{T(P,d)} \gets \textit{T(P}_{Front-Left},\textit{d} )  $
 			\State $\textit{Code(i)} \gets ``Inner-outer''$
+			\State $\textit{T(P,d)} \gets \textit{T(P}_{Front-Left},\textit{d} )  $ and $\textit{Code(i)} \gets ``Inner-outer''$
 		\EndIf
 	\ElsIf {$\textit{P}_{Front}$ = black}
 		\LineComment{Case 7}
@@ -167,19 +179,19 @@ In the table, $Code (i)$ represents only one code, the contour pixel type per co
  \subsubsection{Data Structure}
  % The representative points and inner-outer corner points are represented as vertices of contour pixels. Figure \textcolor{red}{12 (a)} shows the point types of the proposed algorithm. The representative point is of seven types, namely, two outer corners, two inner corners, and one inner-outer corner. Moreover, the inner-outer corner point has two types. Figure \textcolor{red}{12 (b)} illustrates all cases of contour tracing for the proposed algorithm and their corresponding representative points and inner-outer corner points. 
 
-The representative points and inner-outer corner points are represented as vertices of contour pixels. Figure \ref{fig:img11-a} shows the point types of the proposed algorithm. There are seven types of representative point. They are two outer corners, two inner corners, and one inner-outer corner. In addition, there are two types of inner-outer corner point. Figure \ref{fig:img11-b} illustrates all cases of contour tracing for the proposed algorithm and their corresponding representative points and inner-outer corner points. 
+The representative points and inner-outer corner points are represented as vertices of contour pixels. Figure \ref{fig:img12-a} shows the point types of the proposed algorithm. There are seven types of representative point. They are two outer corners, two inner corners, and one inner-outer corner. In addition, there are two types of inner-outer corner point. Figure \ref{fig:img12-b} illustrates all cases of contour tracing for the proposed algorithm and their corresponding representative points and inner-outer corner points. 
 
  % These points are saved as a sequence during contour tracing. If an $i$-th representative point $R_i$ is equivalent to $(r_{i,x}, r_{i,y})$, then the set of representative points $R$ is given by $\{R_0, R_1, R_2, … , R_{n-1}\}$ and $R_0 = R_n$ because the starting and ending points are the same. Similarly, if $C_j$ is the $j$-th inner-outer corner point, it can be represented using its coordinate and its type. The type of the point $C_{j,T}$ is assigned to be NW-SE or NE-SW, as shown in figures \textcolor{red}{12 (a)}. Table \ref{table:data_structure} shows the data structure for data compression and restoration of the contour pixels by using the proposed algorithm. 
 
- These points are saved as a sequence during contour tracing. If the $i$-th representative point $R_i$ is equivalent to $(r_{i,x}, r_{i,y})$, then the set of representative points $R$ is given by $\{R_0, R_1, R_2, \cdots  , R_{n-1}\}$ and $R_0 = R_n$ because the starting and ending points are the same. Similarly, if $C_j$ is the $j$-th inner-outer corner point, it can be represented using its coordinate and its type. The type of point $C_{j,T}$ is assigned to be $NW-SE$ or $NE-SW$, as shown in Figure \ref{fig:img11-a}. Table \ref{table:data_structure} shows the data structure for data compression and the restoration of the contour pixels using the proposed algorithm. 
+ These points are saved as a sequence during contour tracing. If the $i$-th representative point $R_i$ is equivalent to $(r_{i,x}, r_{i,y})$, then the set of representative points $R$ is given by $\{R_0, R_1, R_2, \cdots  , R_{n-1}\}$ and $R_0 = R_n$ because the starting and ending points are the same. Similarly, if $C_j$ is the $j$-th inner-outer corner point, it can be represented using its coordinate and its type. The type of point $C_{j,T}$ is assigned to be $NW-SE$ or $NE-SW$, as shown in Figure \ref{fig:img12-a}. Table \ref{table:data_structure} shows the data structure for data compression and the restoration of the contour pixels using the proposed algorithm. 
 
- %%% Image 11
+ %%% Image 12
 \begin{figure}[htbp]
 	\centering
-	\subfloat[]{ \includegraphics[width=1.0\textwidth]{4.Proposed/fig11-a.png} \label{fig:img11-a} } \\
-	\subfloat[]{ \includegraphics[width=1.0\textwidth]{4.Proposed/fig11-b.png} \label{fig:img11-b} }
-	\caption{Contour Pixel Reconstruction. \protect\subref{fig:img11-a} Representative points and inner-outer corner points \protect\subref{fig:img11-b} Cases of the proposed algorithm }
-	\label{fig:image11}
+	\subfloat[]{ \includegraphics[width=1.0\textwidth]{4.Proposed/fig12-a.png} \label{fig:img12-a} } \\
+	\subfloat[]{ \includegraphics[width=1.0\textwidth]{4.Proposed/fig12-b.png} \label{fig:img12-b} }
+	\caption{Contour Pixel Reconstruction. \protect\subref{fig:img12-a} Representative points and inner-outer corner points \protect\subref{fig:img12-b} Cases of the proposed algorithm }
+	\label{fig:image12}
 \end{figure}
 
 
@@ -227,37 +239,37 @@ The sequence of representative points is important for the reconstruction of the
 \end{equation}
 
 % Figure \textcolor{red}{13} shows the contour pixel reconstruction methods using the relative positions from $R_i$ to $R_{i+1}$. In the case of SE or NW, the contour pixels are filled in a clockwise manner and in the other cases, these pixels are filled in a counterclockwise manner.
-Figure \ref{fig:image12} shows the contour-pixel reconstruction methods using the relative positions from $R_i$ to $R_{i+1}$. In the case of $SE$ or $NW$, the contour pixels are filled in a clockwise manner, while in the other cases, these pixels are filled in a counterclockwise manner.
+Figure \ref{fig:image13} shows the contour-pixel reconstruction methods using the relative positions from $R_i$ to $R_{i+1}$. In the case of $SE$ or $NW$, the contour pixels are filled in a clockwise manner, while in the other cases, these pixels are filled in a counterclockwise manner.
 
 %%% Image 12
-\begin{figure}[htbp]
-	\centering
-	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig12-a.png} \label{fig:img12-a} }
-	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig12-b.png} \label{fig:img12-b} }
-	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig12-c.png} \label{fig:img12-c} } 
-	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig12-d.png} \label{fig:img12-d} }
-	\caption{Contour Pixel Reconstruction. \protect\subref{fig:img12-a} SE \protect\subref{fig:img12-b} NW \protect\subref{fig:img12-c} SW \protect\subref{fig:img12-d} NE}
-	\label{fig:image12}
-\end{figure}
-
-% The methods in figure \JHMEMO{13} are the basic methods for restoring the contour, but they have a problem in reconstructing the inner corner pixel using three or more representative points. Table \ref{table:ex_innerCornerMissing} and figure \JHMEMO{14} show cases of missing inner corner pixels using sequential representative points $R_i$, $R_{i+1}$, and $R_{i+2}$.
-
-The methods in Figure \ref{fig:image12} are the basic methods employed to restore the contour, but they are problematic when used to reconstruct the inner-corner pixel using three or more representative points. Table \ref{table:ex_innerCornerMissing} and Figure \ref{fig:image13} show cases of the missing inner-corner pixels using sequential representative points $R_i$, $R_{i+1}$, and $R_{i+2}$.
-
-%%% Image 13
 \begin{figure}[htbp]
 	\centering
 	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig13-a.png} \label{fig:img13-a} }
 	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig13-b.png} \label{fig:img13-b} }
 	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig13-c.png} \label{fig:img13-c} } 
-	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig13-d.png} \label{fig:img13-d} } //
-	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig13-e.png} \label{fig:img13-e} }
-	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig13-f.png} \label{fig:img13-f} }
-	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig13-g.png} \label{fig:img13-g} }
-	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig13-h.png} \label{fig:img13-h} }
-	 
-	\caption{Restoration Cases for Different Sequences of Representation Points. \protect\subref{fig:img13-a} - \protect\subref{fig:img13-h} Case 1 - 8}
+	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig13-d.png} \label{fig:img13-d} }
+	\caption{Contour Pixel Reconstruction. \protect\subref{fig:img13-a} SE \protect\subref{fig:img13-b} NW \protect\subref{fig:img13-c} SW \protect\subref{fig:img13-d} NE}
 	\label{fig:image13}
+\end{figure}
+
+% The methods in figure \JHMEMO{13} are the basic methods for restoring the contour, but they have a problem in reconstructing the inner corner pixel using three or more representative points. Table \ref{table:ex_innerCornerMissing} and figure \JHMEMO{14} show cases of missing inner corner pixels using sequential representative points $R_i$, $R_{i+1}$, and $R_{i+2}$.
+
+The methods in Figure \ref{fig:image13} are the basic methods employed to restore the contour, but they are problematic when used to reconstruct the inner-corner pixel using three or more representative points. Table \ref{table:ex_innerCornerMissing} and Figure \ref{fig:image14} show cases of the missing inner-corner pixels using sequential representative points $R_i$, $R_{i+1}$, and $R_{i+2}$.
+
+%%% Image 13
+\begin{figure}[htbp]
+	\centering
+	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig14-a.png} \label{fig:img14-a} }
+	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig14-b.png} \label{fig:img14-b} }
+	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig14-c.png} \label{fig:img14-c} } 
+	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig14-d.png} \label{fig:img14-d} } //
+	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig14-e.png} \label{fig:img14-e} }
+	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig14-f.png} \label{fig:img14-f} }
+	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig14-g.png} \label{fig:img14-g} }
+	\subfloat[]{ \includegraphics[width=0.24\textwidth]{4.Proposed/fig14-h.png} \label{fig:img14-h} }
+	 
+	\caption{Restoration Cases for Different Sequences of Representation Points. \protect\subref{fig:img14-a} - \protect\subref{fig:img14-h} Case 1 - 8}
+	\label{fig:image14}
 \end{figure}
 
  \begin{table}[h]

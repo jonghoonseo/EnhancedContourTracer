@@ -99,9 +99,9 @@ In this study, we focus on a contour-tracing algorithm that is suitable for case
 %%% Image 2
 \begin{figure}[htbp]
 	\centering
-	\subfloat[]{ \includegraphics[width=0.3\textwidth, height=5cm]{2.RelatedWorks/fig2-a.png} \label{fig:img2-a} }
-	\subfloat[]{ \includegraphics[width=0.3\textwidth, height=5cm]{2.RelatedWorks/fig2-b.png} \label{fig:img2-b} }
-	\subfloat[]{ \includegraphics[width=0.3\textwidth, height=5cm]{2.RelatedWorks/fig2-c.png} \label{fig:img2-c} }
+	\subfloat[]{ \includegraphics[width=0.32\textwidth, height=5cm]{2.RelatedWorks/fig2-a.png} \label{fig:img2-a} }
+	\subfloat[]{ \includegraphics[width=0.33\textwidth, height=5cm]{2.RelatedWorks/fig2-b.png} \label{fig:img2-b} }
+	\subfloat[]{ \includegraphics[width=0.31\textwidth, height=5cm]{2.RelatedWorks/fig2-c.png} \label{fig:img2-c} }
 	 
 	\caption{Directions and types of contour pixels. \protect\subref{fig:img2-a} Absolute direction $d$ \protect\subref{fig:img2-b} Relative direction $r$ \protect\subref{fig:img2-c} Types of contour pixels}
 	\label{fig:image2}
@@ -139,8 +139,8 @@ SBF cannot trace an inner-outer corner pixel that is located at the left rear, a
 %%% Image 3
 \begin{figure}[htbp]
 	\centering
-	\subfloat[]{ \includegraphics[width=0.25\textwidth]{2.RelatedWorks/fig3-a.png} \label{fig:img3-a} }
-	\subfloat[]{ \includegraphics[width=0.25\textwidth]{2.RelatedWorks/fig3-b.png} \label{fig:img3-b} }
+	\subfloat[]{ \includegraphics[width=0.3\textwidth]{2.RelatedWorks/fig3-a.png} \label{fig:img3-a} }
+	\subfloat[]{ \includegraphics[width=0.3\textwidth]{2.RelatedWorks/fig3-b.png} \label{fig:img3-b} }
 	 
 	\caption{Detour of inner-outer corner at left-rear pixel (modified version of \cite{Gose1996Pattern}). \protect\subref{fig:img3-a} SBF \protect\subref{fig:img3-b} MSBF}
 	\label{fig:image3}
@@ -159,20 +159,27 @@ The SBF and MSBF require movement operations for both contour and background pix
 	\State $\textit{T(P,d)} \gets \textit{S(P,d)}$, where \textit{P} is on black
 	\Do
 	\If {$\textit{P}_{Left}$ = black}
+		\LineComment{Case \ref{fig:img4-a}: Left neighbor}
 		\State $\textit{T(P,d)} \gets \textit{T(P}_{Left},\textit{d}_{Left} )  $
 	\Else
 		\If {$\textit{P}_{Left-Rear}$ = black and $\textit{P}_{Rear}$ = white}
+			\LineComment{Case \ref{fig:img4-b}: Inner-outer corner at left-rear}
 			\State $\textit{T(P,d)} \gets \textit{T(P}_{Left-Rear},\textit{d}_{Rear} )  $
 		\Else
 			\If {$\textit{P}_{Front-Left}$ = black}
 				\If {$\textit{P}_{Front}$ = black}
-					\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d} )  $ and $\textit{T(P,d)} \gets \textit{T(P}_{Left}, \textit{d})$
+					\LineComment{Case \ref{fig:img4-d}: Inner corer at front}
+					\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d} )  $
+					\State $\textit{T(P,d)} \gets \textit{T(P}_{Left}, \textit{d})$
 				\Else
+					\LineComment{Case \ref{fig:img4-c}: Inner-outer corner at front-left}
 					\State $\textit{T(P,d)} \gets \textit{T(P}_{Front-Left},\textit{d} )  $
 				\EndIf
 			\ElsIf {$\textit{P}_{Front}$ = black}
+				\LineComment{Case \ref{fig:img4-e}: Front neighbor}
 				\State $\textit{T(P,d)} \gets \textit{T(P}_{Front},\textit{d}_{Right} )  $
 			\Else
+				\LineComment{Case \ref{fig:img4-f}: Outer corner}
 				\State $\textit{T(P,d)} \gets \textit{T(P},\textit{d}_{Rear} )  $
 			\EndIf
 		\EndIf
@@ -195,7 +202,7 @@ Figure \ref{fig:image4} represents the tracing path of the ISBF based on the loc
 	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-d.png} \label{fig:img4-d} }
 	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-e.png} \label{fig:img4-e} }
 	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-f.png} \label{fig:img4-f} }
-	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-g.png} \label{fig:img4-g} }
+	\subfloat{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-g.png} }
 	 
 	\caption{Contour cases of ISBF \cite{Cheong2006Advanced} \protect\subref{fig:img4-a} Left neighbor \protect\subref{fig:img4-b} Inner-outer corner at left-rear  \protect\subref{fig:img4-c} Inner-outer corner at front-left  \protect\subref{fig:img4-d} Inner corner at front \protect\subref{fig:img4-e} Front neighbor \protect\subref{fig:img4-f} Outer corner}
 	\label{fig:image4}
@@ -203,7 +210,7 @@ Figure \ref{fig:image4} represents the tracing path of the ISBF based on the loc
 
 \subsubsection{Moore-Neighbor Tracing}
 % MNT (see, figure \ref{fig:img5-a}) finds the next contour pixel using 8 connected chain codes using a clockwise sequence starting from the rear pixel of the tracer, i.e., the tracer first moves toward the rear ($T (P_{Rear}, d_{Rear}))$ and finds the next clockwise contour pixel such as the left-rear, left, font-left, front, front-right, right, and right-rear pixels \cite{Toussaint????Grids}. 
-Moore-neighbor tracing (MNT) finds the next contour pixel using eight connected chain codes with a clockwise sequence starting from the rear pixel of the tracer, i.e., the tracer first moves toward the rear ($T (P_{Rear}, d_{Rear})$), and finds the next clockwise contour pixel such as the left-rear, left, font-left, front, front-right, right, and rear-right pixels [7]. 
+Moore-neighbor tracing (MNT) finds the next contour pixel using eight connected chain codes with a clockwise sequence starting from the rear pixel of the tracer, i.e., the tracer first moves toward the rear ($T (P_{Rear}, d_{Rear})$), and finds the next clockwise contour pixel such as the left-rear, left, font-left, front, front-right, right, and rear-right pixels \cite{Ghuneim2000Contour}\JHMEMO{HERE!!!} [7]. 
 
 %%%%%%%%%%%%%%%%%%%%%% TO BE WRITTEN!!!!
 %%%%%%%%%%%%%%%%%%%%%% TO BE WRITTEN!!!!
