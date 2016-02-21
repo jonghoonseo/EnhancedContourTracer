@@ -6,74 +6,69 @@
 
 \definecolor{Gray}{gray}{0.85}
 
+% \begin{table}[]
+% \centering
+% \caption{Speed Experimental Result (Unit: Seconds)}
+% \label{table:table8}
+% \resizebox{\textwidth}{!}{%
+% % \begin{tabular}{p{0.14\textwidth}llllll}
+% \begin{tabular}{p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}}
+% \toprule
+
+% Image                                 & Proposed Algorithm & ISBF        & MSBF        & SBF         & MNT         & RSA         \\
+% \midrule
+% \#1                                   & \cellcolor{Gray}0.00596            & 0.00622     & 0.00658     & 0.00626     & 0.00626     & 0.00750     \\
+% \#2                                   & \cellcolor{Gray}0.00432            & 0.00562     & 0.00592     & 0.00468     & 0.00472     & 0.00560     \\
+% \#3                                   & 0.00778            & 0.00808     & 0.00936     & \cellcolor{Gray}0.00752     & 0.00808     & 0.00940     \\
+% \#4                                   & 0.01406            & 0.01500     & 0.01844     & \cellcolor{Gray}0.01346     & \cellcolor{Gray}0.01374     & 0.01842     \\
+% \#5                                   & 0.00848            & 0.00908     & 0.01000     & 0.00866     & \cellcolor{Gray}0.00842     & 0.01000     \\
+% \#6                                   & \cellcolor{Gray}0.00592            & 0.00684     & 0.00750     & 0.00658     & 0.00624     & 0.00686     \\
+% \#7                                   & \cellcolor{Gray}0.01308            & 0.01470     & 0.01904     & 0.01376     & 0.01344     & 0.01748     \\
+% \#8                                   & 0.00624            & 0.00688     & 0.00784     & \cellcolor{Gray}0.00622     & \cellcolor{Gray}0.00622     & 0.00656     \\
+% \#9                                   & \cellcolor{Gray}0.01656            & 0.01874     & 0.02628     & 0.01778     & 0.01750     & 0.02188     \\
+% \midrule
+% Average                               & \cellcolor{Gray}0.00916            & 0.01013     & 0.01233     & 0.00944     & 0.00940     & 0.01152     \\
+% \midrule
+% Average time per traced contour pixel & \cellcolor{Gray}$4.91\times 10^{-8}$           & $5.43\times 10^{-8}$    & $7.19\times 10^{-8}$    & $5.50\times 10^{-8}$    & $6.18\times 10^{-8}$    & $7.57\times 10^{-8}$    \\
+% \midrule
+% LSE                                   & $3.23\times 10^{-8} + 0.0031$           & $3.57\times 10^{-8} + 0.0035$ & $5.74\times 10^{-8} + 0.0025$ & $3.58\times 10^{-8} + 0.0033$ & $4.06\times 10^{-8} + 0.0032$ & $5.54\times 10^{-8} + 0.0031$ \\
+% R-square                              & 0.98117            & 0.98544     & 0.98838     & 0.98685     & 0.99461     & 0.97615    \\
+% \bottomrule
+% \multicolumn{7}{l}{\textsuperscript{*}\footnotesize{Results of best or faster than the proposed algorithm are marked as shadow.}}
+
+% \end{tabular}
+% }
+% \end{table}
+
 \begin{table}[]
+\scriptsize
 \centering
 \caption{Speed Experimental Result (Unit: Seconds)}
 \label{table:table8}
 \resizebox{\textwidth}{!}{%
-% \begin{tabular}{p{0.14\textwidth}llllll}
-\begin{tabular}{p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}p{0.14\textwidth}}
+\begin{tabular}{p{0.14\textwidth}p{0.07\textwidth}p{0.07\textwidth}p{0.07\textwidth}p{0.07\textwidth}p{0.07\textwidth}p{0.07\textwidth}p{0.07\textwidth}p{0.07\textwidth}p{0.07\textwidth}p{0.07\textwidth}p{0.07\textwidth}p{0.07\textwidth}}
 \toprule
-
-Image                                 & Proposed Algorithm & ISBF        & MSBF        & SBF         & MNT         & RSA         \\
+\multirow{2}{*}{Image} & \multicolumn{2}{l}{Proposed Algorithm} & \multicolumn{2}{l}{ISBF} & \multicolumn{2}{l}{MSBF} & \multicolumn{2}{l}{SBF} & \multicolumn{2}{l}{MNT} & \multicolumn{2}{l}{RSA} \\
+ & Mean & Std. Dev. & Mean & Std. Dev. & Mean & Std. Dev. & Mean & Std. Dev. & Mean & Std. Dev. & Mean & Std. Dev. \\
+ \midrule
+\#1 & \cellcolor{Gray}0.00596 & \cellcolor{Gray}0.00032 & 0.00622 & 0.00069 & 0.00658 & 0.00074 & 0.00626 & 0.00060 & 0.00626 & 0.00054 & 0.00750 & 0.00058 \\
+\#2 & \cellcolor{Gray}0.00432 & 0.00040 & 0.00562 & 0.00047 & 0.00592 & \cellcolor{Gray}0.00005 & 0.00468 & 0.00044 & 0.00472 & \cellcolor{Gray}0.00026 & 0.00560 & \cellcolor{Gray}0.00034 \\
+\#3 & 0.00778 & 0.00046 & 0.00808 & \cellcolor{Gray}0.00036 & 0.00936 & 0.00085 & \cellcolor{Gray}0.00752 & 0.00069 & 0.00808 & \cellcolor{Gray}0.00033 & 0.00940 & 0.00066 \\
+\#4 & 0.01406 & \cellcolor{Gray}0.00006 & 0.01500 & 0.00099 & 0.01844 & 0.00100 & \cellcolor{Gray}0.01346 & \cellcolor{Gray}0.00006 & \cellcolor{Gray}0.01374 & 0.00075 & 0.01842 & 0.00074 \\
+\#5 & 0.00848 & \cellcolor{Gray}0.00038 & 0.00908 & 0.00080 & 0.01000 & 0.00086 & 0.00866 & 0.00054 & \cellcolor{Gray}0.00842 & 0.00075 & 0.01000 & 0.00065 \\
+\#6 & \cellcolor{Gray}0.00592 & \cellcolor{Gray}0.00056 & 0.00684 & 0.00074 & 0.00750 & 0.00070 & 0.00658 & 0.00062 & 0.00624 & 0.00072 & 0.00686 & 0.00058 \\
+\#7 & \cellcolor{Gray}0.01308 & 0.00068 & 0.01470 & 0.00096 & 0.01904 & 0.00110 & 0.01376 & 0.00091 & 0.01344 & \cellcolor{Gray}0.00058 & 0.01748 & 0.00072 \\
+\#8 & 0.00624 & 0.00067 & 0.00688 & \cellcolor{Gray}0.00062 & 0.00784 & \cellcolor{Gray}0.00065 & \cellcolor{Gray}0.00622 & 0.00068 & \cellcolor{Gray}0.00622 & 0.00068 & 0.00656 & \cellcolor{Gray}0.00061 \\
+\#9 & \cellcolor{Gray}0.01656 & 0.00079 & 0.01874 & \cellcolor{Gray}0.00063 & 0.02628 & \cellcolor{Gray}0.00053 & 0.01778 & 0.00086 & 0.01750 & 0.00089 & 0.02188 & 0.00093 \\
 \midrule
-\#1                                   & \cellcolor{Gray}0.00596            & 0.00622     & 0.00658     & 0.00626     & 0.00626     & 0.00750     \\
-\#2                                   & \cellcolor{Gray}0.00432            & 0.00562     & 0.00592     & 0.00468     & 0.00472     & 0.00560     \\
-\#3                                   & 0.00778            & 0.00808     & 0.00936     & \cellcolor{Gray}0.00752     & 0.00808     & 0.00940     \\
-\#4                                   & 0.01406            & 0.01500     & 0.01844     & \cellcolor{Gray}0.01346     & \cellcolor{Gray}0.01374     & 0.01842     \\
-\#5                                   & 0.00848            & 0.00908     & 0.01000     & 0.00866     & \cellcolor{Gray}0.00842     & 0.01000     \\
-\#6                                   & \cellcolor{Gray}0.00592            & 0.00684     & 0.00750     & 0.00658     & 0.00624     & 0.00686     \\
-\#7                                   & \cellcolor{Gray}0.01308            & 0.01470     & 0.01904     & 0.01376     & 0.01344     & 0.01748     \\
-\#8                                   & 0.00624            & 0.00688     & 0.00784     & \cellcolor{Gray}0.00622     & \cellcolor{Gray}0.00622     & 0.00656     \\
-\#9                                   & \cellcolor{Gray}0.01656            & 0.01874     & 0.02628     & 0.01778     & 0.01750     & 0.02188     \\
+Average & \cellcolor{Gray}0.00916 &  & 0.01013 &  & 0.01233 &  & 0.00944 &  & 0.00940 &  & 0.01152 &  \\
 \midrule
-Average                               & \cellcolor{Gray}0.00916            & 0.01013     & 0.01233     & 0.00944     & 0.00940     & 0.01152     \\
+Average time per traced contour pixel & \cellcolor{Gray}$4.91\times 10^{-8}$ &  & $5.43\times 10^{-8}$ &  & $7.19\times 10^{-8}$ &  & $5.50\times 10^{-8}$ &  & $6.18\times 10^{-8}$ &  & $7.57\times 10^{-8}$ &  \\
 \midrule
-Average time per traced contour pixel & \cellcolor{Gray}$4.91\times 10^{-8}$           & $5.43\times 10^{-8}$    & $7.19\times 10^{-8}$    & $5.50\times 10^{-8}$    & $6.18\times 10^{-8}$    & $7.57\times 10^{-8}$    \\
-\midrule
-LSE                                   & $3.23\times 10^{-8} + 0.0031$           & $3.57\times 10^{-8} + 0.0035$ & $5.74\times 10^{-8} + 0.0025$ & $3.58\times 10^{-8} + 0.0033$ & $4.06\times 10^{-8} + 0.0032$ & $5.54\times 10^{-8} + 0.0031$ \\
-R-square                              & 0.98117            & 0.98544     & 0.98838     & 0.98685     & 0.99461     & 0.97615    \\
+LSE & $3.23\times 10^{-8} + 0.0031$ &  & $3.57\times 10^{-8} + 0.0035$ &  & $5.74\times 10^{-8} + 0.0025$ &  & $3.58\times 10^{-8} + 0.0033$ &  & $4.06\times 10^{-8} + 0.0032$ &  & $5.54\times 10^{-8} + 0.0031$ &  \\
+R-square & 0.98117 &  & 0.98544 &  & 0.98838 &  & 0.98685 &  & 0.99461 &  & 0.97615 &  \\
 \bottomrule
-\multicolumn{7}{l}{\textsuperscript{*}\footnotesize{Results of best or faster than the proposed algorithm are marked as shadow.}}
-
+\multicolumn{7}{l}{*Results of best or faster than the proposed algorithm are marked as shadow.} &  &  &  &  &  & 
 \end{tabular}
 }
 \end{table}
-
-
-
-% % Please add the following required packages to your document preamble:
-% % \usepackage{graphicx}
-% \begin{table}[]
-% \centering
-% \caption{EXPERIMENTAL RESULT FROM THE DESKTOP (UNIT: SECOND)}
-% \label{table:table8}
-% \resizebox{\textwidth}{!}{%
-% \begin{tabular}{lllllll}
-
-% \toprule
-
-% Image                                 & ProposedAlgorithm    & ISBF                  & MSBF                  & SBF                   & MNT                   & RSA                   \\
-
-% \midrule 
-% \#1                                   & 0.0298                & 0.0311                & 0.0329                & 0.0313                & 0.0313                & 0.0375                \\
-% \#2                                   & 0.0216                & 0.0281                & 0.0296                & 0.0234                & 0.0236                & 0.0280                \\
-% \#3                                   & 0.0389                & 0.0404                & 0.0468                & 0.0376                & 0.0404                & 0.0470                \\
-% \#4                                   & 0.0703                & 0.0750                & 0.0922                & 0.0673                & 0.0687                & 0.0921                \\
-% \#5                                   & 0.0424                & 0.0454                & 0.0500                & 0.0433                & 0.0421                & 0.0500                \\
-% \#6                                   & 0.0296                & 0.0342                & 0.0375                & 0.0329                & 0.0312                & 0.0343                \\
-% \#7                                   & 0.0654                & 0.0735                & 0.0952                & 0.0688                & 0.0672                & 0.0874                \\
-% \#8                                   & 0.0312                & 0.0344                & 0.0392                & 0.0311                & 0.0311                & 0.0328                \\
-% \#9                                   & 0.0828                & 0.0937                & 0.1314                & 0.0889                & 0.0875                & 0.1094                \\
-
-% \midrule 
-% Average                               & 0.0458                & 0.0506                & 0.0616                & 0.0472                & 0.0470                & 0.0576                \\
-% \midrule 
-% Average time per traced contour pixel & $2.45 \times  10^{-07}$            & $2.71 \times 10^{-07} $           & $3.59 \times 10^{-07} $           & $2.75 \times 10^{-07}$            & $3.09 \times 10^{-07}$            & $3.79 \times 10^{-07}$            \\
-% \midrule 
-% LSE                                   & $1.62  \times  10^{-07} + 0.0156$ & $1.79  \times  10^{-07} + 0.0173$ & $2.87  \times  10^{-07} + 0.0124$ & $1.79  \times  10^{-07} + 0.0164$ & $2.03  \times  10^{-07} + 0.0161$ & $2.77  \times  10^{-07} + 0.0155$ \\
-% R-square                              & 0.956                 & 0.958                 & 0.983                 & 0.958                 & 0.964                 & 0.966                \\
-% \bottomrule
-% \end{tabular}
-% }
-% \end{table}

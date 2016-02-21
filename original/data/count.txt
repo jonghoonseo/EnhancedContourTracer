@@ -1,0 +1,162 @@
+SBF 
+f01_200 
+Total Red pixel count is 73614
+SBF 
+f02_200 
+Total Red pixel count is 45003
+SBF 
+f03_200 
+Total Red pixel count is 139592
+SBF 
+f04_200 
+Total Red pixel count is 283712
+SBF 
+f05_200 
+Total Red pixel count is 142453
+SBF 
+f06_200 
+Total Red pixel count is 91182
+SBF 
+f07_200 
+Total Red pixel count is 264134
+SBF 
+f08_200 
+Total Red pixel count is 86837
+SBF 
+f10_200 
+Total Red pixel count is 418179
+MSBF 
+f01_200 
+Total Red pixel count is 73744
+MSBF 
+f02_200 
+Total Red pixel count is 45003
+MSBF 
+f03_200 
+Total Red pixel count is 139592
+MSBF 
+f04_200 
+Total Red pixel count is 283709
+MSBF 
+f05_200 
+Total Red pixel count is 142447
+MSBF 
+f06_200 
+Total Red pixel count is 91184
+MSBF 
+f07_200 
+Total Red pixel count is 264175
+MSBF 
+f08_200 
+Total Red pixel count is 86837
+MSBF 
+f10_200 
+Total Red pixel count is 418120
+ISBF 
+f01_200 
+Total Red pixel count is 81189
+ISBF 
+f02_200 
+Total Red pixel count is 50824
+ISBF 
+f03_200 
+Total Red pixel count is 152489
+ISBF 
+f04_200 
+Total Red pixel count is 312812
+ISBF 
+f05_200 
+Total Red pixel count is 157377
+ISBF 
+f06_200 
+Total Red pixel count is 98573
+ISBF 
+f07_200 
+Total Red pixel count is 283671
+ISBF 
+f08_200 
+Total Red pixel count is 97027
+ISBF 
+f10_200 
+Total Red pixel count is 453048
+EISBF 
+f01_200 
+Total Red pixel count is 81189
+EISBF 
+f02_200 
+Total Red pixel count is 50824
+EISBF 
+f03_200 
+Total Red pixel count is 152489
+EISBF 
+f04_200 
+Total Red pixel count is 312812
+EISBF 
+f05_200 
+Total Red pixel count is 157377
+EISBF 
+f06_200 
+Total Red pixel count is 98573
+EISBF 
+f07_200 
+Total Red pixel count is 283671
+EISBF 
+f08_200 
+Total Red pixel count is 97027
+EISBF 
+f10_200 
+Total Red pixel count is 453050
+MNT 
+f01_200 
+Total Red pixel count is 65503
+MNT 
+f02_200 
+Total Red pixel count is 38819
+MNT 
+f03_200 
+Total Red pixel count is 126415
+MNT 
+f04_200 
+Total Red pixel count is 253169
+MNT 
+f05_200 
+Total Red pixel count is 127306
+MNT 
+f06_200 
+Total Red pixel count is 82240
+MNT 
+f07_200 
+Total Red pixel count is 238625
+MNT 
+f08_200 
+Total Red pixel count is 76252
+MNT 
+f10_200 
+Total Red pixel count is 364853
+RSA 
+f01_200 
+Total Red pixel count is 65503
+RSA 
+f02_200 
+Total Red pixel count is 38819
+RSA 
+f03_200 
+Total Red pixel count is 126415
+RSA 
+f04_200 
+Total Red pixel count is 253169
+RSA 
+f05_200 
+Total Red pixel count is 127306
+RSA 
+f06_200 
+Total Red pixel count is 82240
+RSA 
+f07_200 
+Total Red pixel count is 238625
+RSA 
+f08_200 
+Total Red pixel count is 76252
+RSA 
+f10_200 
+Total Red pixel count is 364853
