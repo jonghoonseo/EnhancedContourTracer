@@ -55,13 +55,13 @@ In order to compare the proposed algorithm with conventional algorithms, we used
 
 % In the experiments, we did not consider the TPA, since the initial condition of the TPA\cite{Ghuneim2015Contour,Pavlidis2012Algorithms} is that it must start with white left (``L''), left-rear (``W''), and right-rear (``R'') pixels, which is not satisfied in some of the inner contours. Figure \ref{fig:image15} shows an example of this violation. In our experimental situation, there were many cases in which such conditions were not satisfied; therefore, we could not perform identical experiments and meaningful data was not obtained for comparing the trace results with those of the other methods. 
 
-In the experiments, we did not consider the TPA because the initial condition of the TPA \cite{Ghuneim2015Contour,Pavlidis2012Algorithms} is that it must start with white left (``L''), left-rear (``W''), and right-rear (``R'') pixels, which is not satisfied in some of the inner contours. Figure \ref{fig:image15} shows an example of this violation. In our experiments, there were many cases for which these conditions were not satisfied. Therefore, we could not perform identical experiments, and meaningful data were not obtained for comparing the trace results with those of the other methods. 
+In the experiments, we did not consider the TPA because the initial condition of the TPA is that it must start with white left (``L''), left-rear (``W''), and right-rear (``R'') pixels\cite{Ghuneim2015Contour}, which is not satisfied in some of the inner contours. Figure \ref{fig:image15} shows an example of this violation. In our experiments, there were many cases for which these conditions were not satisfied. Therefore, we could not perform identical experiments, and meaningful data were not obtained for comparing the trace results with those of the other methods. 
 
 %%% Figure 15
 \begin{figure}[htbp]
 	\centering
-	\includegraphics[width=0.3\textwidth]{5.ExperimentalResult/fig15.png}
-	\caption{Problem with TPA.}
+	\includegraphics[width=0.2\textwidth]{5.ExperimentalResult/fig15.png}
+	\caption{Problem with TPA. \JHMEMO{TPA must start with white left(L), left-rear(W), and right-rear(R) pixels. However, generic inner contours cannot satisfy this criteria.}}
 	\label{fig:image15}
 \end{figure}
 
@@ -72,7 +72,7 @@ In the experiments, we did not consider the TPA because the initial condition of
 %%% Table 7
 \input{5.ExperimentalResult/table7.tex}
 
-The accuracy of contour tracing involves determining how accurately the tracing algorithm traces, and we measure it by counting the number of pixels traced. First, we apply each algorithm to the test images and mark the tracing on the images. Then, we count all the marked contour pixels in the images. Therefore, even if a pixel is traced several times, it is counted only once. Table \ref{table:table7} shows the results of the comparison between the proposed algorithm and the conventional ones. In the table, ``Total number'' implies the total number of contour pixels, including the inner corner, outer corner, inner-outer corner, and straight-line pixels. In this result, the MNT and RSA traced the least number of pixels as contours because they could not trace the inner-corner pixels. The SBF has inconsistencies with regard to the inner-outer corner and inner-corner types. Therefore, it traced fewer pixels when compared to the ISBF and proposed algorithm. Further, the MSBF has inner-corner inconsistencies that are similar to those of the SBF, and the MSBF traced fewer pixels when compared to the proposed algorithm and ISBF. The proposed algorithm shows that $99.5\%$ of the total contour pixels were found to be the same as those in the case of the ISBF, and it has the maximum total number of traced contour pixels. In conclusion, the proposed algorithm produced the best results with regard to tracing accuracy.
+The accuracy of contour tracing involves determining how accurately the tracing algorithm traces, and we measure it by counting the number of pixels traced. First, we apply each algorithm to the test images and mark the tracing on the images. Then, we count all the marked contour pixels in the images. Therefore, even if a pixel is traced several times, it is counted only once. Table \ref{table:table7} shows the results of the comparison between the proposed algorithm and the conventional ones. \JHMEMO{In the table, ``Total number'' implies the total number of ground truth contour pixels, including the inner corner, outer corner, inner-outer corner, and straight-line pixels. The ground truth pixels are counted which are adjacent with background pixels.} In this result, the MNT and RSA traced the least number of pixels as contours because they could not trace the inner-corner pixels. The SBF has inconsistencies with regard to the inner-outer corner and inner-corner types. Therefore, it traced fewer pixels when compared to the ISBF and proposed algorithm. Further, the MSBF has inner-corner inconsistencies that are similar to those of the SBF, and the MSBF traced fewer pixels when compared to the proposed algorithm and ISBF. The proposed algorithm shows that $99.5\%$ of the total contour pixels were found to be the same as those in the case of the ISBF, and it has the maximum total number of traced contour pixels. In conclusion, the proposed algorithm produced the best results with regard to tracing accuracy.
 
 %%% Figure 16
 \begin{figure}[htbp]
@@ -80,7 +80,7 @@ The accuracy of contour tracing involves determining how accurately the tracing 
 	\subfloat[]{ \includegraphics[width=0.3\textwidth]{5.ExperimentalResult/fig16-a.png} \label{fig:img16-a} }
 	\subfloat[]{ \includegraphics[width=0.3\textwidth]{5.ExperimentalResult/fig16-b.png} \label{fig:img16-b} }
 
-	\caption{\JHMEMO{Visual comparison of two Contour Tracing Methods.} \protect\subref{fig:img16-a} MSBF \protect\subref{fig:img16-b} Proposed method}
+	\caption{\JHMEMO{Visual Comparison of Two Contour Tracing Methods.} \protect\subref{fig:img16-a} MSBF \protect\subref{fig:img16-b} Proposed method}
 	\label{fig:image16}
 \end{figure}
 
@@ -94,7 +94,7 @@ Figure \ref{fig:image16} shows the traced images resulting from the MSBF and pro
 	\subfloat[]{ \includegraphics[width=0.3\textwidth]{5.ExperimentalResult/fig17-a.png} \label{fig:img17-a} }
 	\subfloat[]{ \includegraphics[width=0.3\textwidth]{5.ExperimentalResult/fig17-b.png} \label{fig:img17-b} }
 
-	\caption{\JHMEMO{Visual comparison of two Contour Tracing Methods.} \protect\subref{fig:img17-a} MNT \protect\subref{fig:img17-b} Proposed method (without inner corners)}
+	\caption{\JHMEMO{Visual Comparison of Two Contour Tracing Methods.} \protect\subref{fig:img17-a} MNT \protect\subref{fig:img17-b} Proposed method (without inner corners)}
 	\label{fig:image17}
 \end{figure}
 
@@ -104,12 +104,12 @@ Figure \ref{fig:image16} shows the traced images resulting from the MSBF and pro
 
 % In order to measure the tracing time for each algorithm, we performed each algorithm 10 times per image and calculated the average time. We used the GetTickCount() function supported by Microsoft Visual C++ 6.0 to measure the processing time. Tables \textcolor{red}{8 and 9} show the average processing time of each algorithm used for tracing the images, and a linear model for estimating the process time as the number of traced pixels increases by using the least-square estimation (LSE) method. In the tables, the average processing time per traced contour pixel is obtained by dividing the total processing time by the total number of traced contour pixels. They are measured on the desktop and notebook separately.
 
-In order to measure the tracing time for each algorithm, we performed each algorithm 10 times per image and calculated the average time. We used the \textit{cv2.getTickCount()} function supported by \textit{OpenCV 3.0.0} to measure the processing time. Tables \ref{table:table8} shows the average processing time of each algorithm used for tracing the images, and a linear model for estimating the process time as the number of traced pixels increases using the least-square estimation (LSE) method. In the tables, we obtain the average processing time per traced contour pixel by dividing the total processing time by the total number of traced contour pixels.
+In order to measure the tracing time for each algorithm, we performed each algorithm 20 times per image and calculated the average time. We used the \textit{cv2.getTickCount()} function supported by \textit{OpenCV 3.0.0} to measure the processing time. Tables \ref{table:table8} shows the average processing time of each algorithm used for tracing the images, and a linear model for estimating the process time as the number of traced pixels increases using the least-square estimation (LSE) method. In the tables, we obtain the average processing time per traced contour pixel by dividing the total processing time by the total number of traced contour pixels.
 
 % Moreover, figure \textcolor{red}{18} illustrates a graph that uses data from tables \textcolor{red}{7 to 9}. As shown in figures \textcolor{red}{18 (a) and (b)}, the proposed algorithm had the best performance in the case of the desktop, i.e., it had the least average processing time and showed the least increase in the ratio of process time to number of traced contour pixels, as shown in the LSE. In particular, although the proposed algorithm traced most of the numerous contour pixels in each image, it has the best or good performance when compared with the conventional algorithms. On the contrary, the SBF had the least average processing time for images and the least ratio from the LSE in the case of the notebook, and the proposed algorithm is second in rank based on the average processing time and LSE. from these experimental results the SBF is not the best algorithm for the note book because the ratio of the number of traced contour pixels is only approximately $92\%$ of the proposed algorithm. Due to this reason, the proposed algorithm has better performance than the other algorithms for the number of traced contour pixels and the processing time.
 
 % \JHMEMO{
-Figure \ref{fig:image18} illustrates a graph that uses data from Tables \ref{table:table7}. As shown in Figures \ref{fig:image18}, the proposed algorithm has the best performance, i.e., it had the least average processing time and showed the smallest increase in the ratio of the process time to the number of traced contour pixels, as shown in the LSE. In particular, although the proposed algorithm traced most of the contour pixels in each image, it has the best or a good performance when compared to the conventional algorithms. Therefore, the proposed algorithm has a better performance than the other algorithms for the number of traced contour pixels and the processing time. 
+Figure \ref{fig:image18} illustrates a graph that uses data from Tables \ref{table:table7}. As shown in Figures \ref{fig:image18}, the proposed algorithm has the best performance, i.e., it had the least average processing time and showed the smallest increase in the ratio of the process time to the number of traced contour pixels, as shown in the LSE. In particular, although the proposed algorithm traced most of the contour pixels in each image, it has the best or a good performance when compared to the conventional algorithms. \JHMEMO{Also, the proposed algorithm shows better standard deviation results than the conventional algorithms.} Therefore, the proposed algorithm has a better performance than the other algorithms for the number of traced contour pixels and the processing time.
 
 % }
 
@@ -168,7 +168,7 @@ Figure  \ref{fig:image20} shows the result obtained for the CCITT \#1 image usin
 	\subfloat[]{ \includegraphics[width=0.5\textwidth]{5.ExperimentalResult/fig20_a.png} \label{fig:img20-a} }
 	\subfloat[]{ \includegraphics[width=0.5\textwidth]{5.ExperimentalResult/fig20_b.png} \label{fig:img20-b} }
 	 
-	\caption{Result of Experiment for CCITT \#1. Red Pixels are Contour Pixels. \protect\subref{fig:img20-a} Result of contour tracing \protect\subref{fig:img20-b} Result of contour restoration}
+	\caption{Result of Experiment for CCITT \#1. \JHMEMO{Contour pixels are shown in black, original image pixels in grey.} \protect\subref{fig:img20-a} Result of contour tracing \protect\subref{fig:img20-b} Result of contour restoration}
 	\label{fig:image20}
 \end{figure}
 
@@ -184,7 +184,7 @@ Figure  \ref{fig:image20} shows the result obtained for the CCITT \#1 image usin
 	\subfloat[]{ \includegraphics[width=4.5cm, height=4.5cm]{5.ExperimentalResult/fig21-b.png} \label{fig:img21-b} }
 	\subfloat[]{ \includegraphics[width=4.5cm, height=4.5cm]{5.ExperimentalResult/fig21-c.png} \label{fig:img21-c} }
 	 
-	\caption{Example of Untraed Contour Pixels Caused by Missing Starting Pixel CCITT Image \#9 From $(1093, 1766)$ to $(1108, 1780)$. \protect\subref{fig:img21-a} Original image \protect\subref{fig:img21-b} Traced by ISBF \protect\subref{fig:img21-c} Traced by the proposed algorithm}
+	\caption{Example of Untraced Contour Pixels Caused by Missing Starting Pixel CCITT Image \#9 From $(1093, 1766)$ to $(1108, 1780)$. \protect\subref{fig:img21-a} Original image \protect\subref{fig:img21-b} Traced by ISBF \protect\subref{fig:img21-c} Traced by the proposed algorithm}
 	\label{fig:image21}
 \end{figure}
 
