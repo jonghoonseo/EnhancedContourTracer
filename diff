@@ -1,0 +1,335 @@
+commit 6fa09feb875a3a5e0d024c94df90a268ea07970b
+Author: Jonghoon Seo <jonghoon.seo@gmail.com>
+Date:   Sat Mar 5 13:46:16 2016 +0900
+
+    Proof-reading done
+
+diff --git a/Fast_Contour_Tracing_Algorithm.pdf b/Fast_Contour_Tracing_Algorithm.pdf
+index 4ffbeb4..2459b1e 100644
+Binary files a/Fast_Contour_Tracing_Algorithm.pdf and b/Fast_Contour_Tracing_Algorithm.pdf differ
+diff --git a/sensors-113427-for proof.tex b/sensors-113427-for proof.tex
+index b8a4f2f..06ff90c 100644
+--- a/sensors-113427-for proof.tex	
++++ b/sensors-113427-for proof.tex	
+@@ -130,8 +130,8 @@
+ %=================================================================
+ 
+ % Full title of the paper (Capitalized)
+-\Title{Fast Contour-Tracing Algorithm Based on a%please note the correction to the title
+- Pixel-Following Method for Image Sensors}
++\Title{Fast Contour-Tracing Algorithm Based on \\
++a Pixel-Following Method for Image Sensors}
+ 
+ % Authors (Add full first names)
+ \Author{Jonghoon Seo $^{1}$, Seungho Chae $^{2}$, Jinwook Shim $^{2}$, Dongchul Kim $^{2}$, Cheolho Cheong $^{2}$ and~Tack-Don Han $^{2,}$*}
+@@ -139,16 +139,16 @@
+ 
+ % Affiliations / Addresses (Add [1] after \address if there is only one affiliation.)
+ \address{%
+-	$^{1}$ \quad Software Platform R\&D Lab., LG Electronics Advanced Research Institute, 19 Yangjae-daero 11 gil, Seocho-gu, Seoul 137-893, Korea;
++	$^{1}$ \quad Software Platform R\&D Lab., LG Electronics Advanced Research Institute, 19 Yangjae-daero 11-gil, Seocho-gu, Seoul, 06772, Korea;
+  jonghoon.seo@lge.com \\
+-	$^{2}$ \quad Department of Computer Science, Yonsei University, 134 Sinchon-dong Seodaemun-gu, \hl{Seoul postcode}, Korea;
++	$^{2}$ \quad Department of Computer Science, Yonsei University, 50 Yonsei-ro Seodaemun-gu, Seoul, 03722, Korea;
+ seungho.chae@msl.yonsei.ac.kr (S.C.); jin99foryou@msl.yonsei.ac.kr (J.S.); \linebreak dckim@msl.yonsei.ac.kr (D.K.); balgeum00@msl.yonsei.ac.kr (C.C.)
+ }%Please add post code. 
+ 
+ % \contributed{$^\dagger$ These authors contributed equally to this work.}
+ 
+ % Contact information of the corresponding author (Add [2] after \corres if there are more than one corresponding author.)
+-\corres{Correspondence: hantack55@msl.yonsei.ac.kr; Tel.: +82-2-2123-2715; Fax: +82-2-365-2579}
++\corres{Correspondence: hantack55@gmail.com; Tel.: +82-2-2123-2715; Fax: +82-2-365-2579}
+ 
+ % Abstract (Do not use inserted blank lines, i.e. \\)
+ % \abstract{This is the abstract section. The abstract should be one section and count less than 200 words.}
+@@ -189,17 +189,17 @@ The proposed algorithm classifies the type of contour pixel, based on its local
+ 
+ \section{Introduction}
+ 
+-% A contour is defined as a segment that is one pixel wide and one or more pixels in length, and a boundary is defined as an unbroken contour\cite{Mcqueen2004Contour}. Contours and boundaries are very important information for object representation and image recognition. For example, they are used to separate objects from the background, to calculate the size of an object, to classify a shape, and to find the feature points of an object using the length and shape from its contour pixels\cite{Pratt????Digital,Gose1996Pattern}. Moreover, using the contour information, it is possible to save the shape of objects and restore them to their original shapes for various applications in the field of graphics and vision. Therefore, many researches on contour tracing algorithms for extracting and tracing the contour of an object have been conducted. Most of the algorithms are binary-image-based contour tracing algorithms \cite{Pitas2000Digital,Gose1996Pattern,Das1990Bivariate,Papert1973Uses,Cheong2006Improved,Mirante1982Radial,Pavlidis2012Algorithms}, which trace contours on digitized black-and-white images. Moreover, the focus is on contour tracing algorithms based on color images and gray images []; further, the binary-image-based contour tracing algorithm can be easily applied to color and gray images.
++% A contour is defined as a segment that is one pixel wide and one or more pixels in length, and a boundary is defined as an unbroken contour\cite{Mcqueen2004Contour}. Contours and boundaries are very important information for object representation and image recognition. For example, they are used to separate objects from the background, to calculate the size of an object, to classify a shape, and to find the feature points of an object using the length and shape from its contour pixels\cite{Pratt????Digital,Gose1996Pattern}. Moreover, using the contour information, it is possible to save the shape of objects and restore them to their original shapes for various applications in the field of graphics and vision. Therefore, many researches on contour tracing algorithms for extracting and tracing the contour of an object have been conducted. Most of the algorithms are binary-image-based contour tracing algorithms \cite{Pitas2000Digital,Gose1996Pattern,Das1990Bivariate,Papert1973Uses,Cheong2006Improved,Reddy2012Evaluation,Pavlidis2012Algorithms}, which trace contours on digitized black-and-white images. Moreover, the focus is on contour tracing algorithms based on color images and gray images []; further, the binary-image-based contour tracing algorithm can be easily applied to color and gray images.
+ 
+-A contour is defined as a segment that is one pixel wide and one or more pixels in length, and a boundary is defined as an unbroken contour \cite{Mcqueen2004Contour}. Contours and boundaries provide very important information for object representation and image recognition. For example, they are used to separate objects from their backgrounds, to calculate the sizes of objects, to classify shapes and to find the feature points of objects using the length and shape of their contour pixels \cite{Pratt????Digital,Gose1996Pattern}. Moreover, in the field of graphics and vision, it is possible to use the contour information to save the shape of objects and restore them to their original shapes for various applications. Therefore, there have been many studies on contour-tracing algorithms for extracting and tracing the contour of an object. Most of the algorithms are binary image-based contour-tracing algorithms \cite{Pitas2000Digital,Gose1996Pattern,Das1990Bivariate,Papert1973Uses,Cheong2006Improved,Mirante1982Radial,Pavlidis2012Algorithms}, which trace contours on digitized black and white images taken from various image sensors.
++A contour is defined as a segment that is one pixel wide and one or more pixels in length, and a boundary is defined as an unbroken contour \cite{Mcqueen2004Contour}. Contours and boundaries provide very important information for object representation and image recognition. For example, they are used to separate objects from their backgrounds, to calculate the sizes of objects, to classify shapes and to find the feature points of objects using the length and shape of their contour pixels \cite{Pratt????Digital,Gose1996Pattern}. Moreover, in the field of graphics and vision, it is possible to use the contour information to save the shape of objects and restore them to their original shapes for various applications. Therefore, there have been many studies on contour-tracing algorithms for extracting and tracing the contour of an object. Most of the algorithms are binary image-based contour-tracing algorithms \cite{Pitas2000Digital,Gose1996Pattern,Das1990Bivariate,Papert1973Uses,Cheong2006Improved,Reddy2012Evaluation,Pavlidis2012Algorithms}, which trace contours on digitized black and white images taken from various image sensors.
+ 
+ % In recent years, as the popularity of camera equipped mobile devices such as mobile phones and personal digital assistants (PDAs) has increased, various real-time applications such as image code recognition, face recognition, optical character recognition (OCR), logo recognition, augmented reality (AR), and mixed reality (MR) have emerged for mobile computing environments [], [], []. Since mobile devices possess restricted hardware resources such as low-performance processors, small-sized memory, low-resolution display, and low battery capacity, that require simpler and faster algorithms for image processing. 
+ 
+ In recent years, with the increasing popularity of smart/wearable mobile sensor devices \cite{Aroca2013Wearable}, such as smart phones, smart watches and smart glasses, various real-time applications, such as image code recognition, face recognition, optical character recognition (OCR), logo recognition, augmented reality (AR) and mixed reality (MR), have emerged for sensor computing~\cite{Wakaumi20062D,Brodic2010Basic,Kim2006Rapid,Tian2010RealTime,Zhang2012Robust}. Because smart/wearable mobile sensor devices possess limited hardware resources, such as low-performance processors, small-sized memory, low-resolution displays and low battery capacity, they require simple and fast algorithms for image processing. 
+ 
+-% Generally, a contour tracing algorithm can be evaluated on the basis of the following four criteria: (1) accuracy of contour tracing, (2) processing time, (3) data size to save the traced contour information, and (4) the ability to accurately restore and enlarge the original contour using the saved data. However, there have been few studies on contour tracing algorithms that have sought to satisfy all these criteria. Some of the conventional algorithms miss contour pixels on specific relative pixel locations, and the others require considerable operation time for tracing the pixels because a shortcut to the local patterns is not considered \cite{Cheong2006Improved,Cheong2012Advanced}. Moreover, most of the algorithms have no data compression ability for saving the contour information, and some of them cannot restore the image perfectly using the saved data \cite{Miyatake1997Contour}. 
++% Generally, a contour tracing algorithm can be evaluated on the basis of the following four criteria: (1) accuracy of contour tracing, (2) processing time, (3) data size to save the traced contour information, and (4) the ability to accurately restore and enlarge the original contour using the saved data. However, there have been few studies on contour tracing algorithms that have sought to satisfy all these criteria. Some of the conventional algorithms miss contour pixels on specific relative pixel locations, and the others require considerable operation time for tracing the pixels because a shortcut to the local patterns is not considered \cite{Cheong2006Improved,Cheong2006Advanced}. Moreover, most of the algorithms have no data compression ability for saving the contour information, and some of them cannot restore the image perfectly using the saved data \cite{Miyatake1997Contour}. 
+ 
+-Generally, a contour tracing algorithm can be evaluated based on the following four criteria: (1)~the accuracy of contour tracing; (2) processing time; (3) data size to save the traced contour information; and (4) the ability to accurately restore and enlarge the original contour using the saved data. However, few studies on contour-tracing algorithms have sought to satisfy all of these criteria. Some of the conventional algorithms miss contour pixels that are at specific relative pixel locations, and others require considerable processing time to trace the pixels, because shortcuts to the local patterns are not considered \cite{Cheong2006Improved,Cheong2012Advanced}. Moreover, most of the algorithms have no data-compression capabilities that enable them to save the contour information, and some of them cannot restore the contour perfectly using the saved data~\cite{Miyatake1997Contour}. 
++Generally, a contour tracing algorithm can be evaluated based on the following four criteria: (1)~the accuracy of contour tracing; (2) processing time; (3) data size to save the traced contour information; and (4) the ability to accurately restore and enlarge the original contour using the saved data. However, few studies on contour-tracing algorithms have sought to satisfy all of these criteria. Some of the conventional algorithms miss contour pixels that are at specific relative pixel locations, and others require considerable processing time to trace the pixels, because shortcuts to the local patterns are not considered \cite{Cheong2006Improved,Cheong2006Advanced}. Moreover, most of the algorithms have no data-compression capabilities that enable them to save the contour information, and some of them cannot restore the contour perfectly using the saved data~\cite{Miyatake1997Contour}. 
+ 
+ % In this paper, we propose a novel contour tracing algorithm based on pixel following that overcomes the abovementioned problems, i.e., (1) it provides fast and accurate results for contour pixel tracing, (2) contour information can be compressed for reducing the memory size, and (3) it accurately restores the compressed data to the original contour image. In order to achieve the objectives, the proposed algorithm initially distinguishes the local patterns made by adjacent contour pixels, then finds next contour pixel will be traced from the pattern. 
+ 
+@@ -226,9 +226,9 @@ Figure \ref{fig:image1} shows examples of contour traces that were obtained usin
+ 
+ \subsubsection{Pixel-Following Method}
+ 
+-% The pixel following method traces contour pixels in a predefined manner and then saves their coordinates in the memory according to the trace order. In figure \ref{fig:img1-a}, the algorithm traces contour pixels along the clockwise direction from the current pixel, i.e., it sequentially searches adjacent black pixels of the current pixel using a relative directional order such as left, front-left, front, front-right, right, right-rear, and rear. Pixel following methods such as simple boundary follower (SBF) \cite{Pitas2000Digital,Das1990Bivariate,Papert1973Uses}, modified SBF (MSBF)\cite{Gose1996Pattern}, improved SBF (ISBF)\cite{Cheong2006Improved}, Moore-Neighbor tracing (MNT) \cite{Toussaint????Grids}, modified MNT (MMNT) \cite{Pradhan2010Contour}, radial sweep algorithm (RSA) \cite{Mirante1982Radial}, and Theo Pavlidis algorithm (TPA)\cite{Pavlidis2012Algorithms} have simple rules for tracing contour pixels based on a chain code. On the contrary, this method requires frame size memory to trace the contour, and it also generates erroneous images when the contour image is enlarged\cite{Miyatake1997Contour} since it maintains only the pixel coordinates.
++% The pixel following method traces contour pixels in a predefined manner and then saves their coordinates in the memory according to the trace order. In figure \ref{fig:img1-a}, the algorithm traces contour pixels along the clockwise direction from the current pixel, i.e., it sequentially searches adjacent black pixels of the current pixel using a relative directional order such as left, front-left, front, front-right, right, right-rear, and rear. Pixel following methods such as simple boundary follower (SBF) \cite{Pitas2000Digital,Das1990Bivariate,Papert1973Uses}, modified SBF (MSBF)\cite{Gose1996Pattern}, improved SBF (ISBF)\cite{Cheong2006Improved}, Moore-Neighbor tracing (MNT) \cite{Toussaint????Grids}, modified MNT (MMNT) \cite{Pradhan2010Contour}, radial sweep algorithm (RSA) \cite{Reddy2012Evaluation}, and Theo Pavlidis algorithm (TPA)\cite{Pavlidis2012Algorithms} have simple rules for tracing contour pixels based on a chain code. On the contrary, this method requires frame size memory to trace the contour, and it also generates erroneous images when the contour image is enlarged\cite{Miyatake1997Contour} since it maintains only the pixel coordinates.
+ 
+-The pixel-following method traces contour pixels in a predefined manner and then saves their coordinates in memory according to the trace order. In Figure \ref{fig:img1-a}, the algorithm traces contour pixels along the clockwise direction from the current pixel, \emph{i.e.}, it sequentially searches adjacent black pixels of the current pixel using a relative directional order, such as left, front-left, front, front-right, right, rear-right and rear. Pixel-following methods, such as the simple boundary follower (SBF) \cite{Pitas2000Digital,Das1990Bivariate,Papert1973Uses}, modified SBF (MSBF) \cite{Gose1996Pattern}, improved SBF (ISBF) \cite{Cheong2006Improved}, Moore-neighbor tracing (MNT) \cite{Toussaint????Grids}, the radial sweep algorithm (RSA) \cite{Mirante1982Radial} and the Theo Pavlidis algorithm (TPA) \cite{Pavlidis2012Algorithms}, have simple rules for tracing contour pixels based on a chain code. These methods require a frame-size memory to trace the contour and generate erroneous images when the contour image is enlarged \cite{Miyatake1997Contour} because they maintain only the pixel coordinates.
++The pixel-following method traces contour pixels in a predefined manner and then saves their coordinates in memory according to the trace order. In Figure \ref{fig:img1-a}, the algorithm traces contour pixels along the clockwise direction from the current pixel, \emph{i.e.}, it sequentially searches adjacent black pixels of the current pixel using a relative directional order, such as left, front-left, front, front-right, right, rear-right and rear. Pixel-following methods, such as the simple boundary follower (SBF) \cite{Pitas2000Digital,Das1990Bivariate,Papert1973Uses}, modified SBF (MSBF) \cite{Gose1996Pattern}, improved SBF (ISBF) \cite{Cheong2006Improved}, Moore-neighbor tracing (MNT) \cite{Toussaint????Grids}, the radial sweep algorithm (RSA) \cite{Reddy2012Evaluation} and the Theo Pavlidis algorithm (TPA) \cite{Pavlidis2012Algorithms}, have simple rules for tracing contour pixels based on a chain code. These methods require a frame-size memory to trace the contour and generate erroneous images when the contour image is enlarged \cite{Miyatake1997Contour} because they maintain only the pixel coordinates.
+ %%% Image 1
+ \begin{figure}[H]
+ 	\centering
+@@ -253,15 +253,9 @@ The vertex-following method traces the vertices of the contour pixels that are l
+ \subsubsection{Run-Data-Based Following Method}
+ % The run-data-based following method, involving the edge-point tracing of rundata \cite{Miyatake1997Contour,Shoji1999Contour}, uses run data in pairs consisting of the left and right edges of an object obtained by horizontal scan lines from left to right on an image. The object can have an outer contour and additional inner contours; therefore, the run data has five types: (left edge of outer contour, right edge of outer contour), (left edge of outer contour, left edge of inner contour), (right edge of inner contour, left edge of inner contour), (right edge of inner contour, right edge of outer contour), and (right edge of outer contour, left edge of outer contour). For contour following, the run-data-based following method constructs a run-following relationship between the edge points of two adjacent scan lines. In figure \ref{fig:img1-c}, scan line \#3 detects (left edge of 5, right edge of 6) and scan line \#4 detects (left edge of 7, right edge of 8), and subsequently the run-following relationships between 5 and 7 and between 8 and 6 are generated. The method uses only one or two line buffers; therefore, it requires a smaller amount of memory as compared to the pixel following and vertex following methods since it uses only one or two scan lines. Examples of the method are run-type direction code (RD code) method \cite{Miyatake1997Contour} and PXY table based method \cite{Shoji1999Contour}. 
+ 
+-The run-data-based following method, which involves the edge-point tracing of run data \cite{Miyatake1997Contour,Shoji1999Contour}, uses run data in pairs consisting of an object's left and right edges, which are obtained using horizontal scan lines from left to right on an image. The object can have an outer contour and additional inner contours. Therefore, there are five types of run data: \hl{(}%please check the use of () here; please check the use of the () for these data conventions throughout
+-left edge of outer contour, right edge of outer contour), (left edge of outer contour, left edge of inner contour), (right edge of inner contour, left edge of inner contour), (right edge of inner contour, right edge of outer contour) and (right edge of outer contour, left edge of outer contour). For contour following, the run-data-based following method constructs a run-following relationship between the edge points of two adjacent scan lines. In~\mbox{Figure \ref{fig:img1-c}}, Scan Line \#3 detects \hl{(}left edge of 5%is this a whole number? if so, write out as five
+-, right edge of 6%see the previous note
+-), and Scan Line \#4 detects (left edge of 7%see the previous note
+-, right edge of 8%see the previous note
+-). Subsequently, the run-following relationships between 5 and 7 and between 8 and 6 are generated. The method uses only one or two line buffers and therefore requires a smaller amount of memory compared to the pixel-following and vertex-following methods. Examples of this method are the run-type direction code (RD code) method \cite{Miyatake1997Contour}, the \hl{PXY}
+- table-based method \cite{Shoji1999Contour} and the OpenCV method \cite{Suzuki1985Topological}. 
++The run-data-based following method, which involves the edge-point tracing of run data \cite{Miyatake1997Contour,Shoji1999Contour}, uses run data in pairs consisting of an object's left and right edges, which are obtained using horizontal scan lines from left to right on an image. The object can have an outer contour and additional inner contours. Therefore, there are five types of run data: (left edge of outer contour, right edge of outer contour), (left edge of outer contour, left edge of inner contour), (right edge of inner contour, left edge of inner contour), (right edge of inner contour, right edge of outer contour) and (right edge of outer contour, left edge of outer contour). For contour following, the run-data-based following method constructs a run-following relationship between the edge points of two adjacent scan lines. In~\mbox{Figure \ref{fig:img1-c}}, Scan Line \#3 detects (left edge of 5, right edge of 6), and Scan Line \#4 detects (left edge of 7, right edge of 8). Subsequently, the run-following relationships between 5 and 7 and between 8 and 6 are generated. The method uses only one or two line buffers and therefore requires a smaller amount of memory compared to the pixel-following and vertex-following methods. Examples of this method are the run-type direction code (RD code) method \cite{Miyatake1997Contour}, the PXY table-based method \cite{Shoji1999Contour} and the OpenCV method \cite{Suzuki1985Topological}. 
+ 
+-Table \ref{table:relatedworks} lists the characteristics of the contour-following methods. The pixel-following method and vertex-following method trace contours without scanning all of the pixels of the image, and their transition data, such as contour points and the tracing sequence, are generated automatically by the contour-following process. Therefore, only a few pixels need to be scanned in order to obtain the first contour pixel representing the starting point of the object. Despite these merits, they are not suitable for large images with many objects because they require more operations and a larger memory when compared to the run-data-based following method. In other words, they scan all of the pixels with an image-buffer size memory in order to obtain all of the objects, and they have several additional operations that enable them to detect whether to follow a contour pixel for all of the contour pixels and their adjacent background pixels (see \hl{Figure} \ref{fig:image8}). 
++Table \ref{table:relatedworks} lists the characteristics of the contour-following methods. The pixel-following method and vertex-following method trace contours without scanning all of the pixels of the image, and their transition data, such as contour points and the tracing sequence, are generated automatically by the contour-following process. Therefore, only a few pixels need to be scanned in order to obtain the first contour pixel representing the starting point of the object. Despite these merits, they are not suitable for large images with many objects because they require more operations and a larger memory when compared to the run-data-based following method. In other words, they scan all of the pixels with an image-buffer size memory in order to obtain all of the objects, and they have several additional operations that enable them to detect whether to follow a contour pixel for all of the contour pixels and their adjacent background pixels.
+ 
+ 
+ \begin{table}[H]
+@@ -296,7 +290,7 @@ On the contrary, the run-data-based following method searches the edge points wi
+ 
+ % Let $I$ be a binary digital image with $M \times N$ pixels where the coordinate of the top-left-most pixel is $(0, 0)$ and that of the bottom-right-most pixel is $(M-1, N-1)$. In $I$, a pixel can be represented as $P = (x, y),\, x = 0,1,2,\cdots,M-1,\, y = 0,1,2,\cdots, N-1$. Most contour tracing algorithms uses a tracer $T (P, d)$ with absolute directional information $d\in\{N,NE,NW,W,SW,S,SE,E,NE\}$ , and they have the following basic sequence: 
+ 
+-Let I
++Let $I$
+  be a binary digital image with $M \times N$ pixels, where the coordinate of the top-leftmost pixel is $(0, 0)$ and that of the bottom-rightmost pixel is $(M - 1, N - 1)$. In $I$, a pixel can be represented as $P = (x, y),\, x = 0,1,2,\cdots,M-1,\, y = 0,1,2,\cdots, N-1$. Most contour-tracing algorithms use a tracer $T (P, d)$ with absolute directional information $d\in\{N,NE,NW,W,SW,S,SE,E,NE\}$, and they have the following basic sequence: 
+ 
+ % \begin{enumerate}
+@@ -314,7 +308,7 @@ Let I
+ 
+ % For determining the next contour point, which could be a contour pixel or pixel corner, the tracer detects the intensity of its adjacent pixel $P_r$ and the new absolute direction $d_r$ for $P_r$ by using relative direction information $r\in\{front,\ front-left,\ left,\ left-rear,\ rear,\ right-rear,\ right,\ front-right\}$. For example, if the absolute direction of the current tracer $T(P, d)$ is $N$, the left direction of the tracer $d_{Left}$ is $W$. Similarly, the left pixel of tracer $P_{Left}$ is $(x-1, y)$. Figures \ref{fig:img2-a} and \ref{fig:img2-b} show the directional information of the tracer and figure \ref{fig:img2-c} shows the types of contour pixels. The contour pixels can be classified into four types, namely, straight line, inner corner pixel, outer corner pixel, and inner-outer corner pixel. In figure \ref{fig:img2-c}, ``O'' represents the outer corner; ``I'' the inner corner; and ``IO'' the inner-outer corner according to the local pattern of the contour.
+ 
+-To determine the next contour point, which may be a contour pixel or pixel corner, the tracer detects the intensity of its adjacent pixel $P_r$ and the new absolute direction $d_r$ for $P_r$ by using relative direction information $r\in\{front,\ front-left,\ left,\ rear-left,\ rear,\ rear-right,\ right,\ front-right\}$. For example, if the absolute direction of the current tracer $T(P, d)$ is $N$, the left direction of the tracer $d_{Left}$ is $W$. Similarly, the left pixel of tracer $P_{Left}$ is $(x - 1, y)$. Figure \ref{fig:image2}a,b show the directional information of the tracer, and Figure \ref{fig:img2-c} shows the different types of contour pixels. The contour pixels can be classified into four types, namely straight line, inner corner pixel, outer corner pixel and inner-outer corner pixel. In Figure \ref{fig:img2-c}, ``$O$'' represents the outer corner, ``$I$'' represents the inner corner and ``$IO$'' represents the inner-outer corner according to the local pattern of the contour.
++To determine the next contour point, which may be a contour pixel or pixel corner, the tracer detects the intensity of its adjacent pixel $P_r$ and the new absolute direction $d_r$ for $P_r$ by using relative direction information $r\in\{front,\ front-left,\ left,\ rear-left,\ rear,\ rear-right,\ right,\ front-right\}$. For example, if the absolute direction of the current tracer $T(P, d)$ is $N$, the left direction of the tracer $d_{Left}$ is $W$. Similarly, the left pixel of tracer $P_{Left}$ is $(x - 1, y)$. Figure \ref{fig:img2-a}, \ref{fig:img2-b} show the directional information of the tracer, and Figure \ref{fig:img2-c} shows the different types of contour pixels. The contour pixels can be classified into four types, namely straight line, inner corner pixel, outer corner pixel and inner-outer corner pixel. In Figure \ref{fig:img2-c}, ``$O$'' represents the outer corner, ``$I$'' represents the inner corner and ``$IO$'' represents the inner-outer corner according to the local pattern of the contour.
+ 
+ % In this study, we focus on a contour tracing algorithm that is suitable for situations involving a relatively small number of objects and requiring real-time tracing such as AR, MR, and recognition image-based code in small scale images, e.g., the mobile computing environment. Hence, we first introduce and briefly describe the conventional contour tracing algorithms that are used in this environment and analyze their tracing accuracy and characteristics. 
+ 
+@@ -336,7 +330,7 @@ In this study, we focus on a contour-tracing algorithm that is suitable for case
+ 
+ % SBF is also known as Papert's turtle algorithm \cite{Das1990Bivariate} and as square tracing algorithm\cite{Toussaint????Grids}, and it is the simplest contour tracing algorithm. Initially, the location of tracer $S$ is saved, and the tracer moves leftward or rightward; if the pixel tracer is located on a contour pixel, the tracer moves leftward, otherwise it moves rightward. The procedure is as given below.
+ 
+-The simple boundary follower (SBF) is also known as Papert's turtle algorithm \cite{Papert1973Uses} and as a square-tracing algorithm \cite{Ghuneim2015Contour}, and it is the simplest contour-tracing algorithm. Initially, the location of tracer $S$ is saved, and the tracer moves in a left or right direction. If the pixel tracer is located on a contour pixel, the tracer moves left; otherwise, it moves right. The procedure is as given \hl{below}.
++The simple boundary follower (SBF) is also known as Papert's turtle algorithm \cite{Papert1973Uses} and as a square-tracing algorithm \cite{Ghuneim2015Contour}, and it is the simplest contour-tracing algorithm. Initially, the location of tracer $S$ is saved, and the tracer moves in a left or right direction. If the pixel tracer is located on a contour pixel, the tracer moves left; otherwise, it moves right. The procedure is shown in Algorithm \ref{alg:sbf}.
+ 
+ \begin{algorithm}[H]
+ 	\caption{Algorithm of the simple boundary follower.}\label{alg:sbf}
+@@ -374,9 +368,9 @@ SBF cannot trace an inner-outer corner pixel that is located at the left rear, a
+ 
+ \subsubsection{Improved Simple Boundary Follower}
+ 
+-% The SBF and MSBF require movement operations for both contour and background pixels; therefore, they waste time during movement on the background pixel and they cannot trace the inner corner pixel in front of the tracer \cite{Cheong2006Improved,Toussaint????Grids}. Hence, the ISBF \cite{Cheong2006Improved} is proposed based on our previous research for overcoming these limitations. The ISBF has six cases for following contour pixels based on the local patterns of the contour pixels. The modified version of \cite{Cheong2012Advanced} is as follows: 
++% The SBF and MSBF require movement operations for both contour and background pixels; therefore, they waste time during movement on the background pixel and they cannot trace the inner corner pixel in front of the tracer \cite{Cheong2006Improved,Toussaint????Grids}. Hence, the ISBF \cite{Cheong2006Improved} is proposed based on our previous research for overcoming these limitations. The ISBF has six cases for following contour pixels based on the local patterns of the contour pixels. The modified version of \cite{Cheong2006Advanced} is as follows: 
+ 
+-The SBF and MSBF require movement operations for both contour and background pixels; therefore, time is wasted during movement on the background pixel, and they cannot trace the inner-corner pixel in front of the tracer \cite{Cheong2006Improved,Ghuneim2015Contour}. Hence, we have proposed an improved SBF (ISBF)~\cite{Cheong2006Improved} that is based on our previous research aimed at overcoming these limitations. The ISBF has six cases for following contour pixels based on the local patterns of the contour pixels. The modified version of \cite{Cheong2012Advanced} is as \hl{follows}: 
++The SBF and MSBF require movement operations for both contour and background pixels; therefore, time is wasted during movement on the background pixel, and they cannot trace the inner-corner pixel in front of the tracer \cite{Cheong2006Improved,Ghuneim2015Contour}. Hence, we have proposed an improved SBF (ISBF)~\cite{Cheong2006Improved} that is based on our previous research aimed at overcoming these limitations. The ISBF has six cases for following contour pixels based on the local patterns of the contour pixels. The modified version\cite{Cheong2006Advanced} of ISBF is shown in Algorithm \ref{alg:isbf}. 
+ 
+ 
+ \begin{algorithm}[H]
+@@ -433,7 +427,7 @@ Figure \ref{fig:image4} represents the tracing path of the ISBF based on the loc
+ 	\subfloat[]{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-f.png} \label{fig:img4-f} }
+ 	\subfloat{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-g.png} }
+ 	 
+-	\caption{Contour cases of the improved SBF (ISBF) \cite{Cheong2012Advanced}: (\textbf{a}) left neighbor; (\textbf{b}) inner-outer corner at the left-rear; (\textbf{c}) inner-outer corner at the front-left; (\textbf{d}) inner corner at the front; (\textbf{e}) front neighbor; (\textbf{f}) outer corner.}
++	\caption{Contour cases of the improved SBF (ISBF) \cite{Cheong2006Advanced}: (\textbf{a}) left neighbor; (\textbf{b}) inner-outer corner at the left-rear; (\textbf{c}) inner-outer corner at the front-left; (\textbf{d}) inner corner at the front; (\textbf{e}) front neighbor; (\textbf{f}) outer corner. Reproduced with permission from Cheong, C., Seo, J., and Han, T.D., in proceedings of the 33rd KISS conference; published by KIISE, 2006.}
+ 	\label{fig:image4}
+ \end{figure}
+ 
+@@ -451,16 +445,16 @@ Moore-neighbor tracing (MNT) finds the next contour pixel using eight connected
+ %%%%%%%%%%%%%%%%%%%%%% TO BE WRITTEN!!!!
+ 
+ \subsubsection{Radial Sweep Algorithm}
+-% RSA \cite{Mirante1982Radial} is similar to MNT, but its tracer has no directional information. Therefore, it maintains two points, namely, previous pixel and current pixel for the initial tracing direction. Figure \ref{fig:img5-b} illustrates an example of a tracing path by using RSA from $P_i$ to $P_{i+2}$. In the figure, the direction vector from $P_i$ to $P_{i-1}$ is first generated, and then the tracer searches for the next contour pixel using the previous pixel $P_{i-1}$ for the clockwise direction of the vector.
++% RSA \cite{Reddy2012Evaluation} is similar to MNT, but its tracer has no directional information. Therefore, it maintains two points, namely, previous pixel and current pixel for the initial tracing direction. Figure \ref{fig:img5-b} illustrates an example of a tracing path by using RSA from $P_i$ to $P_{i+2}$. In the figure, the direction vector from $P_i$ to $P_{i-1}$ is first generated, and then the tracer searches for the next contour pixel using the previous pixel $P_{i-1}$ for the clockwise direction of the vector.
+ 
+-The radial sweep algorithm (RSA) \cite{Mirante1982Radial} is similar to MNT, but its tracer has no directional information. Therefore, it maintains two points, namely the previous pixel and current pixel for the initial tracing direction. Figure \ref{fig:img5-b} illustrates an example of a tracing path obtained using RSA from $P_i$ to $P_{i+2}$. In the figure, the direction vector from $P_i$ to $P_{i-1}$ is first generated, and the tracer then searches for the next contour pixel using the previous pixel $P_{i-1}$ for the clockwise direction of the~vector.
++The radial sweep algorithm (RSA) \cite{Reddy2012Evaluation} is similar to MNT, but its tracer has no directional information. Therefore, it maintains two points, namely the previous pixel and current pixel for the initial tracing direction. Figure \ref{fig:img5-b} illustrates an example of a tracing path obtained using RSA from $P_i$ to $P_{i+2}$. In the figure, the direction vector from $P_i$ to $P_{i-1}$ is first generated, and the tracer then searches for the next contour pixel using the previous pixel $P_{i-1}$ for the clockwise direction of the~vector.
+ 
+ %%% Image 5
+ \begin{figure}[H]
+ 	\centering
+ 	\subfloat[]{ \includegraphics[width=0.3\textwidth]{2.RelatedWorks/fig5-a.png} \label{fig:img5-a} }
+ 	\subfloat[]{ \includegraphics[width=0.3\textwidth]{2.RelatedWorks/fig5-b.png} \label{fig:img5-b} }
+-	\caption{Contour-following sequence of Moore-neighbor tracing (MNT) and the radial sweep algorithm (RSA): (\textbf{a}) \hl{MNT} \cite{Toussaint????Grids}; (\textbf{b}) RSA~\cite{Mirante1982Radial}.}
++	\caption{Contour-following sequence of Moore-neighbor tracing (MNT) and the radial sweep algorithm (RSA): (\textbf{a}) MNT \cite{Toussaint????Grids}; (\textbf{b}) RSA~\cite{Reddy2012Evaluation}.}
+ 	\label{fig:mnt_rsa}
+ \end{figure}
+ 
+@@ -477,7 +471,7 @@ To determine the next contour pixel, the Theo Pavlidis algorithm (TPA) \cite{Pav
+ 	\subfloat[]{ \includegraphics[width=0.2\textwidth]{2.RelatedWorks/fig6-c.png} \label{fig:img6-c} }
+ 	\subfloat[]{ \includegraphics[width=0.2\textwidth]{2.RelatedWorks/fig6-d.png} \label{fig:img6-d} }
+ 	 
+-	\caption{Contour-following sequence of the Theo Pavlidis algorithm (TPA)~\cite{Cheong2012Advanced}. (\textbf{a}) Front-left contour; (\textbf{b}) front contour; (\textbf{c}) front-right contour; (\textbf{d}) rotation.}
++	\caption{Contour-following sequence of the Theo Pavlidis algorithm (TPA)~\cite{Cheong2006Advanced}. (\textbf{a}) Front-left contour; (\textbf{b}) front contour; (\textbf{c}) front-right contour; (\textbf{d}) rotation.}
+ 	\label{fig:image6}
+ \end{figure}
+ 
+@@ -539,14 +533,14 @@ The pixel-following algorithm requires start and stop criteria to avoid incomple
+ 
+ \subsubsection{Assumption for Start}
+ 
+-% Commonly, start of tracing occurs when the tracer enters a black pixel from a white pixel. Due to this reason, at the start of tracing, the tracer must be placed on a black pixel and its rear pixel $P_{Rear}$ should be white. Moreover, in the case of the MSBF and ISBF, if the $P_{Left-Rear}$ of the start pixel is an inner-outer corner pixel, they cannot trace all the contour pixels by using their stopping criteria \cite{Cheong2012Advanced}. In addition, TPA has to select a start pixel that has white pixels at the tracer positions $P_{Left}$, $P_{Left-Rear}$, and $P_{Right-Rear}$\cite{Ghuneim2015Contour}; otherwise, it cannot trace the left pixel of the contour. 
++% Commonly, start of tracing occurs when the tracer enters a black pixel from a white pixel. Due to this reason, at the start of tracing, the tracer must be placed on a black pixel and its rear pixel $P_{Rear}$ should be white. Moreover, in the case of the MSBF and ISBF, if the $P_{Left-Rear}$ of the start pixel is an inner-outer corner pixel, they cannot trace all the contour pixels by using their stopping criteria \cite{Cheong2006Advanced}. In addition, TPA has to select a start pixel that has white pixels at the tracer positions $P_{Left}$, $P_{Left-Rear}$, and $P_{Right-Rear}$\cite{Ghuneim2015Contour}; otherwise, it cannot trace the left pixel of the contour. 
+ 
+-Commonly, tracing starts when the tracer enters a black pixel from a white pixel. Therefore, at~the start of tracing, the tracer must be placed on a black pixel, and its rear pixel $P_{Rear}$ should be white. Moreover, in the case of the MSBF and ISBF, if the $P_{Left-Rear}$ of the start pixel is an inner-outer corner pixel, it cannot trace all of the contour pixels using their stopping criteria \cite{Reddy2012Evaluation,Cheong2012Advanced}. In addition, TPA has to select a start pixel that has white pixels at the tracer positions $P_{Left}$, $P_{Left-Rear}$ and $P_{Right-Rear}$ \cite{Ghuneim2015Contour}; otherwise, it cannot trace the left pixel of the contour. 
++Commonly, tracing starts when the tracer enters a black pixel from a white pixel. Therefore, at~the start of tracing, the tracer must be placed on a black pixel, and its rear pixel $P_{Rear}$ should be white. Moreover, in the case of the MSBF and ISBF, if the $P_{Left-Rear}$ of the start pixel is an inner-outer corner pixel, it cannot trace all of the contour pixels using their stopping criteria \cite{Reddy2012Evaluation,Cheong2006Advanced}. In addition, TPA has to select a start pixel that has white pixels at the tracer positions $P_{Left}$, $P_{Left-Rear}$ and $P_{Right-Rear}$ \cite{Ghuneim2015Contour}; otherwise, it cannot trace the left pixel of the contour. 
+ 
+ \subsubsection{Stop Criterion}
+-% There are three methods for stopping the contour tracing \cite{Ghuneim2015Contour}. The first method is Jacob's stopping criterion \cite{Ghuneim2015Contour} that terminates the trace when the tracer reenters the start pixel with an absolute direction that is the same as the start direction, i.e., if the current tracer $T(P,d)$ is the same as the start tracer $S(P,d)$, the pixel following is terminated. The SBF, MSBF, and ISBF use this criterion and their tracing terminates at the start pixel, as shown in figures \ref{fig:img8-a}-\ref{fig:img8-c}. The second method uses the number of reentries to the start pixel. In figures \ref{fig:img8-d} and \ref{fig:img8-f}, the tracers of MNT and TPA revisit the start pixel (1, 5) with different directional information; therefore, they do not stop but go to the next contour pixel if the first method is applied. For this reason, if a specified number of reentries such as three or four times is satisfied, the trace is terminated \cite{Ghuneim2015Contour}. Sometimes, this method is not efficient because it requires unnecessary tracing to be performed one or more times. The final method checks the trace route that is traced by the previous pixel and current pixel of the tracer and determines whether or not it has already been passed. This method is used for RSA \cite{Ghuneim2015Contour,Mirante1982Radial} since its tracer has no directional information but only pixel location information. In other words, whenever the tracer enters the $i$-th contour pixel, the current pixel location $P_i$ is appended sequentially into the traced contour path. Moreover, if the traced path of $(P_{i-1}, P_i)$ appears twice, the tracing is terminated. This method can be applied for all pixel following methods and it is simpler than the second method; however, it requires more operations than Jacob's stopping criterion.
++% There are three methods for stopping the contour tracing \cite{Ghuneim2015Contour}. The first method is Jacob's stopping criterion \cite{Ghuneim2015Contour} that terminates the trace when the tracer reenters the start pixel with an absolute direction that is the same as the start direction, i.e., if the current tracer $T(P,d)$ is the same as the start tracer $S(P,d)$, the pixel following is terminated. The SBF, MSBF, and ISBF use this criterion and their tracing terminates at the start pixel, as shown in figures \ref{fig:img8-a}-\ref{fig:img8-c}. The second method uses the number of reentries to the start pixel. In figures \ref{fig:img8-d} and \ref{fig:img8-f}, the tracers of MNT and TPA revisit the start pixel (1, 5) with different directional information; therefore, they do not stop but go to the next contour pixel if the first method is applied. For this reason, if a specified number of reentries such as three or four times is satisfied, the trace is terminated \cite{Ghuneim2015Contour}. Sometimes, this method is not efficient because it requires unnecessary tracing to be performed one or more times. The final method checks the trace route that is traced by the previous pixel and current pixel of the tracer and determines whether or not it has already been passed. This method is used for RSA \cite{Ghuneim2015Contour,Reddy2012Evaluation} since its tracer has no directional information but only pixel location information. In other words, whenever the tracer enters the $i$-th contour pixel, the current pixel location $P_i$ is appended sequentially into the traced contour path. Moreover, if the traced path of $(P_{i-1}, P_i)$ appears twice, the tracing is terminated. This method can be applied for all pixel following methods and it is simpler than the second method; however, it requires more operations than Jacob's stopping criterion.
+ 
+-There are three methods for stopping the contour tracing \cite{Ghuneim2015Contour,Reddy2012Evaluation}. The first method is Jacob's stopping criterion \cite{Ghuneim2015Contour}, which terminates the trace when the tracer reenters the start pixel with an absolute direction that is the same as the start direction, \emph{i.e.}, if the current tracer $T(P,d)$ is the same as the start tracer $S(P,d)$, the pixel following is terminated. SBF, MSBF and ISBF use this criterion, and their tracing terminates at the start pixel, as shown in Figure \ref{fig:image8}a--c. The second method uses the number of reentries to the start pixel. In Figure \ref{fig:image8}d--f, the tracers of MNT and TPA revisit the start pixel $(1, 5)$ with different directional information; therefore, they do not stop, but rather go to the next contour pixel if the first method is applied. For this reason, if a specified number of reentries, e.g., three or four times, is satisfied, the trace is terminated \cite{Reddy2012Evaluation}. This method is sometimes not efficient, because it requires unnecessary tracing to be performed one or more times. The final method checks the trace route that is traced by the previous pixel and the current pixel of the tracer and determines whether it has already been passed. This method is used for RSA \cite{Ghuneim2015Contour,Mirante1982Radial} because its tracer has only pixel-location information and no directional information. In other words, whenever the tracer enters the $i$-th contour pixel, the current pixel location $P_i$ is appended sequentially into the traced contour path. Moreover, if the traced path of $(P_{i-1}, P_i)$ appears twice, the tracing is terminated. This method can be applied for all pixel-following methods, and it is simpler than the second method; however, it requires more operations than Jacob's stopping criterion.
++There are three methods for stopping the contour tracing \cite{Ghuneim2015Contour,Reddy2012Evaluation}. The first method is Jacob's stopping criterion \cite{Ghuneim2015Contour}, which terminates the trace when the tracer reenters the start pixel with an absolute direction that is the same as the start direction, \emph{i.e.}, if the current tracer $T(P,d)$ is the same as the start tracer $S(P,d)$, the pixel following is terminated. SBF, MSBF and ISBF use this criterion, and their tracing terminates at the start pixel, as shown in Figure \ref{fig:image8}a--c. The second method uses the number of reentries to the start pixel. In Figure \ref{fig:image8}d--f, the tracers of MNT and TPA revisit the start pixel $(1, 5)$ with different directional information; therefore, they do not stop, but rather go to the next contour pixel if the first method is applied. For this reason, if a specified number of reentries, e.g., three or four times, is satisfied, the trace is terminated \cite{Reddy2012Evaluation}. This method is sometimes not efficient, because it requires unnecessary tracing to be performed one or more times. The final method checks the trace route that is traced by the previous pixel and the current pixel of the tracer and determines whether it has already been passed. This method is used for RSA \cite{Ghuneim2015Contour,Reddy2012Evaluation} because its tracer has only pixel-location information and no directional information. In other words, whenever the tracer enters the $i$-th contour pixel, the current pixel location $P_i$ is appended sequentially into the traced contour path. Moreover, if the traced path of $(P_{i-1}, P_i)$ appears twice, the tracing is terminated. This method can be applied for all pixel-following methods, and it is simpler than the second method; however, it requires more operations than Jacob's stopping criterion.
+ 
+ \subsubsection{Limitations of Conventional Pixel-Following Methods}
+ 
+@@ -938,8 +932,7 @@ To compare the proposed algorithm to conventional algorithms, we perform an expe
+ 
+ % We experimented on nine CCITT standard fax images with 200 DPI (dots per inch) \cite{Miyatake1997Contour}. All these images have $1,728 \times 2,339$ pixels and a file size of 11,842 KB. Table \ref{table:ccitt} shows the document type of these images and the total number of contour pixels. We used these large sized images because they a number of various types of contours, and they are useful to compare the efficiencies with regard to parameters such as processing time and accuracy of the trace results of the contour tracing algorithms.
+ 
+-We experimented on nine \hl{CCITT}
+- standard fax images with 200 dots per inch (dpi) \cite{Miyatake1997Contour}. All of these images have $1728 \times 2339$ pixels and a file size of 11,842~KB. Table \ref{table:ccitt} shows the document type of these images and the total number of contour pixels. We used these large-sized images because they have various types of contours, which is useful when comparing the efficiencies with regard to parameters, such as processing time and the accuracy of the trace results of the contour-tracing~algorithms.
++We experimented on nine CCITT (Consultative Committee for International Telephony and Telegraphy) standard fax images with 200 dots per inch (dpi) \cite{Miyatake1997Contour}. All of these images have $1728 \times 2339$ pixels and a file size of 11,842~KB. Table \ref{table:ccitt} shows the document type of these images and the total number of contour pixels. We used these large-sized images because they have various types of contours, which is useful when comparing the efficiencies with regard to parameters, such as processing time and the accuracy of the trace results of the contour-tracing~algorithms.
+ 
+ \begin{table}[H]
+ 	\centering
+@@ -958,7 +951,7 @@ We experimented on nine \hl{CCITT}
+ 		9 & Facsimile test chart & 453,721 \\
+ 		\bottomrule
+ 	\end{tabular}
+-	\caption{\protect \hl{CCITT} fax standard images.}
++	\caption{\protect CCITT (Consultative Committee for International Telephony and Telegraphy) fax standard images.}
+ 	\label{table:ccitt}
+ \end{table}	
+ 
+@@ -1051,7 +1044,7 @@ Figure \ref{fig:image16} shows the traced images resulting from MSBF and the pro
+ 
+ % In order to measure the tracing time for each algorithm, we performed each algorithm 10 times per image and calculated the average time. We used the GetTickCount() function supported by Microsoft Visual C++ 6.0 to measure the processing time. Tables \textcolor{red}{8 and 9} show the average processing time of each algorithm used for tracing the images, and a linear model for estimating the process time as the number of traced pixels increases by using the least-square estimation (LSE) method. In the tables, the average processing time per traced contour pixel is obtained by dividing the total processing time by the total number of traced contour pixels. They are measured on the desktop and notebook separately.
+ 
+-In order to measure the tracing time for each algorithm, we performed each algorithm 20 times per image and calculated the average time. We used the \hl{\textit{cv2.getTickCount()}} function supported by \hl{\textit{OpenCV~3.0.0}} to measure the processing time. Table \ref{table:table8} shows the average processing time of each algorithm used for tracing the images and a linear model for estimating the process time as the number of traced pixels increases using the least-square estimation (LSE) method. In the table, we obtain the average processing time per traced contour pixel by dividing the total processing time by the total number of traced contour pixels.
++In order to measure the tracing time for each algorithm, we performed each algorithm 20 times per image and calculated the average time. We used the cv2.getTickCount() function supported by OpenCV 3.0.0 to measure the processing time. Table \ref{table:table8} shows the average processing time of each algorithm used for tracing the images and a linear model for estimating the process time as the number of traced pixels increases using the least-square estimation (LSE) method. In the table, we obtain the average processing time per traced contour pixel by dividing the total processing time by the total number of traced contour pixels.
+ 
+ % Moreover, figure \textcolor{red}{18} illustrates a graph that uses data from tables \textcolor{red}{7 to 9}. As shown in figures \textcolor{red}{18 (a) and (b)}, the proposed algorithm had the best performance in the case of the desktop, i.e., it had the least average processing time and showed the least increase in the ratio of process time to number of traced contour pixels, as shown in the LSE. In particular, although the proposed algorithm traced most of the numerous contour pixels in each image, it has the best or good performance when compared with the conventional algorithms. On the contrary, the SBF had the least average processing time for images and the least ratio from the LSE in the case of the notebook, and the proposed algorithm is second in rank based on the average processing time and LSE. from these experimental results the SBF is not the best algorithm for the note book because the ratio of the number of traced contour pixels is only approximately $92\%$ of the proposed algorithm. Due to this reason, the proposed algorithm has better performance than the other algorithms for the number of traced contour pixels and the processing time.
+ 
+@@ -1137,10 +1130,10 @@ R-square & 0.98117 & & 0.98544 & & 0.98838 & & 0.98685 & & 0.99461 & & 0.97615 &
+ \end{tabular}
+ }\\
+ \begin{tabular}{ccccccccccccc}
+-\multicolumn{1}{c}{\footnotesize \hl{*}~Results of best or faster speed/smaller standard deviation than the proposed algorithm are marked with a shadow.}
++\multicolumn{1}{c}{\footnotesize Results of best or faster speed/smaller standard deviation than the proposed algorithm are marked with a shadow.}
+ \end{tabular}
+ 
+-\end{table}%Please add * in table.
++\end{table}
+ 
+ %%% Image 18
+ \begin{figure}[H]
+@@ -1159,7 +1152,7 @@ R-square & 0.98117 & & 0.98544 & & 0.98838 & & 0.98685 & & 0.99461 & & 0.97615 &
+ 
+ % The proposed algorithm does not save all the contour pixels, but it saves only the representative points and the inner-outer corner pixels. Table \textcolor{red}{10} shows the data size acquired from the above experiments on CCITT standard fax images. It shows the data sizes of traced contour pixels and its compressed data. The number of traced contour pixels $(A)$, which are same results from table \textcolor{red}{7} and the $C$ and $D$ in the table are numbers of the representative points and the inner-outer corner points of the traced contour pixels. $A$ and $C$ are the number of $(x, y)$ coordinates, and $D$ represents the number of inner-outer corners that comprise $(x, y)$ coordinates and the type of inner-outer corner. The benefit of storing only the representative points based on the vertex of the contour pixel is that it can dramatically reduce the data size. This experimental results showed that the proposed algorithm reduced the data size to {19~60\%} of the memory used when all the contour pixels were stored, as shown in Table \textcolor{red}{10}.
+ 
+-The proposed algorithm does not save all of the contour pixels, but it saves only the representative points and the inner-outer corner pixels. Table \ref{table:table10} shows the data size acquired from the above experiments performed using CCITT standard fax images. It shows the data sizes of traced contour pixels and their compressed data. The number of traced contour pixels (A), which are the same results from Table \ref{table:table7}, and $C$ and $D$ in the table indicate the number of representative points and inner-outer corner points of the traced contour pixels. $A$ and $C$ are the number of $(x, y)$ coordinates, and $D$ represents the number of inner-outer corners that comprise $(x, y)$ coordinates and the type of inner-outer corner. The benefit of storing only the representative points based on the vertex of the contour pixel is that it can significantly reduce the data size. The experimental results obtained show that the proposed algorithm reduced the data size to 19\%--60\% of the memory used when all of the contour pixels were stored, as shown in Table \ref{table:table10}.
++The proposed algorithm does not save all of the contour pixels, but it saves only the representative points and the inner-outer corner pixels. Table \ref{table:table10} shows the data size acquired from the above experiments performed using CCITT standard fax images. It shows the data sizes of traced contour pixels and their compressed data. The number of traced contour pixels ($A$), which are the same results from Table \ref{table:table7}, and $C$ and $D$ in the table indicate the number of representative points and inner-outer corner points of the traced contour pixels. $A$ and $C$ are the number of $(x, y)$ coordinates, and $D$ represents the number of inner-outer corners that comprise $(x, y)$ coordinates and the type of inner-outer corner. The benefit of storing only the representative points based on the vertex of the contour pixel is that it can significantly reduce the data size. The experimental results obtained show that the proposed algorithm reduced the data size to 19\%--60\% of the memory used when all of the contour pixels were stored, as shown in Table \ref{table:table10}.
+ 
+ %%% Table 10
+ %!TEX root = ../Fast_Contour_Tracing_Algorithm.tex
+@@ -1309,7 +1302,7 @@ In the experiments, there were missing contour pixels that did not satisfy the e
+ 	\label{fig:image21}
+ \end{figure}
+ 
+-To overcome the problem, we applied an eight-connection mask to the images to obtain the starting pixel, but the mask required many operations. In other words, we attempted to measure the performance of multi-direction scanning in order to eliminate the missing contour-pixel problem by using vertical and horizontal scans instead of an eight-connection mask operation. Table \ref{table:table12} shows the increase in the number of pixels traced using bidirectional scanning, and Table \ref{table:table13} describes the processing time for this method. Moreover, Figure \ref{fig:image22} shows the tracing result that was obtained using the proposed algorithm based on bidirectional scanning, and it shows that seven of the missing pixels are traced, but one diagonal connective-contour pixel \hl{(A)} remained untraced. 
++To overcome the problem, we applied an eight-connection mask to the images to obtain the starting pixel, but the mask required many operations. In other words, we attempted to measure the performance of multi-direction scanning in order to eliminate the missing contour-pixel problem by using vertical and horizontal scans instead of an eight-connection mask operation. Table \ref{table:table12} shows the increase in the number of pixels traced using bidirectional scanning, and Table \ref{table:table13} describes the processing time for this method. Moreover, Figure \ref{fig:image22} shows the tracing result that was obtained using the proposed algorithm based on bidirectional scanning, and it shows that seven of the missing pixels are traced, but one diagonal connective-contour pixel remained untraced. 
+ 
+ 
+ %%% Image 22
+@@ -1498,8 +1491,7 @@ Mcqueen, W.A.
+ 
+ \bibitem[Pratt()]{Pratt????Digital}
+ Pratt, W.
+-\newblock {\em Digital Image Processing}; \hl{Wiley: City, Country}, 1978.
+-%Please add the publisher’s location (city, country).
++\newblock {\em Digital Image Processing}; Wiley \& Sons: Hoboken, NJ, USA., 1978.
+ 
+ \bibitem[Gose \em{et~al.}(1996)Gose, Johnsonbaugh, and Jost]{Gose1996Pattern}
+ Gose, E.; Johnsonbaugh, R.; Jost, S.
+@@ -1508,8 +1500,7 @@ Gose, E.; Johnsonbaugh, R.; Jost, S.
+ 
+ \bibitem[Pitas(2000)]{Pitas2000Digital}
+ Pitas, I.
+-\newblock {\em Digital Image Processing Algorithms and Applications}; \hl{John
+- Wiley \& Sons: City, Country}, 2000.
++\newblock {\em Digital Image Processing Algorithms and Applications}; Wiley \& Sons: Hoboken, NJ, USA., 2000.
+ 
+ \bibitem[Das \em{et~al.}(1990)Das, Paulik, and Loh]{Das1990Bivariate}
+ Das, M.; Paulik, M.; Loh, N.
+@@ -1520,7 +1511,7 @@ Das, M.; Paulik, M.; Loh, N.
+ 
+ \bibitem[Papert(1973)]{Papert1973Uses}
+ Papert, S.
+-\newblock Uses of Technology to Enhance Education. Available online: http://hdl.handle.net/1721.1/6213 (accessed on \hl{Day Month Year}).
++\newblock Uses of Technology to Enhance Education. Available online: http://hdl.handle.net/1721.1/6213 (accessed on 16 August 2015).
+ 
+ \bibitem[Cheong and Han(2006)]{Cheong2006Improved}
+ Cheong, C.; Han, T.D.
+@@ -1528,15 +1519,9 @@ Cheong, C.; Han, T.D.
+ \newblock {\em J. Korea Inf. Sci. Soc. Softw.
+  Appl.} {\bf 2006}, {\em 33},~427--439.
+ 
+-\bibitem[Mirante and Weingarten(1982)]{Mirante1982Radial}
+-Mirante, A.; Weingarten, N.
+-\newblock The Radial Sweep Algorithm for Constructing Triangulated Irregular
+- Networks. {\em IEEE Comput. Graphics Appl.} {\bf 1982}, {\em 2}, 11--21.
+-
+ \bibitem[Pavlidis(2012)]{Pavlidis2012Algorithms}
+ Pavlidis, T.
+-\newblock {\em Algorithms for Graphics and Image Processing}; \hl{Springer Science
+- \& Business Media: City, Country}, 2012.
++\newblock {\em Algorithms for Graphics and Image Processing}; Springer-Verlag: Berlin-Heidelberg-New York, 2012.
+ 
+ \bibitem[Aroca \em{et~al.}(2013)Aroca, Gomes, Dantas, Calbo, and
+  Gonçalves]{Aroca2013Wearable}
+@@ -1573,11 +1558,11 @@ Zhang, S.; Zhao, X.; Lei, B.
+ \newblock Robust Facial Expression Recognition via Compressive Sensing.
+ \newblock {\em Sensors} {\bf 2012}, {\em 12},~3747--3761.
+ 
+-\bibitem[Cheong \em{et~al.}(2012)Cheong, Seo, and Han]{Cheong2012Advanced}
++\bibitem[Cheong \em{et~al.}(2006)Cheong, Seo, and Han]{Cheong2006Advanced}
+ Cheong, C.; Seo, J.; Han, T.D.
+ \newblock Advanced contour tracing algorithms based on analysis of tracing
+  conditions.
+-\newblock In Proceedings of the 33rd KISS Fall Conference, \hl{ City, Country, start date--end date 2012}; Volume 
++\newblock In Proceedings of the 33rd KISS Fall Conference, Seoul, Korea, 20--21 October 2006; Volume
+  33, pp. 431--436.
+ 
+ \bibitem[Miyatake \em{et~al.}(1997)Miyatake, Matsushima, and
+@@ -1600,9 +1585,10 @@ Shoji, K.; Miyamichi, J.; Hirano, K.
+ \newblock {\em Syst. Comput. Jpn.} {\bf 1999}, {\em 30},~1--11.
+ 
+ \bibitem[Toussaint()]{Toussaint????Grids}
+-\hl{Toussaint, G.}
+-\newblock Grids, Connectivity and Contour Tracing. \hl{ the book name it belongs to; Publisher: City Country, Year}.
+-%Please check this reference type.
++Toussaint, G.
++\newblock Grids, Connectivity and Contour Tracing.
++\newblock
++ Available online: \href{http://www-cgrl.cs.mcgill.ca/~godfried/teaching/pr-notes/contour.ps}{\nolinkurl{http://www-cgrl.cs.mcgill.ca/~godfried/teaching/pr-notes/contour.ps}}. (accessed on 26 August 2015).
+ 
+ \bibitem[Suzuki and Abe(1985)]{Suzuki1985Topological}
+ Suzuki, S.; Abe, K.
+@@ -1617,8 +1603,7 @@ Ghuneim, A.
+ \newblock
+  Available online: \href{http://www.imageprocessingplace.com/downloads\_V3/root\_downloads/tutorials/contour\_tracing\_Abeer\_George\_Ghuneim/index.html}
+  {\nolinkurl{http://www.imageprocessingplace.com/downloads\_V3/root\_downloads/tutorials/contour\_tracing\_Abeer\_George\_Ghuneim/index.html}}.
+-(\hl{accessed on}).
+-%Please add the online resource update day month year.
++(accessed on 28 August 2015).
+ 
+ \bibitem[Reddy \em{et~al.}(2012)Reddy, V., and Bhaskar]{Reddy2012Evaluation}
+ Reddy, P.R.; V., A.; Bhaskar, M.
