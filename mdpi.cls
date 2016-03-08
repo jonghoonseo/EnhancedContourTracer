@@ -1,339 +1,427 @@
-  %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%% %% MDPI class for LaTeX files   07-09-2015
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% %%	MDPI class for LaTeX files	 01-12-2015
+%% %%	For any information please send an e-mail to:
+%% %%		latex-support@mdpi.com (Janine Daum) 
 %% %%
-%% %% Class style provided by Stefano Mariani for any information please send an e-mail to:
-%% %%   stefano.mariani@polimi.it
+%% %%	Class style provided by Stefano Mariani (stefano.mariani@polimi.it)
 %% %%   Modified by:
-%% %%   Dietrich Rordorf (rordorf@mdpi.com)
-%% %%   Peter Harremoes (entropeter@mdpi.com)
-%% %%   Zeno Schumacher (latex@mdpi.com)
-%% %%   Maddalena Giulini (latex@mdpi.com)
-%% %%   Andres Gartmann (gartmann@mdpi.com) - v1.2
-%% %%   Janine Daum (latex@mdpi.com)
-%% %%
+%% %%		Dietrich Rordorf (rordorf@mdpi.com)
+%% %%		Peter Harremoes (entropeter@mdpi.com)
+%% %%		Zeno Schumacher (latex@mdpi.com)
+%% %%		Maddalena Giulini (latex@mdpi.com)
+%% %%		Andres Gartmann (gartmann@mdpi.com) v1.2
+%% %%		Janine Daum (latex-support@mdpi.com) v3.0
+%% %%		
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+%% IDENTIFICATION
 \NeedsTeXFormat{LaTeX2e}
-\ProvidesClass{mdpi}[2015/07/09 MDPI paper class]
-\usepackage[T1]{fontenc}
+\ProvidesClass{mdpi}[2015/01/12 MDPI paper class]
 
-\AtEndDocument{\par \cright}
+\AtEndDocument{\par \cright} %% needs to be here
 
+%% PRELIMINARY DECLARATIONS
+\LoadClass[10pt]{article}
+\RequirePackage[T1]{fontenc}
+\RequirePackage{calc}
+\RequirePackage{indentfirst}
+\RequirePackage{fancyhdr}
+\RequirePackage{graphicx,epstopdf}
+\RequirePackage{lastpage}
+\RequirePackage{ifthen}
+\RequirePackage{lineno}
+\RequirePackage{float}
+\RequirePackage{amsmath}
+\RequirePackage{setspace}
+\RequirePackage{enumitem}
+\RequirePackage{mathpazo}
+\RequirePackage{booktabs} % for \toprule etc. in tables
+\RequirePackage[largestsep]{titlesec}
+\RequirePackage{etoolbox} % for \AtBeginDocument
+
+%% OPTIONS
 %% To choose the journal
-\DeclareOption{actuators}{\gdef\@journal{Actuators}}
-\DeclareOption{administrativesciences}{\gdef\@journal{AdministrativeSciences}}
-\DeclareOption{aerospace}{\gdef\@journal{Aerospace}}
-\DeclareOption{agriculture}{\gdef\@journal{Agriculture}}
-\DeclareOption{agronomy}{\gdef\@journal{Agronomy}}
-\DeclareOption{algorithms}{\gdef\@journal{Algorithms}}
-\DeclareOption{animals}{\gdef\@journal{Animals}}
-\DeclareOption{antibiotics}{\gdef\@journal{Antibiotics}}
-\DeclareOption{antibodies}{\gdef\@journal{Antibodies}}
-\DeclareOption{antioxidants}{\gdef\@journal{Antioxidants}}
-\DeclareOption{appliedsciences}{\gdef\@journal{AppliedSciences}}
-\DeclareOption{arts}{\gdef\@journal{Arts}}
-\DeclareOption{atmosphere}{\gdef\@journal{Atmosphere}}
-\DeclareOption{atoms}{\gdef\@journal{Atoms}}
-\DeclareOption{axioms}{\gdef\@journal{Axioms}}
-\DeclareOption{batteries}{\gdef\@journal{Batteries}}
-\DeclareOption{behavioralsciences}{\gdef\@journal{BehavioralSciences}}
-\DeclareOption{bioengineering}{\gdef\@journal{Bioengineering}}
-\DeclareOption{biology}{\gdef\@journal{Biology}}
-\DeclareOption{biomedicines}{\gdef\@journal{Biomedicines}}
-\DeclareOption{biomimetics}{\gdef\@journal{Biomimetics}}
-\DeclareOption{biomolecules}{\gdef\@journal{Biomolecules}}
-\DeclareOption{biosensors}{\gdef\@journal{Biosensors}}
-\DeclareOption{brainsciences}{\gdef\@journal{BrainSciences}}
-\DeclareOption{buildings}{\gdef\@journal{Buildings}}
-\DeclareOption{cancers}{\gdef\@journal{Cancers}}
-\DeclareOption{catalysts}{\gdef\@journal{Catalysts}}
-\DeclareOption{cells}{\gdef\@journal{Cells}}
-\DeclareOption{challenges}{\gdef\@journal{Challenges}}
-\DeclareOption{chemosensors}{\gdef\@journal{Chemosensors}}
-\DeclareOption{children}{\gdef\@journal{Children}}
-\DeclareOption{chromatography}{\gdef\@journal{Chromatography}}
-\DeclareOption{climate}{\gdef\@journal{Climate}}
-\DeclareOption{coatings}{\gdef\@journal{Coatings}}
-\DeclareOption{computation}{\gdef\@journal{Computation}}
-\DeclareOption{computers}{\gdef\@journal{Computers}}
-\DeclareOption{cosmetics}{\gdef\@journal{Cosmetics}}
-\DeclareOption{crystals}{\gdef\@journal{Crystals}}
-\DeclareOption{data}{\gdef\@journal{Data}}
-\DeclareOption{dentistryjournal}{\gdef\@journal{DentistryJournal}}
-\DeclareOption{diagnostics}{\gdef\@journal{Diagnostics}}
-\DeclareOption{diseases}{\gdef\@journal{Diseases}}
-\DeclareOption{diversity}{\gdef\@journal{Diversity}}
-\DeclareOption{econometrics}{\gdef\@journal{Econometrics}}
-\DeclareOption{economies}{\gdef\@journal{Economies}}
-\DeclareOption{education}{\gdef\@journal{Education}}
-\DeclareOption{electronics}{\gdef\@journal{Electronics}}
-\DeclareOption{energies}{\gdef\@journal{Energies}}
-\DeclareOption{entropy}{\gdef\@journal{Entropy}}
-\DeclareOption{environmentalsciences}{\gdef\@journal{EnvironmentalSciences}}
-\DeclareOption{environments}{\gdef\@journal{Environments}}
-\DeclareOption{epigenomes}{\gdef\@journal{Epigenomes}}
-\DeclareOption{fibers}{\gdef\@journal{Fibers}}
-\DeclareOption{foods}{\gdef\@journal{Foods}}
-\DeclareOption{forests}{\gdef\@journal{Forests}}
-\DeclareOption{futureinternet}{\gdef\@journal{FutureInternet}}
-\DeclareOption{galaxies}{\gdef\@journal{Galaxies}}
-\DeclareOption{games}{\gdef\@journal{Games}}
-\DeclareOption{gels}{\gdef\@journal{Gels}}
-\DeclareOption{genealogy}{\gdef\@journal{Genealogy}}
-\DeclareOption{genes}{\gdef\@journal{Genes}}
-\DeclareOption{geosciences}{\gdef\@journal{Geosciences}}
-\DeclareOption{healthcare}{\gdef\@journal{Healthcare}}
-\DeclareOption{horticulturae}{\gdef\@journal{Horticulturae}}
-\DeclareOption{humanities}{\gdef\@journal{Humanities}}
-\DeclareOption{hydrology}{\gdef\@journal{Hydrology}}
-\DeclareOption{informatics}{\gdef\@journal{Informatics}}
-\DeclareOption{information}{\gdef\@journal{Information}}
-\DeclareOption{inorganics}{\gdef\@journal{Inorganics}}
-\DeclareOption{insects}{\gdef\@journal{Insects}}
-\DeclareOption{ijerph}{\gdef\@journal{Ijerph}}
-\DeclareOption{ijfs}{\gdef\@journal{Ijfs}}
-\DeclareOption{ijms}{\gdef\@journal{Ijms}}
-\DeclareOption{ijgi}{\gdef\@journal{Ijgi}}
-\DeclareOption{jcdd}{\gdef\@journal{Jcdd}}
-\DeclareOption{jcm}{\gdef\@journal{Jcm}}
-\DeclareOption{jdb}{\gdef\@journal{Jdb}}
-\DeclareOption{jfb}{\gdef\@journal{Jfb}}
-\DeclareOption{jof}{\gdef\@journal{Jof}}
-\DeclareOption{jimaging}{\gdef\@journal{Jimaging}}
-\DeclareOption{joi}{\gdef\@journal{Joi}}
-\DeclareOption{jlpea}{\gdef\@journal{Jlpea}}
-\DeclareOption{jmse}{\gdef\@journal{Jmse}}
-\DeclareOption{jpm}{\gdef\@journal{Jpm}}
-\DeclareOption{jrfm}{\gdef\@journal{Jrfm}}
-\DeclareOption{jsan}{\gdef\@journal{Jsan}}
-\DeclareOption{land}{\gdef\@journal{Land}}
-\DeclareOption{laws}{\gdef\@journal{Laws}}
-\DeclareOption{life}{\gdef\@journal{Life}}
-\DeclareOption{lubricants}{\gdef\@journal{Lubricants}}
-\DeclareOption{machines}{\gdef\@journal{Machines}}
-\DeclareOption{magnetochemistry}{\gdef\@journal{Magnetochemistry}}
-\DeclareOption{marinedrugs}{\gdef\@journal{MarineDrugs}}
-\DeclareOption{materials}{\gdef\@journal{Materials}}
-\DeclareOption{mathematics}{\gdef\@journal{Mathematics}}
-\DeclareOption{medicalsciences}{\gdef\@journal{MedicalSciences}}
-\DeclareOption{membranes}{\gdef\@journal{Membranes}}
-\DeclareOption{metabolites}{\gdef\@journal{Metabolites}}
-\DeclareOption{metals}{\gdef\@journal{Metals}}
-\DeclareOption{microarrays}{\gdef\@journal{Microarrays}}
-\DeclareOption{micromachines}{\gdef\@journal{Micromachines}}
-\DeclareOption{microorganisms}{\gdef\@journal{Microorganisms}}
-\DeclareOption{minerals}{\gdef\@journal{Minerals}}
-\DeclareOption{molbank}{\gdef\@journal{Molbank}}
-\DeclareOption{molecules}{\gdef\@journal{Molecules}}
-\DeclareOption{nanomaterials}{\gdef\@journal{Nanomaterials}}
-\DeclareOption{ncrna}{\gdef\@journal{Ncrna}}
-\DeclareOption{nutrients}{\gdef\@journal{Nutrients}}
-\DeclareOption{pathogens}{\gdef\@journal{Pathogens}}
-\DeclareOption{pharmaceuticals}{\gdef\@journal{Pharmaceuticals}}
-\DeclareOption{pharmaceutics}{\gdef\@journal{Pharmaceutics}}
-\DeclareOption{pharmacy}{\gdef\@journal{Pharmacy}}
-\DeclareOption{photonics}{\gdef\@journal{Photonics}}
-\DeclareOption{plants}{\gdef\@journal{Plants}}
-\DeclareOption{polymers}{\gdef\@journal{Polymers}}
-\DeclareOption{processes}{\gdef\@journal{Processes}}
-\DeclareOption{proteomes}{\gdef\@journal{Proteomes}}
-\DeclareOption{publications}{\gdef\@journal{Publications}}
-\DeclareOption{religions}{\gdef\@journal{Religions}}
-\DeclareOption{remotesensing}{\gdef\@journal{RemoteSensing}}
-\DeclareOption{resources}{\gdef\@journal{Resources}}
-\DeclareOption{risks}{\gdef\@journal{Risks}}
-\DeclareOption{robotics}{\gdef\@journal{Robotics}}
-\DeclareOption{safety}{\gdef\@journal{Safety}}
-\DeclareOption{sensors}{\gdef\@journal{Sensors}}
-\DeclareOption{sinusitis}{\gdef\@journal{Sinusitis}}
-\DeclareOption{socialsciences}{\gdef\@journal{SocialSciences}}
-\DeclareOption{societies}{\gdef\@journal{Societies}}
-\DeclareOption{sports}{\gdef\@journal{Sports}}
-\DeclareOption{standards}{\gdef\@journal{Standards}}
-\DeclareOption{sustainability}{\gdef\@journal{Sustainability}}
-\DeclareOption{symmetry}{\gdef\@journal{Symmetry}}
-\DeclareOption{systems}{\gdef\@journal{Systems}}
-\DeclareOption{technologies}{\gdef\@journal{Technologies}}
-\DeclareOption{toxics}{\gdef\@journal{Toxics}}
-\DeclareOption{toxins}{\gdef\@journal{Toxins}}
-\DeclareOption{universe}{\gdef\@journal{Universe}}
-\DeclareOption{vaccines}{\gdef\@journal{Vaccines}}
-\DeclareOption{veterinarysciences}{\gdef\@journal{VeterinarySciences}}
-\DeclareOption{viruses}{\gdef\@journal{Viruses}}
-\DeclareOption{water}{\gdef\@journal{Water}}
+\DeclareOption{actuators}{\gdef\@journal{actuators}}
+\DeclareOption{admsci}{\gdef\@journal{admsci}}
+	\DeclareOption{administrativesciences}{\gdef\@journal{admsci}} %to have backwards compatibility
+\DeclareOption{aerospace}{\gdef\@journal{aerospace}}
+\DeclareOption{agriculture}{\gdef\@journal{agriculture}}
+\DeclareOption{agronomy}{\gdef\@journal{agronomy}}
+\DeclareOption{algorithms}{\gdef\@journal{algorithms}}
+\DeclareOption{animals}{\gdef\@journal{animals}}
+\DeclareOption{antibiotics}{\gdef\@journal{antibiotics}}
+\DeclareOption{antibodies}{\gdef\@journal{antibodies}}
+\DeclareOption{antioxidants}{\gdef\@journal{antioxidants}}
+\DeclareOption{applsci}{\gdef\@journal{applsci}}
+	\DeclareOption{appliedsciences}{\gdef\@journal{applsci}} %to have backwards compatibility
+\DeclareOption{arts}{\gdef\@journal{arts}}
+\DeclareOption{atmosphere}{\gdef\@journal{atmosphere}}
+\DeclareOption{atoms}{\gdef\@journal{atoms}}
+\DeclareOption{axioms}{\gdef\@journal{axioms}}
+\DeclareOption{batteries}{\gdef\@journal{batteries}}
+\DeclareOption{behavsci}{\gdef\@journal{behavsci}} 
+	\DeclareOption{behavioralsciences}{\gdef\@journal{behavsci}} %to have backwards compatibility 
+\DeclareOption{beverages}{\gdef\@journal{beverages}}
+\DeclareOption{bioengineering}{\gdef\@journal{bioengineering}}
+\DeclareOption{biology}{\gdef\@journal{biology}}
+\DeclareOption{biomedicines}{\gdef\@journal{biomedicines}}
+\DeclareOption{biomimetics}{\gdef\@journal{biomimetics}}
+\DeclareOption{biomolecules}{\gdef\@journal{biomolecules}}
+\DeclareOption{biosensors}{\gdef\@journal{biosensors}}
+\DeclareOption{brainsci}{\gdef\@journal{brainsci}} 
+	\DeclareOption{brainsciences}{\gdef\@journal{brainsci}} %to have backwards compatibility 
+\DeclareOption{buildings}{\gdef\@journal{buildings}}
+\DeclareOption{c}{\gdef\@journal{c}}
+\DeclareOption{cancers}{\gdef\@journal{cancers}}
+\DeclareOption{catalysts}{\gdef\@journal{catalysts}}
+\DeclareOption{cells}{\gdef\@journal{cells}}
+\DeclareOption{challenges}{\gdef\@journal{challenges}}
+\DeclareOption{chemosensors}{\gdef\@journal{chemosensors}}
+\DeclareOption{children}{\gdef\@journal{children}}
+\DeclareOption{chromatography}{\gdef\@journal{chromatography}}
+\DeclareOption{climate}{\gdef\@journal{climate}}
+\DeclareOption{coatings}{\gdef\@journal{coatings}}
+\DeclareOption{computation}{\gdef\@journal{computation}}
+\DeclareOption{computers}{\gdef\@journal{computers}}
+\DeclareOption{condensedmatter}{\gdef\@journal{condensedmatter}}
+\DeclareOption{cosmetics}{\gdef\@journal{cosmetics}}
+\DeclareOption{cryptography}{\gdef\@journal{cryptography}}
+\DeclareOption{crystals}{\gdef\@journal{crystals}}
+\DeclareOption{data}{\gdef\@journal{data}}
+\DeclareOption{dentistry}{\gdef\@journal{dentistry}}
+	\DeclareOption{dentistryjournal}{\gdef\@journal{dentistry}} %to have backwards compatibility 
+\DeclareOption{diagnostics}{\gdef\@journal{diagnostics}}
+\DeclareOption{diseases}{\gdef\@journal{diseases}}
+\DeclareOption{diversity}{\gdef\@journal{diversity}}
+\DeclareOption{econometrics}{\gdef\@journal{econometrics}}
+\DeclareOption{economies}{\gdef\@journal{economies}}
+\DeclareOption{education}{\gdef\@journal{education}}
+	\DeclareOption{educationsciences}{\gdef\@journal{education}} %to have backwards compatibility 
+\DeclareOption{electronics}{\gdef\@journal{electronics}}
+\DeclareOption{energies}{\gdef\@journal{energies}}
+\DeclareOption{entropy}{\gdef\@journal{entropy}}
+\DeclareOption{environments}{\gdef\@journal{environments}}
+\DeclareOption{epigenomes}{\gdef\@journal{epigenomes}}
+\DeclareOption{fermentation}{\gdef\@journal{fermentation}}
+\DeclareOption{fibers}{\gdef\@journal{fibers}}
+\DeclareOption{fishes}{\gdef\@journal{fishes}}
+\DeclareOption{fluids}{\gdef\@journal{fluids}}
+\DeclareOption{foods}{\gdef\@journal{foods}}
+\DeclareOption{forests}{\gdef\@journal{forests}}
+\DeclareOption{futureinternet}{\gdef\@journal{futureinternet}}
+\DeclareOption{galaxies}{\gdef\@journal{galaxies}}
+\DeclareOption{games}{\gdef\@journal{games}}
+\DeclareOption{gels}{\gdef\@journal{gels}}
+\DeclareOption{genealogy}{\gdef\@journal{genealogy}}
+\DeclareOption{genes}{\gdef\@journal{genes}}
+\DeclareOption{geosciences}{\gdef\@journal{geosciences}}
+\DeclareOption{geriatrics}{\gdef\@journal{geriatrics}}
+\DeclareOption{healthcare}{\gdef\@journal{healthcare}}
+\DeclareOption{horticulturae}{\gdef\@journal{horticulturae}}
+\DeclareOption{humanities}{\gdef\@journal{humanities}}
+\DeclareOption{hydrology}{\gdef\@journal{hydrology}}
+\DeclareOption{informatics}{\gdef\@journal{informatics}}
+\DeclareOption{information}{\gdef\@journal{information}}
+\DeclareOption{infrastructures}{\gdef\@journal{infrastructures}}
+\DeclareOption{inorganics}{\gdef\@journal{inorganics}}
+\DeclareOption{insects}{\gdef\@journal{insects}}
+\DeclareOption{instruments}{\gdef\@journal{instruments}}
+\DeclareOption{ijerph}{\gdef\@journal{ijerph}}
+\DeclareOption{ijfs}{\gdef\@journal{ijfs}}
+\DeclareOption{ijms}{\gdef\@journal{ijms}}
+\DeclareOption{ijgi}{\gdef\@journal{ijgi}}
+\DeclareOption{inventions}{\gdef\@journal{inventions}}
+\DeclareOption{jcdd}{\gdef\@journal{jcdd}}
+\DeclareOption{jcm}{\gdef\@journal{jcm}}
+\DeclareOption{jdb}{\gdef\@journal{jdb}}
+\DeclareOption{jfb}{\gdef\@journal{jfb}}
+\DeclareOption{jfmk}{\gdef\@journal{jfmk}}
+\DeclareOption{jof}{\gdef\@journal{jof}}
+\DeclareOption{jimaging}{\gdef\@journal{jimaging}}
+\DeclareOption{jintelligence}{\gdef\@journal{jintelligence}}
+\DeclareOption{jlpea}{\gdef\@journal{jlpea}}
+\DeclareOption{jmse}{\gdef\@journal{jmse}}
+\DeclareOption{jpm}{\gdef\@journal{jpm}}
+\DeclareOption{jrfm}{\gdef\@journal{jrfm}}
+\DeclareOption{jsan}{\gdef\@journal{jsan}}
+\DeclareOption{land}{\gdef\@journal{land}}
+\DeclareOption{languages}{\gdef\@journal{languages}}
+\DeclareOption{laws}{\gdef\@journal{laws}}
+\DeclareOption{life}{\gdef\@journal{life}}
+\DeclareOption{literature}{\gdef\@journal{literature}}
+\DeclareOption{lubricants}{\gdef\@journal{lubricants}}
+\DeclareOption{machines}{\gdef\@journal{machines}}
+\DeclareOption{magnetochemistry}{\gdef\@journal{magnetochemistry}}
+\DeclareOption{marinedrugs}{\gdef\@journal{marinedrugs}}
+\DeclareOption{materials}{\gdef\@journal{materials}}
+\DeclareOption{mathematics}{\gdef\@journal{mathematics}}
+\DeclareOption{medsci}{\gdef\@journal{medsci}}
+	\DeclareOption{medicalsciences}{\gdef\@journal{medsci}} %to have backwards compatibility 
+\DeclareOption{medicines}{\gdef\@journal{medicines}}
+\DeclareOption{membranes}{\gdef\@journal{membranes}}
+\DeclareOption{metabolites}{\gdef\@journal{metabolites}}
+\DeclareOption{metals}{\gdef\@journal{metals}}
+\DeclareOption{microarrays}{\gdef\@journal{microarrays}}
+\DeclareOption{micromachines}{\gdef\@journal{micromachines}}
+\DeclareOption{microorganisms}{\gdef\@journal{microorganisms}}
+\DeclareOption{minerals}{\gdef\@journal{minerals}}
+\DeclareOption{molbank}{\gdef\@journal{molbank}}
+\DeclareOption{molecules}{\gdef\@journal{molecules}}
+\DeclareOption{mps}{\gdef\@journal{mps}}
+\DeclareOption{nanomaterials}{\gdef\@journal{nanomaterials}}
+\DeclareOption{ncrna}{\gdef\@journal{ncrna}}
+\DeclareOption{neonatalscreening}{\gdef\@journal{neonatalscreening}}
+\DeclareOption{nutrients}{\gdef\@journal{nutrients}}
+\DeclareOption{particles}{\gdef\@journal{particles}}
+\DeclareOption{pathogens}{\gdef\@journal{pathogens}}
+\DeclareOption{pharmaceuticals}{\gdef\@journal{pharmaceuticals}}
+\DeclareOption{pharmaceutics}{\gdef\@journal{pharmaceutics}}
+\DeclareOption{pharmacy}{\gdef\@journal{pharmacy}}
+\DeclareOption{philosophies}{\gdef\@journal{philosophies}}
+\DeclareOption{photonics}{\gdef\@journal{photonics}}
+\DeclareOption{plants}{\gdef\@journal{plants}}
+\DeclareOption{polymers}{\gdef\@journal{polymers}}
+\DeclareOption{processes}{\gdef\@journal{processes}}
+\DeclareOption{proteomes}{\gdef\@journal{proteomes}}
+\DeclareOption{publications}{\gdef\@journal{publications}}
+\DeclareOption{recycling}{\gdef\@journal{recycling}}
+\DeclareOption{religions}{\gdef\@journal{religions}}
+\DeclareOption{remotesensing}{\gdef\@journal{remotesensing}}
+\DeclareOption{resources}{\gdef\@journal{resources}}
+\DeclareOption{risks}{\gdef\@journal{risks}}
+\DeclareOption{robotics}{\gdef\@journal{robotics}}
+\DeclareOption{safety}{\gdef\@journal{safety}}
+\DeclareOption{sensors}{\gdef\@journal{sensors}}
+\DeclareOption{sexes}{\gdef\@journal{sexes}}
+\DeclareOption{sinusitis}{\gdef\@journal{sinusitis}}
+\DeclareOption{socsci}{\gdef\@journal{socsci}}
+	\DeclareOption{socialsciences}{\gdef\@journal{socsci}} %to have backwards compatibility 
+\DeclareOption{societies}{\gdef\@journal{societies}}
+\DeclareOption{soils}{\gdef\@journal{soils}}
+\DeclareOption{sports}{\gdef\@journal{sports}}
+\DeclareOption{standards}{\gdef\@journal{standards}}
+\DeclareOption{sustainability}{\gdef\@journal{sustainability}}
+\DeclareOption{symmetry}{\gdef\@journal{symmetry}}
+\DeclareOption{systems}{\gdef\@journal{systems}}
+\DeclareOption{technologies}{\gdef\@journal{technologies}}
+\DeclareOption{toxics}{\gdef\@journal{toxics}}
+\DeclareOption{toxins}{\gdef\@journal{toxins}}
+\DeclareOption{universe}{\gdef\@journal{universe}}
+\DeclareOption{vaccines}{\gdef\@journal{vaccines}}
+\DeclareOption{vetsci}{\gdef\@journal{vetsci}}
+	\DeclareOption{veterinarysciences}{\gdef\@journal{vetsci}} %to have backwards compatibility
+\DeclareOption{viruses}{\gdef\@journal{viruses}}
+\DeclareOption{visions}{\gdef\@journal{visions}}
+\DeclareOption{water}{\gdef\@journal{water}}
 
 %% Uppercase will have the same effect
-\DeclareOption{Actuators}{\gdef\@journal{Actuators}}
-\DeclareOption{Administrativesciences}{\gdef\@journal{AdministrativeSciences}}
-\DeclareOption{Aerospace}{\gdef\@journal{Aerospace}}
-\DeclareOption{Agriculture}{\gdef\@journal{Agriculture}}
-\DeclareOption{Agronomy}{\gdef\@journal{Agronomy}}
-\DeclareOption{Algorithms}{\gdef\@journal{Algorithms}}
-\DeclareOption{Animals}{\gdef\@journal{Animals}}
-\DeclareOption{Antibiotics}{\gdef\@journal{Antibiotics}}
-\DeclareOption{Antibodies}{\gdef\@journal{Antibodies}}
-\DeclareOption{Antioxidants}{\gdef\@journal{Antioxidants}}
-\DeclareOption{Appliedsciences}{\gdef\@journal{AppliedSciences}}
-\DeclareOption{Arts}{\gdef\@journal{Arts}}
-\DeclareOption{Atmosphere}{\gdef\@journal{Atmosphere}}
-\DeclareOption{Atoms}{\gdef\@journal{Atoms}}
-\DeclareOption{Axioms}{\gdef\@journal{Axioms}}
-\DeclareOption{Batteries}{\gdef\@journal{Batteries}}
-\DeclareOption{Behavioralsciences}{\gdef\@journal{BehavioralSciences}}
-\DeclareOption{Bioengineering}{\gdef\@journal{Bioengineering}}
-\DeclareOption{Biology}{\gdef\@journal{Biology}}
-\DeclareOption{Biomedicines}{\gdef\@journal{Biomedicines}}
-\DeclareOption{Biomimetics}{\gdef\@journal{Biomimetics}}
-\DeclareOption{Biomolecules}{\gdef\@journal{Biomolecules}}
-\DeclareOption{Biosensors}{\gdef\@journal{Biosensors}}
-\DeclareOption{Brainsciences}{\gdef\@journal{BrainSciences}}
-\DeclareOption{Buildings}{\gdef\@journal{Buildings}}
-\DeclareOption{Cancers}{\gdef\@journal{Cancers}}
-\DeclareOption{Catalysts}{\gdef\@journal{Catalysts}}
-\DeclareOption{Cells}{\gdef\@journal{Cells}}
-\DeclareOption{Challenges}{\gdef\@journal{Challenges}}
-\DeclareOption{Chemosensors}{\gdef\@journal{Chemosensors}}
-\DeclareOption{Children}{\gdef\@journal{Children}}
-\DeclareOption{Chromatography}{\gdef\@journal{Chromatography}}
-\DeclareOption{Climate}{\gdef\@journal{Climate}}
-\DeclareOption{Coatings}{\gdef\@journal{Coatings}}
-\DeclareOption{Computation}{\gdef\@journal{Computation}}
-\DeclareOption{Computers}{\gdef\@journal{Computers}}
-\DeclareOption{Cosmetics}{\gdef\@journal{Cosmetics}}
-\DeclareOption{Crystals}{\gdef\@journal{Crystals}}
-\DeclareOption{Data}{\gdef\@journal{Data}}
-\DeclareOption{Dentistryjournal}{\gdef\@journal{DentistryJournal}}
-\DeclareOption{Diagnostics}{\gdef\@journal{Diagnostics}}
-\DeclareOption{Diseases}{\gdef\@journal{Diseases}}
-\DeclareOption{Diversity}{\gdef\@journal{Diversity}}
-\DeclareOption{Econometrics}{\gdef\@journal{Econometrics}}
-\DeclareOption{Economies}{\gdef\@journal{Economies}}
-\DeclareOption{Education}{\gdef\@journal{Education}}
-\DeclareOption{Electronics}{\gdef\@journal{Electronics}}
-\DeclareOption{Energies}{\gdef\@journal{Energies}}
-\DeclareOption{Entropy}{\gdef\@journal{Entropy}}
-\DeclareOption{Environmentalsciences}{\gdef\@journal{EnvironmentalSciences}}
-\DeclareOption{Environments}{\gdef\@journal{Environments}}
-\DeclareOption{Epigenomes}{\gdef\@journal{Epigenomes}}
-\DeclareOption{Fibers}{\gdef\@journal{Fibers}}
-\DeclareOption{Foods}{\gdef\@journal{Foods}}
-\DeclareOption{Forests}{\gdef\@journal{Forests}}
-\DeclareOption{Futureinternet}{\gdef\@journal{FutureInternet}}
-\DeclareOption{Galaxies}{\gdef\@journal{Galaxies}}
-\DeclareOption{Games}{\gdef\@journal{Games}}
-\DeclareOption{Gels}{\gdef\@journal{Gels}}
-\DeclareOption{Genealogy}{\gdef\@journal{Genealogy}}
-\DeclareOption{Genes}{\gdef\@journal{Genes}}
-\DeclareOption{Geosciences}{\gdef\@journal{Geosciences}}
-\DeclareOption{Healthcare}{\gdef\@journal{Healthcare}}
-\DeclareOption{Horticulturae}{\gdef\@journal{Horticulturae}}
-\DeclareOption{Humanities}{\gdef\@journal{Humanities}}
-\DeclareOption{Hydrology}{\gdef\@journal{Hydrology}}
-\DeclareOption{Informatics}{\gdef\@journal{Informatics}}
-\DeclareOption{Information}{\gdef\@journal{Information}}
-\DeclareOption{Inorganics}{\gdef\@journal{Inorganics}}
-\DeclareOption{Insects}{\gdef\@journal{Insects}}
-\DeclareOption{Ijerph}{\gdef\@journal{Ijerph}}
-\DeclareOption{Ijfs}{\gdef\@journal{Ijfs}}
-\DeclareOption{Ijms}{\gdef\@journal{Ijms}}
-\DeclareOption{Ijgi}{\gdef\@journal{Ijgi}}
-\DeclareOption{Jcdd}{\gdef\@journal{Jcdd}}
-\DeclareOption{Jcm}{\gdef\@journal{Jcm}}
-\DeclareOption{Jdb}{\gdef\@journal{Jdb}}
-\DeclareOption{Jfb}{\gdef\@journal{Jfb}}
-\DeclareOption{Jof}{\gdef\@journal{Jof}}
-\DeclareOption{Jimaging}{\gdef\@journal{Jimaging}}
-\DeclareOption{Joi}{\gdef\@journal{Joi}}
-\DeclareOption{Jlpea}{\gdef\@journal{Jlpea}}
-\DeclareOption{Jmse}{\gdef\@journal{Jmse}}
-\DeclareOption{Jpm}{\gdef\@journal{Jpm}}
-\DeclareOption{Jrfm}{\gdef\@journal{Jrfm}}
-\DeclareOption{Jsan}{\gdef\@journal{Jsan}}
-\DeclareOption{Land}{\gdef\@journal{Land}}
-\DeclareOption{Laws}{\gdef\@journal{Laws}}
-\DeclareOption{Life}{\gdef\@journal{Life}}
-\DeclareOption{Lubricants}{\gdef\@journal{Lubricants}}
-\DeclareOption{Machines}{\gdef\@journal{Machines}}
-\DeclareOption{Magnetochemistry}{\gdef\@journal{Magnetochemistry}}
-\DeclareOption{MarineDrugs}{\gdef\@journal{MarineDrugs}}
-\DeclareOption{Materials}{\gdef\@journal{Materials}}
-\DeclareOption{Mathematics}{\gdef\@journal{Mathematics}}
-\DeclareOption{Medicalsciences}{\gdef\@journal{MedicalSciences}}
-\DeclareOption{Membranes}{\gdef\@journal{Membranes}}
-\DeclareOption{Metabolites}{\gdef\@journal{Metabolites}}
-\DeclareOption{Metals}{\gdef\@journal{Metals}}
-\DeclareOption{Microarrays}{\gdef\@journal{Microarrays}}
-\DeclareOption{Micromachines}{\gdef\@journal{Micromachines}}
-\DeclareOption{Microorganisms}{\gdef\@journal{Microorganisms}}
-\DeclareOption{Minerals}{\gdef\@journal{Minerals}}
-\DeclareOption{Molbank}{\gdef\@journal{Molbank}}
-\DeclareOption{Molecules}{\gdef\@journal{Molecules}}
-\DeclareOption{Nanomaterials}{\gdef\@journal{Nanomaterials}}
-\DeclareOption{ncRNA}{\gdef\@journal{Ncrna}}
-\DeclareOption{Nutrients}{\gdef\@journal{Nutrients}}
-\DeclareOption{Pathogens}{\gdef\@journal{Pathogens}}
-\DeclareOption{Pharmaceuticals}{\gdef\@journal{Pharmaceuticals}}
-\DeclareOption{Pharmaceutics}{\gdef\@journal{Pharmaceutics}}
-\DeclareOption{Pharmacy}{\gdef\@journal{Pharmacy}}
-\DeclareOption{Photonics}{\gdef\@journal{Photonics}}
-\DeclareOption{Plants}{\gdef\@journal{Plants}}
-\DeclareOption{Polymers}{\gdef\@journal{Polymers}}
-\DeclareOption{Processes}{\gdef\@journal{Processes}}
-\DeclareOption{Proteomes}{\gdef\@journal{Proteomes}}
-\DeclareOption{Publications}{\gdef\@journal{Publications}}
-\DeclareOption{Religions}{\gdef\@journal{Religions}}
-\DeclareOption{RemoteSensing}{\gdef\@journal{RemoteSensing}}
-\DeclareOption{Resources}{\gdef\@journal{Resources}}
-\DeclareOption{Risks}{\gdef\@journal{Risks}}
-\DeclareOption{Robotics}{\gdef\@journal{Robotics}}
-\DeclareOption{Safety}{\gdef\@journal{Safety}}
-\DeclareOption{Sensors}{\gdef\@journal{Sensors}}
-\DeclareOption{Sinusitis}{\gdef\@journal{Sinusitis}}
-\DeclareOption{SocialSciences}{\gdef\@journal{SocialSciences}}
-\DeclareOption{Societies}{\gdef\@journal{Societies}}
-\DeclareOption{Sports}{\gdef\@journal{Sports}}
-\DeclareOption{Standards}{\gdef\@journal{Standards}}
-\DeclareOption{Sustainability}{\gdef\@journal{Sustainability}}
-\DeclareOption{Symmetry}{\gdef\@journal{Symmetry}}
-\DeclareOption{Systems}{\gdef\@journal{Systems}}
-\DeclareOption{Technologies}{\gdef\@journal{Technologies}}
-\DeclareOption{Toxics}{\gdef\@journal{Toxics}}
-\DeclareOption{Toxins}{\gdef\@journal{Toxins}}
-\DeclareOption{Universe}{\gdef\@journal{Universe}}
-\DeclareOption{Vaccines}{\gdef\@journal{Vaccines}}
-\DeclareOption{VeterinarySciences}{\gdef\@journal{VeterinarySciences}}
-\DeclareOption{Viruses}{\gdef\@journal{Viruses}}
-\DeclareOption{Water}{\gdef\@journal{Water}}
-\DeclareOption{journal}{\ClassWarning{mdpi}{You have not specified the journal. The first class option of the document class mdpi specifies the journal. The word journal should be replaced by one of the following journal names: actuators, administrativesciences, aerospace, agriculture, agronomy, algorithms, animals, antibiotics, antibodies, antioxidants, appliedsciences, arts, atmosphere, atoms, axioms, batteries, behavioralsciences, bioengineering, biology, biomedicines, biomimetics, biomolecules, biosensors, brainsciences, buildings, cancers, catalysts, cells, challenges, chemosensors, children, chromatography, climate, coatings, computation, computers, cosmetics, crystals, data, dentistryjournal, diagnostics, diseases, diversity, econometrics, economies, education, electronics, energies, entropy, environmentalsciences, environments, epigenomes, fibers, foods, forests, futureinternet, galaxies, games, gels, genealogy, genes, geosciences, healthcare, horticulturae, humanities, hydrology, informatics, information, inorganics, insects, ijerph, ijfs, ijms, ijgi, jcdd, jcm, jdb, jfb, jof, jimaging, joi, jlpea, jmse, jpm, jrfm, jsan, land, laws, life, lubricants, machines, magnetochemistry, marinedrugs, materials, mathematics, medicalsciences, membranes, metabolites, metals, microarrays, micromachines, microorganisms, minerals, molbank, molecules, nanomaterials, ncrna, nutrients, pathogens, pharmaceuticals, pharmaceutics, pharmacy, photonics, plants, polymers, processes, proteomes, publications, religions, remotesensing, resources, risks, robotics, safety, sensors, sinusitis, socialsciences, societies, sports, standards, sustainability, symmetry, systems, technologies, toxics, toxins, universe, vaccines, veterinarysciences, viruses, water}}
+\DeclareOption{Actuators}{\gdef\@journal{actuators}}
+\DeclareOption{Admsci}{\gdef\@journal{admsci}}
+	\DeclareOption{Administrativesciences}{\gdef\@journal{admsci}} %to have backwards compatibility
+\DeclareOption{Aerospace}{\gdef\@journal{aerospace}}
+\DeclareOption{Agriculture}{\gdef\@journal{agriculture}}
+\DeclareOption{Agronomy}{\gdef\@journal{agronomy}}
+\DeclareOption{Algorithms}{\gdef\@journal{algorithms}}
+\DeclareOption{Animals}{\gdef\@journal{animals}}
+\DeclareOption{Antibiotics}{\gdef\@journal{antibiotics}}
+\DeclareOption{Antibodies}{\gdef\@journal{antibodies}}
+\DeclareOption{Antioxidants}{\gdef\@journal{antioxidants}}
+\DeclareOption{Applsci}{\gdef\@journal{applsci}}
+	\DeclareOption{Appliedsciences}{\gdef\@journal{applsci}} %to have backwards compatibility
+\DeclareOption{Arts}{\gdef\@journal{arts}}
+\DeclareOption{Atmosphere}{\gdef\@journal{atmosphere}}
+\DeclareOption{Atoms}{\gdef\@journal{atoms}}
+\DeclareOption{Axioms}{\gdef\@journal{axioms}}
+\DeclareOption{Batteries}{\gdef\@journal{batteries}}
+\DeclareOption{Behavsci}{\gdef\@journal{behavsci}}
+	\DeclareOption{Behavioralsciences}{\gdef\@journal{behavsci}} %to have backwards compatibility
+\DeclareOption{Beverages}{\gdef\@journal{beverages}}
+\DeclareOption{Bioengineering}{\gdef\@journal{bioengineering}}
+\DeclareOption{Biology}{\gdef\@journal{biology}}
+\DeclareOption{Biomedicines}{\gdef\@journal{biomedicines}}
+\DeclareOption{Biomimetics}{\gdef\@journal{biomimetics}}
+\DeclareOption{Biomolecules}{\gdef\@journal{biomolecules}}
+\DeclareOption{Biosensors}{\gdef\@journal{biosensors}}
+\DeclareOption{Brainsci}{\gdef\@journal{brainsci}}
+	\DeclareOption{Brainsciences}{\gdef\@journal{brainsci}} %to have backwards compatibility
+\DeclareOption{Buildings}{\gdef\@journal{buildings}}
+\DeclareOption{C}{\gdef\@journal{c}}
+\DeclareOption{Cancers}{\gdef\@journal{cancers}}
+\DeclareOption{Catalysts}{\gdef\@journal{catalysts}}
+\DeclareOption{Cells}{\gdef\@journal{cells}}
+\DeclareOption{Challenges}{\gdef\@journal{challenges}}
+\DeclareOption{Chemosensors}{\gdef\@journal{chemosensors}}
+\DeclareOption{Children}{\gdef\@journal{children}}
+\DeclareOption{Chromatography}{\gdef\@journal{chromatography}}
+\DeclareOption{Climate}{\gdef\@journal{climate}}
+\DeclareOption{Coatings}{\gdef\@journal{coatings}}
+\DeclareOption{Computation}{\gdef\@journal{computation}}
+\DeclareOption{Computers}{\gdef\@journal{computers}}
+\DeclareOption{Condensedmatter}{\gdef\@journal{condensedmatter}}
+\DeclareOption{Cosmetics}{\gdef\@journal{cosmetics}}
+\DeclareOption{Cryptography}{\gdef\@journal{cryptography}}
+\DeclareOption{Crystals}{\gdef\@journal{crystals}}
+\DeclareOption{Data}{\gdef\@journal{data}}
+\DeclareOption{Dentistry}{\gdef\@journal{dentistry}}
+	\DeclareOption{Dentistryjournal}{\gdef\@journal{dentistry}} %to have backwards compatibility
+\DeclareOption{Diagnostics}{\gdef\@journal{diagnostics}}
+\DeclareOption{Diseases}{\gdef\@journal{diseases}}
+\DeclareOption{Diversity}{\gdef\@journal{diversity}}
+\DeclareOption{Econometrics}{\gdef\@journal{econometrics}}
+\DeclareOption{Economies}{\gdef\@journal{economies}}
+\DeclareOption{Education}{\gdef\@journal{education}}
+	\DeclareOption{Educationsciences}{\gdef\@journal{education}} %to have backwards compatibility
+\DeclareOption{Electronics}{\gdef\@journal{electronics}}
+\DeclareOption{Energies}{\gdef\@journal{energies}}
+\DeclareOption{Entropy}{\gdef\@journal{entropy}}
+\DeclareOption{Environments}{\gdef\@journal{environments}}
+\DeclareOption{Epigenomes}{\gdef\@journal{epigenomes}}
+\DeclareOption{Fermentation}{\gdef\@journal{fermentation}}
+\DeclareOption{Fibers}{\gdef\@journal{fibers}}
+\DeclareOption{Fishes}{\gdef\@journal{fishes}}
+\DeclareOption{Fluids}{\gdef\@journal{fluids}}
+\DeclareOption{Foods}{\gdef\@journal{foods}}
+\DeclareOption{Forests}{\gdef\@journal{forests}}
+\DeclareOption{Futureinternet}{\gdef\@journal{futureinternet}}
+\DeclareOption{Galaxies}{\gdef\@journal{galaxies}}
+\DeclareOption{Games}{\gdef\@journal{games}}
+\DeclareOption{Gels}{\gdef\@journal{gels}}
+\DeclareOption{Genealogy}{\gdef\@journal{genealogy}}
+\DeclareOption{Genes}{\gdef\@journal{genes}}
+\DeclareOption{Geosciences}{\gdef\@journal{geosciences}}
+\DeclareOption{Geriatrics}{\gdef\@journal{geriatrics}}
+\DeclareOption{Healthcare}{\gdef\@journal{healthcare}}
+\DeclareOption{Horticulturae}{\gdef\@journal{horticulturae}}
+\DeclareOption{Humanities}{\gdef\@journal{humanities}}
+\DeclareOption{Hydrology}{\gdef\@journal{hydrology}}
+\DeclareOption{Informatics}{\gdef\@journal{informatics}}
+\DeclareOption{Information}{\gdef\@journal{information}}
+\DeclareOption{Infrastructures}{\gdef\@journal{infrastructures}}
+\DeclareOption{Inorganics}{\gdef\@journal{inorganics}}
+\DeclareOption{Insects}{\gdef\@journal{insects}}
+\DeclareOption{Instruments}{\gdef\@journal{instruments}}
+\DeclareOption{Ijerph}{\gdef\@journal{ijerph}}
+\DeclareOption{Ijfs}{\gdef\@journal{ijfs}}
+\DeclareOption{Ijms}{\gdef\@journal{ijms}}
+\DeclareOption{Ijgi}{\gdef\@journal{ijgi}}
+\DeclareOption{Inventions}{\gdef\@journal{inventions}}
+\DeclareOption{Jcdd}{\gdef\@journal{jcdd}}
+\DeclareOption{Jcm}{\gdef\@journal{jcm}}
+\DeclareOption{Jdb}{\gdef\@journal{jdb}}
+\DeclareOption{Jfb}{\gdef\@journal{jfb}}
+\DeclareOption{Jmk}{\gdef\@journal{jfmk}}
+\DeclareOption{Jof}{\gdef\@journal{jof}}
+\DeclareOption{Jimaging}{\gdef\@journal{jimaging}}
+\DeclareOption{Jintelligence}{\gdef\@journal{jintelligence}}
+\DeclareOption{Jlpea}{\gdef\@journal{jlpea}}
+\DeclareOption{Jmse}{\gdef\@journal{jmse}}
+\DeclareOption{Jpm}{\gdef\@journal{jpm}}
+\DeclareOption{Jrfm}{\gdef\@journal{jrfm}}
+\DeclareOption{Jsan}{\gdef\@journal{jsan}}
+\DeclareOption{Land}{\gdef\@journal{land}}
+\DeclareOption{Languages}{\gdef\@journal{languages}}
+\DeclareOption{Laws}{\gdef\@journal{laws}}
+\DeclareOption{Life}{\gdef\@journal{life}}
+\DeclareOption{Literature}{\gdef\@journal{literature}}
+\DeclareOption{Lubricants}{\gdef\@journal{lubricants}}
+\DeclareOption{Machines}{\gdef\@journal{machines}}
+\DeclareOption{Magnetochemistry}{\gdef\@journal{magnetochemistry}}
+\DeclareOption{MarineDrugs}{\gdef\@journal{marinedrugs}}
+\DeclareOption{Materials}{\gdef\@journal{materials}}
+\DeclareOption{Mathematics}{\gdef\@journal{mathematics}}
+\DeclareOption{Medsci}{\gdef\@journal{medsci}}
+	\DeclareOption{Medicalsciences}{\gdef\@journal{medsci}} %to have backwards compatibility
+\DeclareOption{Medicines}{\gdef\@journal{medicines}}
+\DeclareOption{Membranes}{\gdef\@journal{membranes}}
+\DeclareOption{Metabolites}{\gdef\@journal{metabolites}}
+\DeclareOption{Metals}{\gdef\@journal{metals}}
+\DeclareOption{Microarrays}{\gdef\@journal{microarrays}}
+\DeclareOption{Micromachines}{\gdef\@journal{micromachines}}
+\DeclareOption{Microorganisms}{\gdef\@journal{microorganisms}}
+\DeclareOption{Minerals}{\gdef\@journal{minerals}}
+\DeclareOption{Molbank}{\gdef\@journal{molbank}}
+\DeclareOption{Molecules}{\gdef\@journal{molecules}}
+\DeclareOption{Mps}{\gdef\@journal{mps}}
+\DeclareOption{Nanomaterials}{\gdef\@journal{nanomaterials}}
+\DeclareOption{ncRNA}{\gdef\@journal{ncrna}}
+\DeclareOption{Neonatalscreening}{\gdef\@journal{neonatalscreening}}
+\DeclareOption{Nutrients}{\gdef\@journal{nutrients}}
+\DeclareOption{Particles}{\gdef\@journal{particles}}
+\DeclareOption{Pathogens}{\gdef\@journal{pathogens}}
+\DeclareOption{Pharmaceuticals}{\gdef\@journal{pharmaceuticals}}
+\DeclareOption{Pharmaceutics}{\gdef\@journal{pharmaceutics}}
+\DeclareOption{Pharmacy}{\gdef\@journal{pharmacy}}
+\DeclareOption{Philosophies}{\gdef\@journal{philosophies}}
+\DeclareOption{Photonics}{\gdef\@journal{photonics}}
+\DeclareOption{Plants}{\gdef\@journal{plants}}
+\DeclareOption{Polymers}{\gdef\@journal{polymers}}
+\DeclareOption{Processes}{\gdef\@journal{processes}}
+\DeclareOption{Proteomes}{\gdef\@journal{proteomes}}
+\DeclareOption{Publications}{\gdef\@journal{publications}}
+\DeclareOption{Recycling}{\gdef\@journal{recycling}}
+\DeclareOption{Religions}{\gdef\@journal{religions}}
+\DeclareOption{RemoteSensing}{\gdef\@journal{remotesensing}}
+\DeclareOption{Resources}{\gdef\@journal{resources}}
+\DeclareOption{Risks}{\gdef\@journal{risks}}
+\DeclareOption{Robotics}{\gdef\@journal{robotics}}
+\DeclareOption{Safety}{\gdef\@journal{safety}}
+\DeclareOption{Sensors}{\gdef\@journal{sensors}}
+\DeclareOption{Sexes}{\gdef\@journal{sexes}}
+\DeclareOption{Sinusitis}{\gdef\@journal{sinusitis}}
+\DeclareOption{Socsci}{\gdef\@journal{socsci}}
+	\DeclareOption{SocialSciences}{\gdef\@journal{socsci}} %to have backwards compatibility
+\DeclareOption{Societies}{\gdef\@journal{societies}}
+\DeclareOption{Soils}{\gdef\@journal{soils}}
+\DeclareOption{Sports}{\gdef\@journal{sports}}
+\DeclareOption{Standards}{\gdef\@journal{standards}}
+\DeclareOption{Sustainability}{\gdef\@journal{sustainability}}
+\DeclareOption{Symmetry}{\gdef\@journal{symmetry}}
+\DeclareOption{Systems}{\gdef\@journal{systems}}
+\DeclareOption{Technologies}{\gdef\@journal{technologies}}
+\DeclareOption{Toxics}{\gdef\@journal{toxics}}
+\DeclareOption{Toxins}{\gdef\@journal{toxins}}
+\DeclareOption{Universe}{\gdef\@journal{universe}}
+\DeclareOption{Vaccines}{\gdef\@journal{vaccines}}
+\DeclareOption{Vetsci}{\gdef\@journal{vetsci}}
+	\DeclareOption{VeterinarySciences}{\gdef\@journal{vetsci}} %to have backwards compatibility
+\DeclareOption{Viruses}{\gdef\@journal{viruses}}
+\DeclareOption{Visions}{\gdef\@journal{visions}}
+\DeclareOption{Water}{\gdef\@journal{water}}
+\DeclareOption{journal}{\ClassWarning{mdpi}{You have not specified the journal. The first class option of the document class mdpi specifies the journal. The word journal should be replaced by one of the following journal names: actuators, admsci, aerospace, agriculture, agronomy, algorithms, animals, antibiotics, antibodies, antioxidants, applsci, arts, atmosphere, atoms, axioms, batteries, behavsci, beverages, bioengineering, biology, biomedicines, biomimetics, biomolecules, biosensors, brainsci, buildings, c, cancers, catalysts, cells, challenges, chemosensors, children, chromatography, climate, coatings, computation, computers, condensedmatter, cosmetics, cryptography, crystals, data, dentistry, diagnostics, diseases, diversity, econometrics, economies, education, electronics, energies, entropy, environments, epigenomes, fermentation, fibers, fishes, fluids, foods, forests, futureinternet, galaxies, games, gels, genealogy, genes, geosciences, geriatrics, healthcare, horticulturae, humanities, hydrology, informatics, information, infrastructures, inorganics, insects, instruments, ijerph, ijfs, ijms, ijgi, inventions, jcdd, jcm, jdb, jfb, jfmk, jimaging, jof, jintelligence, jlpea, jmse, jpm, jrfm, jsan, land, languages, laws, life, literature, lubricants, machines, magnetochemistry, marinedrugs, materials, mathematics, medsci, medicines, membranes, metabolites, metals, microarrays, micromachines, microorganisms, minerals, molbank, molecules, mps, nanomaterials, ncrna, neonatalscreening, nutrients, particles, pathogens, pharmaceuticals, pharmaceutics, pharmacy, philosophies, photonics, plants, polymers, processes, proteomes, publications, recycling, religions, remotesensing, resources, risks, robotics, safety, sensors, sexes, sinusitis, socsci, societies, soils, sports, standards, sustainability, symmetry, systems, technologies, toxics, toxins, universe, vaccines, vetsci, viruses, visions, water}} 
 
 %% To choose the type of manuscript
-\DeclareOption{article}{\gdef\@arttype{Article}}
-\DeclareOption{review}{\gdef\@arttype{Review}}
-\DeclareOption{communication}{\gdef\@arttype{Communication}}
-\DeclareOption{commentary}{\gdef\@arttype{Commentary}}
-\DeclareOption{bookreview}{\gdef\@arttype{Book Review}}
-\DeclareOption{correction}{\gdef\@arttype{Correction}}
 \DeclareOption{addendum}{\gdef\@arttype{Addendum}}
-\DeclareOption{editorial}{\gdef\@arttype{Editorial}}
-\DeclareOption{changes}{\gdef\@arttype{Changes}}
-\DeclareOption{supfile}{\gdef\@arttype{Supfile}}
+\DeclareOption{article}{\gdef\@arttype{Article}}
+\DeclareOption{bookreview}{\gdef\@arttype{Book Review}}
+\DeclareOption{briefreport}{\gdef\@arttype{Brief Report}}
 \DeclareOption{casereport}{\gdef\@arttype{Case Report}}
+\DeclareOption{changes}{\gdef\@arttype{Changes}}
 \DeclareOption{comment}{\gdef\@arttype{Comment}}
+\DeclareOption{commentary}{\gdef\@arttype{Commentary}}
+\DeclareOption{communication}{\gdef\@arttype{Communication}}
 \DeclareOption{conceptpaper}{\gdef\@arttype{Concept Paper}}
+\DeclareOption{correction}{\gdef\@arttype{Correction}}
 \DeclareOption{conferencereport}{\gdef\@arttype{Conference Report}}
 \DeclareOption{meetingreport}{\gdef\@arttype{Meeting Report}}
+\DeclareOption{creative}{\gdef\@arttype{Creative}}
+\DeclareOption{datadescriptor}{\gdef\@arttype{Data Descriptor}}
 \DeclareOption{discussion}{\gdef\@arttype{Discussion}}
+\DeclareOption{editorial}{\gdef\@arttype{Editorial}}
 \DeclareOption{essay}{\gdef\@arttype{Essay}}
+\DeclareOption{erratum}{\gdef\@arttype{Erratum}}
+\DeclareOption{hypothesis}{\gdef\@arttype{Hypothesis}}
+\DeclareOption{interestingimage}{\gdef\@arttype{Interesting Image}}
 \DeclareOption{letter}{\gdef\@arttype{Letter}}
 \DeclareOption{newbookreceived}{\gdef\@arttype{New Book Received}}
+\DeclareOption{obituary}{\gdef\@arttype{Obituary}}
 \DeclareOption{opinion}{\gdef\@arttype{Opinion}}
 \DeclareOption{projectreport}{\gdef\@arttype{Project Report}}
 \DeclareOption{reply}{\gdef\@arttype{Reply}}
 \DeclareOption{retraction}{\gdef\@arttype{Retraction}}
+\DeclareOption{review}{\gdef\@arttype{Review}}
 \DeclareOption{shortnote}{\gdef\@arttype{Short Note}}
+\DeclareOption{supfile}{\gdef\@arttype{Supfile}}
 \DeclareOption{technicalnote}{\gdef\@arttype{Technical Note}}
-\DeclareOption{creative}{\gdef\@arttype{Creative}}
-\DeclareOption{datadescriptor}{\gdef\@arttype{Data Descriptor}}
 
 %% To choose the status of the manuscript
 \DeclareOption{submit}{\gdef\@status{submit}}
@@ -342,33 +430,25 @@
 %% To choose the whether there is one or more authors
 \DeclareOption{oneauthor}{\gdef\@authornum{author}}
 \DeclareOption{moreauthors}{\gdef\@authornum{authors}}
-\DeclareOption{10pt}{\OptionNotUsed}
-\DeclareOption{twocolumn}{\OptionNotUsed}
+
+%% Add the chosen options to the class
 \DeclareOption*{\PassOptionsToClass{\CurrentOption}{article}}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\ExecuteOptions{entropy,12pt,a4paper,article,submit,oneauthor}
+%% Defaults
+\ExecuteOptions{entropy,10pt,a4paper,article,submit,oneauthor}
+
+%% Process options
 \ProcessOptions\relax
 
-\LoadClass[12pt]{article}
+%% MORE DECLARATIONS
 
-\RequirePackage{calc}
-\RequirePackage{indentfirst}
-\RequirePackage{times,fancyhdr}
-\RequirePackage{graphicx}
-\RequirePackage{lastpage}
-\RequirePackage{ifthen}
-\RequirePackage{lineno}
-\RequirePackage{float}
-\RequirePackage{amsmath}
-
-%% Definition of mathematics environments like theorems, propositions, and lemmas
+%%%% Maths environments
 \RequirePackage{amsthm}
 \newtheoremstyle{mdpi}% name
 {12pt}% space above
 {12pt}% space below
 {\itshape}% body font
-{}% hndent amount 1
+{}% indent amount 1
 {\bfseries}% theorem head font
 {.}% punctuation after theorem head
 {.5em}% space after theorem head
@@ -384,9 +464,7 @@
 {.5em}% space after theorem head
 {}% theorem head spec (can be left empty, meaning `normal')
 
-%% Adjustments in the proof environment (corresponding to the MDPI Word template)
 \renewcommand{\qed}{\unskip\nobreak\quad\qedsymbol} %% This places the symbol right after the text instead of placing it at the end on the line.
-
 
 \renewenvironment{proof}[1][\proofname]{\par %% \proofname allows to have "Proof of my theorem"
   \pushQED{\qed}%
@@ -399,156 +477,13 @@
   \popQED\endtrivlist\@endpefalse
 }
 
-\RequirePackage{color}
-\ifthenelse{\equal{\@journal}{Actuators}}{\definecolor{logocolor}{rgb}{0.02,0.37,0.035}}{}%
-\ifthenelse{\equal{\@journal}{AdministrativeSciences}}{\definecolor{logocolor}{rgb}{0.31,0.51,0.60}}{}%
-\ifthenelse{\equal{\@journal}{Aerospace}}{\definecolor{logocolor}{rgb}{0.0,0.126,0.375}}{}%
-\ifthenelse{\equal{\@journal}{Agriculture}}{\definecolor{logocolor}{rgb}{0.23,0.42,0.18}}{}%
-\ifthenelse{\equal{\@journal}{Agronomy}}{\definecolor{logocolor}{rgb}{0.21,0.31,0.09}}{}%
-\ifthenelse{\equal{\@journal}{Algorithms}}{\definecolor{logocolor}{rgb}{0.31,0.46,0}}{}%
-\ifthenelse{\equal{\@journal}{Animals}}{\definecolor{logocolor}{rgb}{0.05,0.26,0.44}}{}%
-\ifthenelse{\equal{\@journal}{Antibiotics}}{\definecolor{logocolor}{rgb}{0.332,0,0}}{}%
-\ifthenelse{\equal{\@journal}{Antibodies}}{\definecolor{logocolor}{rgb}{0.4,0.0,0.4}}{}%
-\ifthenelse{\equal{\@journal}{Antioxidants}}{\definecolor{logocolor}{rgb}{0.278,0.129,0.573}}{}%
-\ifthenelse{\equal{\@journal}{AppliedSciences}}{\definecolor{logocolor}{rgb}{0.29,0.29,0.5}}{}%
-\ifthenelse{\equal{\@journal}{Arts}}{\definecolor{logocolor}{rgb}{0.066,0.457,0.711}}{}%
-\ifthenelse{\equal{\@journal}{Atmosphere}}{\definecolor{logocolor}{rgb}{0.2,0.2,0.6}}{}%
-\ifthenelse{\equal{\@journal}{Atoms}}{\definecolor{logocolor}{rgb}{0.0,0.13,0.17}}{}%
-\ifthenelse{\equal{\@journal}{Axioms}}{\definecolor{logocolor}{rgb}{0.51,0.56,0.21}}{}%
-\ifthenelse{\equal{\@journal}{Batteries}}{\definecolor{logocolor}{rgb}{0.109,0.598,0.234}}{}%
-\ifthenelse{\equal{\@journal}{BehavioralSciences}}{\definecolor{logocolor}{rgb}{0,0.31,0.44}}{}%
-\ifthenelse{\equal{\@journal}{Bioengineering}}{\definecolor{logocolor}{rgb}{0.0,0.434,0.07}}{}%
-\ifthenelse{\equal{\@journal}{Biology}}{\definecolor{logocolor}{rgb}{0.16,0.19,0.45}}{}%
-\ifthenelse{\equal{\@journal}{Biomedicines}}{\definecolor{logocolor}{rgb}{0.078,0.25,0.60}}{}%
-\ifthenelse{\equal{\@journal}{Biomimetics}}{\definecolor{logocolor}{rgb}{0.149,0.196,0.09}}{}%
-\ifthenelse{\equal{\@journal}{Biomolecules}}{\definecolor{logocolor}{rgb}{0.22,0.44,0.13}}{}%
-\ifthenelse{\equal{\@journal}{Biosensors}}{\definecolor{logocolor}{rgb}{0.16,0.37,0.27}}{}%
-\ifthenelse{\equal{\@journal}{BrainSciences}}{\definecolor{logocolor}{rgb}{0,0.36,0.44}}{}%
-\ifthenelse{\equal{\@journal}{Buildings}}{\definecolor{logocolor}{rgb}{0.4,0.4,0.2}}{}%
-\ifthenelse{\equal{\@journal}{Cancers}}{\definecolor{logocolor}{rgb}{0,0.20,0.60}}{}%
-\ifthenelse{\equal{\@journal}{Catalysts}}{\definecolor{logocolor}{rgb}{0.5,0.24,0.03}}{}%
-\ifthenelse{\equal{\@journal}{Cells}}{\definecolor{logocolor}{rgb}{0.09,0.33,0.75}}{}%
-\ifthenelse{\equal{\@journal}{Challenges}}{\definecolor{logocolor}{rgb}{0.13,0.44,0.23}}{}%
-\ifthenelse{\equal{\@journal}{Chemosensors}}{\definecolor{logocolor}{rgb}{0.0,0.498,0.498}}{}%
-\ifthenelse{\equal{\@journal}{Children}}{\definecolor{logocolor}{rgb}{0.114,0.494,0.631}}{}%
-\ifthenelse{\equal{\@journal}{Chromatography}}{\definecolor{logocolor}{rgb}{0.337,0.267,0.267}}{}%
-\ifthenelse{\equal{\@journal}{Climate}}{\definecolor{logocolor}{rgb}{0.165,0.298,0.714}}{}%
-\ifthenelse{\equal{\@journal}{Coatings}}{\definecolor{logocolor}{rgb}{0.25,0.16,0.02}}{}%
-\ifthenelse{\equal{\@journal}{Computation}}{\definecolor{logocolor}{rgb}{0.392,0.4,0.180}}{}%
-\ifthenelse{\equal{\@journal}{Computers}}{\definecolor{logocolor}{rgb}{0.4,0.4,0}}{}%
-\ifthenelse{\equal{\@journal}{Cosmetics}}{\definecolor{logocolor}{rgb}{0.153,0.627,0.49}}{}%
-\ifthenelse{\equal{\@journal}{Crystals}}{\definecolor{logocolor}{rgb}{0.21,0.43,0.69}}{}%
-\ifthenelse{\equal{\@journal}{Data}}{\definecolor{logocolor}{rgb}{0.219,0.215,0.496}}{}%
-\ifthenelse{\equal{\@journal}{DentistryJournal}}{\definecolor{logocolor}{rgb}{0.664, 0.266,0}}{}%
-\ifthenelse{\equal{\@journal}{Diagnostics}}{\definecolor{logocolor}{rgb}{0.17,0.51,0.56}}{}%
-\ifthenelse{\equal{\@journal}{Diseases}}{\definecolor{logocolor}{rgb}{0.24,0.24,0.24}}{}%
-\ifthenelse{\equal{\@journal}{Diversity}}{\definecolor{logocolor}{rgb}{0.25,0.41,0.49}}{}%
-\ifthenelse{\equal{\@journal}{Econometrics}}{\definecolor{logocolor}{rgb}{0.46,0.35,0.05}}{}%
-\ifthenelse{\equal{\@journal}{Economies}}{\definecolor{logocolor}{rgb}{0.29,0.51,0.44}}{}%
-\ifthenelse{\equal{\@journal}{Education}}{\definecolor{logocolor}{rgb}{0.055,0.434,0.051}}{}%
-\ifthenelse{\equal{\@journal}{Electronics}}{\definecolor{logocolor}{rgb}{0.35,0.44,0.0}}{}%
-\ifthenelse{\equal{\@journal}{Energies}}{\definecolor{logocolor}{rgb}{0.6,0.2,0}}{}%
-\ifthenelse{\equal{\@journal}{Entropy}}{\definecolor{logocolor}{rgb}{0,0.502,0.502}}{}%
-\ifthenelse{\equal{\@journal}{EnvironmentalSciences}}{\definecolor{logocolor}{rgb}{0.447,0.557,0.180}}{}%
-\ifthenelse{\equal{\@journal}{Environments}}{\definecolor{logocolor}{rgb}{0.445,0.555,0.180}}{}%
-\ifthenelse{\equal{\@journal}{Epigenomes}}{\definecolor{logocolor}{rgb}{0,0.5,0.5}}{}%
-\ifthenelse{\equal{\@journal}{Fibers}}{\definecolor{logocolor}{rgb}{0.235,0.067,0.267}}{}%
-\ifthenelse{\equal{\@journal}{Foods}}{\definecolor{logocolor}{rgb}{0.34,0.53,0.08}}{}%
-\ifthenelse{\equal{\@journal}{Forests}}{\definecolor{logocolor}{rgb}{0.16,0.31,0.13}}{}%
-\ifthenelse{\equal{\@journal}{FutureInternet}}{\definecolor{logocolor}{rgb}{0.28,0.32,0.43}}{}%
-\ifthenelse{\equal{\@journal}{Galaxies}}{\definecolor{logocolor}{rgb}{0.10,0,0.62}}{}%
-\ifthenelse{\equal{\@journal}{Games}}{\definecolor{logocolor}{rgb}{0.34,0.18,0.14}}{}%
-\ifthenelse{\equal{\@journal}{Gels}}{\definecolor{logocolor}{rgb}{0,0.496,0.496}}{}%
-\ifthenelse{\equal{\@journal}{Genealogy}}{\definecolor{logocolor}{rgb}{0.359,0.277,0.195}}{}%
-\ifthenelse{\equal{\@journal}{Genes}}{\definecolor{logocolor}{rgb}{0.37,0.29,0.48}}{}%
-\ifthenelse{\equal{\@journal}{Geosciences}}{\definecolor{logocolor}{rgb}{0.0,0.2,0.6}}{}%
-\ifthenelse{\equal{\@journal}{Healthcare}}{\definecolor{logocolor}{rgb}{0.398,0.027,0.441}}{}%
-\ifthenelse{\equal{\@journal}{Horticulturae}}{\definecolor{logocolor}{rgb}{0.164,0.199,0.098}}{}%
-\ifthenelse{\equal{\@journal}{Humanities}}{\definecolor{logocolor}{rgb}{0.27,0.4,0.86}}{}%
-\ifthenelse{\equal{\@journal}{Hydrology}}{\definecolor{logocolor}{rgb}{0.164,0,0.496}}{}%
-\ifthenelse{\equal{\@journal}{Informatics}}{\definecolor{logocolor}{rgb}{0.07,0,0.75}}{}%
-\ifthenelse{\equal{\@journal}{Information}}{\definecolor{logocolor}{rgb}{0.03,0.5,0.27}}{}%
-\ifthenelse{\equal{\@journal}{Inorganics}}{\definecolor{logocolor}{rgb}{0.42,0.188,0.282}}{}%
-\ifthenelse{\equal{\@journal}{Insects}}{\definecolor{logocolor}{rgb}{0.18,0.37,0.11}}{}%
-\ifthenelse{\equal{\@journal}{Ijerph}}{\definecolor{logocolor}{rgb}{0.26,0.43,0.13}}{}%
-\ifthenelse{\equal{\@journal}{Ijfs}}{\definecolor{logocolor}{rgb}{0.33,0.27,0}}{}%
-\ifthenelse{\equal{\@journal}{Ijms}}{\definecolor{logocolor}{rgb}{0, 0.5, 0.5}}{}%
-\ifthenelse{\equal{\@journal}{Ijgi}}{\definecolor{logocolor}{rgb}{0.01,0.26,0.55}}{}%
-\ifthenelse{\equal{\@journal}{Jcdd}}{\definecolor{logocolor}{rgb}{0.398,0.0430,0.383}}{}%
-\ifthenelse{\equal{\@journal}{Jcm}}{\definecolor{logocolor}{rgb}{0.07,0.37,0.34}}{}%
-\ifthenelse{\equal{\@journal}{Jdb}}{\definecolor{logocolor}{rgb}{0.28,0.38,0.53}}{}%
-\ifthenelse{\equal{\@journal}{Jfb}}{\definecolor{logocolor}{rgb}{0.07,0.37,0.34}}{}%
-\ifthenelse{\equal{\@journal}{Jof}}{\definecolor{logocolor}{rgb}{0.074,0.344,0.406}}{}%
-\ifthenelse{\equal{\@journal}{Jimaging}}{\definecolor{logocolor}{rgb}{0.094,0.219,0.25}}{}%
-\ifthenelse{\equal{\@journal}{Joi}}{\definecolor{logocolor}{rgb}{0.31,0.29,0.50}}{}%
-\ifthenelse{\equal{\@journal}{Jlpea}}{\definecolor{logocolor}{rgb}{0.07,0.37,0.22}}{}%
-\ifthenelse{\equal{\@journal}{Jmse}}{\definecolor{logocolor}{rgb}{0.059,0.059,0.431}}{}%
-\ifthenelse{\equal{\@journal}{Jpm}}{\definecolor{logocolor}{rgb}{0,0.40,0.32}}{}%
-\ifthenelse{\equal{\@journal}{Jrfm}}{\definecolor{logocolor}{rgb}{0,0.238,0.434}}{}%
-\ifthenelse{\equal{\@journal}{Jsan}}{\definecolor{logocolor}{rgb}{0.04,0.16,0.1}}{}%
-\ifthenelse{\equal{\@journal}{Land}}{\definecolor{logocolor}{rgb}{0.373,0.247,0.188}}{}%
-\ifthenelse{\equal{\@journal}{Laws}}{\definecolor{logocolor}{rgb}{0.32,0.12,0.38}}{}%
-\ifthenelse{\equal{\@journal}{Life}}{\definecolor{logocolor}{rgb}{0.13,0.46,0.85}}{}%
-\ifthenelse{\equal{\@journal}{Lubricants}}{\definecolor{logocolor}{rgb}{0.23,0.20,0.18}}{}%
-\ifthenelse{\equal{\@journal}{Machines}}{\definecolor{logocolor}{rgb}{0.05,0.01,0.45}}{}%
-\ifthenelse{\equal{\@journal}{Magnetochemistry}}{\definecolor{logocolor}{rgb}{0.336,0.004,0.406}}{}%
-\ifthenelse{\equal{\@journal}{MarineDrugs}}{\definecolor{logocolor}{rgb}{0,0.502,0.502}}{}%
-\ifthenelse{\equal{\@journal}{Materials}}{\definecolor{logocolor}{rgb}{0.6,0.4,0.2}}{}%
-\ifthenelse{\equal{\@journal}{Mathematics}}{\definecolor{logocolor}{rgb}{0.227,0.161,0.090}}{}%
-\ifthenelse{\equal{\@journal}{MedicalSciences}}{\definecolor{logocolor}{rgb}{0.180,0.360,0.391}}{}%
-\ifthenelse{\equal{\@journal}{Membranes}}{\definecolor{logocolor}{rgb}{0.5,0.2,0.03}}{}%
-\ifthenelse{\equal{\@journal}{Metabolites}}{\definecolor{logocolor}{rgb}{0.14,0.31,0.34}}{}%
-\ifthenelse{\equal{\@journal}{Metals}}{\definecolor{logocolor}{rgb}{0.56,0.3,0}}{}%
-\ifthenelse{\equal{\@journal}{Microarrays}}{\definecolor{logocolor}{rgb}{0.45,0.56,0.63}}{}%
-\ifthenelse{\equal{\@journal}{Micromachines}}{\definecolor{logocolor}{rgb}{0,0.2,0.6}}{}%
-\ifthenelse{\equal{\@journal}{Microorganisms}}{\definecolor{logocolor}{rgb}{0.008,0.031,0.255}}{}%
-\ifthenelse{\equal{\@journal}{Molecules}}{\definecolor{logocolor}{rgb}{0,0.502,0.502}}{}%
-\ifthenelse{\equal{\@journal}{Minerals}}{\definecolor{logocolor}{rgb}{0.54,0.24,0.01}}{}%
-\ifthenelse{\equal{\@journal}{Molbank}}{\definecolor{logocolor}{rgb}{0,0.502,0.502}}{}%
-\ifthenelse{\equal{\@journal}{Nanomaterials}}{\definecolor{logocolor}{rgb}{0.26,0.31,0.69}}{}%
-\ifthenelse{\equal{\@journal}{Ncrna}}{\definecolor{logocolor}{rgb}{0.816,0.035,0.035}}{}%
-\ifthenelse{\equal{\@journal}{Nutrients}}{\definecolor{logocolor}{rgb}{0.20,0.40,0.20}}{}%
-\ifthenelse{\equal{\@journal}{Pathogens}}{\definecolor{logocolor}{rgb}{0.6,0.2,0.4}}{}%
-\ifthenelse{\equal{\@journal}{Pharmaceuticals}}{\definecolor{logocolor}{rgb}{0.44,0.19,0.63}}{}%
-\ifthenelse{\equal{\@journal}{Pharmaceutics}}{\definecolor{logocolor}{rgb}{0.20,0.40,0.40}}{}%
-\ifthenelse{\equal{\@journal}{Pharmacy}}{\definecolor{logocolor}{rgb}{0.40,0.16,0.48}}{}%
-\ifthenelse{\equal{\@journal}{Photonics}}{\definecolor{logocolor}{rgb}{0.208,0.208,0.337}}{}%
-\ifthenelse{\equal{\@journal}{Plants}}{\definecolor{logocolor}{rgb}{0.27,0.46,0.0}}{}%
-\ifthenelse{\equal{\@journal}{Polymers}}{\definecolor{logocolor}{rgb}{0.44,0.19,0.63}}{}%
-\ifthenelse{\equal{\@journal}{Processes}}{\definecolor{logocolor}{rgb}{0.678,0.408,0.376}}{}%
-\ifthenelse{\equal{\@journal}{Proteomes}}{\definecolor{logocolor}{rgb}{0.07,0.38,0.15}}{}%
-\ifthenelse{\equal{\@journal}{Publications}}{\definecolor{logocolor}{rgb}{0.259,0.216,0.0353}}{}%
-\ifthenelse{\equal{\@journal}{Religions}}{\definecolor{logocolor}{rgb}{0,0.4,0.6}}{}%
-\ifthenelse{\equal{\@journal}{RemoteSensing}}{\definecolor{logocolor}{rgb}{0.20,0.40,0}}{}%
-\ifthenelse{\equal{\@journal}{Resources}}{\definecolor{logocolor}{rgb}{0.06,0.33,0.49}}{}%
-\ifthenelse{\equal{\@journal}{Risks}}{\definecolor{logocolor}{rgb}{0.62,0,0.31}}{}%
-\ifthenelse{\equal{\@journal}{Robotics}}{\definecolor{logocolor}{rgb}{0.239,0.263,0.471}}{}%
-\ifthenelse{\equal{\@journal}{Safety}}{\definecolor{logocolor}{rgb}{0.488,0,0}}{}%
-\ifthenelse{\equal{\@journal}{Sensors}}{\definecolor{logocolor}{rgb}{0,0.502,0.502}}{}%
-\ifthenelse{\equal{\@journal}{Sinusitis}}{\definecolor{logocolor}{rgb}{0.477,0.238,0.164}}{}%
-\ifthenelse{\equal{\@journal}{SocialSciences}}{\definecolor{logocolor}{rgb}{0.15,0.29,0.4}}{}%
-\ifthenelse{\equal{\@journal}{Societies}}{\definecolor{logocolor}{rgb}{0.08,0.43,0.62}}{}%
-\ifthenelse{\equal{\@journal}{Sports}}{\definecolor{logocolor}{rgb}{0.42,0.24,0.18}}{}%
-\ifthenelse{\equal{\@journal}{Standards}}{\definecolor{logocolor}{rgb}{0.219,0.254,0.973}}{}%
-\ifthenelse{\equal{\@journal}{Sustainability}}{\definecolor{logocolor}{rgb}{0.21,0.37,0.57}}{}%
-\ifthenelse{\equal{\@journal}{Symmetry}}{\definecolor{logocolor}{rgb}{0,0.20,0.20}}{}%
-\ifthenelse{\equal{\@journal}{Systems}}{\definecolor{logocolor}{rgb}{0.133,0.333,0.0}}{}%
-\ifthenelse{\equal{\@journal}{Technologies}}{\definecolor{logocolor}{rgb}{0.055,0.114,0.286}}{}%
-\ifthenelse{\equal{\@journal}{Toxics}}{\definecolor{logocolor}{rgb}{0.582, 0.082,0.684}}{}%
-\ifthenelse{\equal{\@journal}{Toxins}}{\definecolor{logocolor}{rgb}{0.60,0.20,0}}{}%
-\ifthenelse{\equal{\@journal}{Universe}}{\definecolor{logocolor}{rgb}{0.051,0.203,0.285}}{}%
-\ifthenelse{\equal{\@journal}{Vaccines}}{\definecolor{logocolor}{rgb}{0.2,0.2,0.2}}{}%
-\ifthenelse{\equal{\@journal}{VeterinarySciences}}{\definecolor{logocolor}{rgb}{0.441,0,0.383}}{}%
-\ifthenelse{\equal{\@journal}{Viruses}}{\definecolor{logocolor}{rgb}{0.5,0,0}}{}%
-\ifthenelse{\equal{\@journal}{Water}}{\definecolor{logocolor}{rgb}{0.21,0.37,0.57}}{}%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\RequirePackage[sort&compress]{natbib}
-\bibpunct{[}{]}{,}{n}{}{}
+%%%% Hyphenation
 \RequirePackage[none]{hyphenat}
 \sloppy
-%Previously: \hyphenpenalty=2000\exhyphenpenalty=2000\sloppy
-%Now: no hyphenation what so ever
+
+%%%% References
+\RequirePackage[sort&compress]{natbib}
+\bibpunct{[}{]}{,}{n}{}{}
 
 \renewcommand\NAT@set@cites{%
   \ifNAT@numbers
@@ -580,12 +515,14 @@
     \def\natexlab##1{##1}%
   \fi}
 
-\renewcommand{\baselinestretch}{1.19}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%% Hyperlinks
 \RequirePackage[unicode=false, pdftoolbar=true, pdfmenubar=true, bookmarksopen={true},
 pdffitwindow=true, pdfnewwindow=true, colorlinks=true,
-linkcolor=blue, citecolor=blue, urlcolor=blue, hyperfootnotes=false, pdfstartview={FitH}, pdfpagemode= None]{hyperref}
+linkcolor=blue, citecolor=blue, urlcolor=black, hyperfootnotes=false, pdfstartview={FitH}, pdfpagemode= None]{hyperref}   
+%% to have the option to change the urlcolor
+\newcommand{\changeurlcolor}[1]{\hypersetup{urlcolor=#1}} 
+
+%%%% Metadata
 \newcommand{\org@maketitle}{}% LATEX-Check
 \let\org@maketitle\maketitle
 \def\maketitle{%
@@ -596,1382 +533,568 @@ pdfkeywords={\@keyword}
 }%
 \org@maketitle
 }
-\renewcommand{\@pdfauthor}{\@Author}
+\renewcommand{\@pdfauthor}{\@AuthorNames}
 
-%% Footnotes (corresponding to the MDPI Word template)
+%%%% Footnotes
 \RequirePackage[hang]{footmisc}
 \setlength{\skip\footins}{1.2cm}
 \setlength{\footnotemargin}{5mm}
 \def\footnoterule{\kern-14\p@
 \hrule \@width 2in \kern 11.6\p@}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% URL
 \RequirePackage{url}
 \urlstyle{same}
+
+%%%% Widows & orphans
 \clubpenalty=10000
 \widowpenalty=10000
 \displaywidowpenalty=10000
 
-%%%%For tracking changes
-%\ifthenelse{\equal{\@status}{accept}}{\newcommand{\cor}[2]{{#2}}}{
-%\newcommand{\cor}[2]{{\textcolor{red}{\st{#1 }}}\textcolor[rgb]{0.25,0,0.5}{#2}}}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%% Front matter
 \newcommand{\firstargument}{}
 \newcommand{\Title}[1]{\gdef\@Title{#1}}%
 \newcommand{\Author}[1]{\gdef\@Author{#1}}%
-\newcommand{\lastpage}[1]{\gdef\@lastpage{#1}}
+\def\@AuthorNames{}
+\newcommand{\AuthorNames}[1]{\gdef\@AuthorNames{#1}}%
+\newcommand{\firstpage}[1]{\gdef\@firstpage{#1}}
 \newcommand{\doinum}[1]{\gdef\@doinum{#1}}
 \newcommand{\pubvolume}[1]{\gdef\@pubvolume{#1}}
 \newcommand{\pubyear}[1]{\gdef\@pubyear{#1}}
+\newcommand{\copyrightyear}[1]{\gdef\@copyrightyear{#1}}
 \newcommand{\address}[2][]{\renewcommand{\firstargument}{#1}\gdef\@address{#2}}
 \newcommand{\corresfirstargument}{}
-\newcommand{\corres}[2][]{\renewcommand{\corresfirstargument}{#1}\gdef\@corres{#2}}
-\def\@contributed{}
-\newcommand{\contributed}[1]{\gdef\@contributed{#1}}%
+\def\@corres{}
+\newcommand{\corres}[2][]{\renewcommand{\corresfirstargument}{#1}\gdef\@corres{#2}} 
 \def\@conference{}
 \newcommand{\conference}[1]{\gdef\@conference{#1}}%
+\def\@abstract{}
 \renewcommand{\abstract}[1]{\gdef\@abstract{#1}}
 \def\@externaleditor{}
 \newcommand{\externaleditor}[1]{\gdef\@externaleditor{#1}}
-\newcommand{\history}[1]{\gdef\@history{#1}}
+\newcommand{\history}[1]{\gdef\@history{#1}} 
 \def\@pacs{}
-\newcommand{\PACS}[1]{\gdef\@pacs{#1}}
+\newcommand{\PACS}[1]{\gdef\@pacs{#1}} 
 \def\@msc{}
-\newcommand{\MSC}[1]{\gdef\@msc{#1}}
+\newcommand{\MSC}[1]{\gdef\@msc{#1}} 
 \def\@jel{}
 \newcommand{\JEL}[1]{\gdef\@jel{#1}}
+\def\@keyword{}
 \newcommand{\keyword}[1]{\gdef\@keyword{#1}}
 \def\@dataset{}
 \newcommand{\dataset}[1]{\gdef\@dataset{#1}}
 \def\@datasetlicense{}
 \newcommand{\datasetlicense}[1]{\gdef\@datasetlicense{#1}}
+\def\@firstnote{}
+\newcommand{\firstnote}[1]{\gdef\@firstnote{#1}}
+\def\@secondnote{}
+\newcommand{\secondnote}[1]{\gdef\@secondnote{#1}}%
+\def\@simplesumm{}
+\newcommand{\simplesumm}[1]{\gdef\@simplesumm{#1}}
+\newcommand{\articlenumber}[1]{\gdef\@articlenumber{#1}}
 
-%% Define the journal name for the header using the ifthen package
+%%%% Journal name for the header
 \newcommand{\journalname}{%
-  \ifthenelse{\equal{\@journal}{Actuators}}{Actuators}{}%
-  \ifthenelse{\equal{\@journal}{AdministrativeSciences}}{Adm. Sci.}{}%
-  \ifthenelse{\equal{\@journal}{Aerospace}}{Aerospace}{}%
-  \ifthenelse{\equal{\@journal}{Agriculture}}{Agriculture}{}%
-  \ifthenelse{\equal{\@journal}{Agronomy}}{Agronomy}{}%
-  \ifthenelse{\equal{\@journal}{Algorithms}}{Algorithms}{}%
-  \ifthenelse{\equal{\@journal}{Animals}}{Animals}{}%
-  \ifthenelse{\equal{\@journal}{Antibiotics}}{Antibiotics}{}%
-  \ifthenelse{\equal{\@journal}{Antibodies}}{Antibodies}{}%
-  \ifthenelse{\equal{\@journal}{Antioxidants}}{Antioxidants}{}%
-  \ifthenelse{\equal{\@journal}{AppliedSciences}}{Appl. Sci.}{}%
-  \ifthenelse{\equal{\@journal}{Arts}}{Arts}{}%
-  \ifthenelse{\equal{\@journal}{Atmosphere}}{Atmosphere}{}%
-  \ifthenelse{\equal{\@journal}{Atoms}}{Atoms}{}%
-  \ifthenelse{\equal{\@journal}{Axioms}}{Axioms}{}%
-  \ifthenelse{\equal{\@journal}{Batteries}}{Batteries}{}%
-  \ifthenelse{\equal{\@journal}{BehavioralSciences}}{Behav. Sci.}{}%
-  \ifthenelse{\equal{\@journal}{Bioengineering}}{Bioengineering}{}%
-  \ifthenelse{\equal{\@journal}{Biology}}{Biology}{}%
-  \ifthenelse{\equal{\@journal}{Biomedicines}}{Biomedicines}{}%
-  \ifthenelse{\equal{\@journal}{Biomimetics}}{Biomimetics}{}%
-  \ifthenelse{\equal{\@journal}{Biomolecules}}{Biomolecules}{}%
-  \ifthenelse{\equal{\@journal}{Biosensors}}{Biosensors}{}%
-  \ifthenelse{\equal{\@journal}{BrainSciences}}{Brain Sci.}{}%
-  \ifthenelse{\equal{\@journal}{Buildings}}{Buildings}{}%
-  \ifthenelse{\equal{\@journal}{Cancers}}{Cancers}{}%
-  \ifthenelse{\equal{\@journal}{Catalysts}}{Catalysts}{}%
-  \ifthenelse{\equal{\@journal}{Cells}}{Cells}{}%
-  \ifthenelse{\equal{\@journal}{Challenges}}{Challenges}{}%
-  \ifthenelse{\equal{\@journal}{Chemosensors}}{Chemosensors}{}%
-  \ifthenelse{\equal{\@journal}{Children}}{Children}{}%
-  \ifthenelse{\equal{\@journal}{Chromatography}}{Chromatography}{}%
-  \ifthenelse{\equal{\@journal}{Climate}}{Climate}{}%
-  \ifthenelse{\equal{\@journal}{Coatings}}{Coatings}{}%
-  \ifthenelse{\equal{\@journal}{Computation}}{Computation}{}%
-  \ifthenelse{\equal{\@journal}{Computers}}{Computers}{}%
-  \ifthenelse{\equal{\@journal}{Cosmetics}}{Cosmetics}{}%
-  \ifthenelse{\equal{\@journal}{Crystals}}{Crystals}{}%
-  \ifthenelse{\equal{\@journal}{Data}}{Data}{}%
-  \ifthenelse{\equal{\@journal}{DentistryJournal}}{Dent. J.}{}%
-  \ifthenelse{\equal{\@journal}{Diagnostics}}{Diagnostics}{}%
-  \ifthenelse{\equal{\@journal}{Diseases}}{Diseases}{}%
-  \ifthenelse{\equal{\@journal}{Diversity}}{Diversity}{}%
-  \ifthenelse{\equal{\@journal}{Econometrics}}{Econometrics}{}%
-  \ifthenelse{\equal{\@journal}{Economies}}{Economies}{}%
-  \ifthenelse{\equal{\@journal}{Education}}{Education}{}%
-  \ifthenelse{\equal{\@journal}{Electronics}}{Electronics}{}%
-  \ifthenelse{\equal{\@journal}{Energies}}{Energies}{}%
-  \ifthenelse{\equal{\@journal}{Entropy}}{Entropy}{}%
-  \ifthenelse{\equal{\@journal}{EnvironmentalSciences}}{Eviron. Sci.}{}%
-  \ifthenelse{\equal{\@journal}{Environments}}{Environments}{}%
-  \ifthenelse{\equal{\@journal}{Epigenomes}}{Epigenomes}{}%
-  \ifthenelse{\equal{\@journal}{Fibers}}{Fibers}{}%
-  \ifthenelse{\equal{\@journal}{Foods}}{Foods}{}%
-  \ifthenelse{\equal{\@journal}{Forests}}{Forests}{}%
-  \ifthenelse{\equal{\@journal}{FutureInternet}}{Future Internet}{}%
-  \ifthenelse{\equal{\@journal}{Galaxies}}{Galaxies}{}%
-  \ifthenelse{\equal{\@journal}{Games}}{Games}{}%
-  \ifthenelse{\equal{\@journal}{Gels}}{Gels}{}%
-  \ifthenelse{\equal{\@journal}{Genealogy}}{Genealogy}{}%
-  \ifthenelse{\equal{\@journal}{Genes}}{Genes}{}%
-  \ifthenelse{\equal{\@journal}{Geosciences}}{Geosciences}{}%
-  \ifthenelse{\equal{\@journal}{Healthcare}}{Healthcare}{}%
-  \ifthenelse{\equal{\@journal}{Horticulturae}}{Horticulturae}{}%
-  \ifthenelse{\equal{\@journal}{Humanities}}{Humanities}{}%
-  \ifthenelse{\equal{\@journal}{Hydrology}}{Hydrology}{}%
-  \ifthenelse{\equal{\@journal}{Informatics}}{Informatics}{}%
-  \ifthenelse{\equal{\@journal}{Information}}{Information}{}%
-  \ifthenelse{\equal{\@journal}{Inorganics}}{Inorganics}{}%
-  \ifthenelse{\equal{\@journal}{Insects}}{Insects}{}%
-  \ifthenelse{\equal{\@journal}{Ijerph}}{Int. J. Environ. Res. Public Health}{}%
-  \ifthenelse{\equal{\@journal}{Ijfs}}{Int. J. Financ. Stud.}{}%
-  \ifthenelse{\equal{\@journal}{Ijms}}{Int. J. Mol. Sci.}{}%
-  \ifthenelse{\equal{\@journal}{Ijgi}}{ISPRS Int. J. Geo-Inf.}{}%
-  \ifthenelse{\equal{\@journal}{Jcdd}}{J. Cardiovasc. Dev. Dis.}{}%
-  \ifthenelse{\equal{\@journal}{Jcm}}{J. Clinical Medicine}{}%
-  \ifthenelse{\equal{\@journal}{Jdb}}{J. Dev. Biol.}{}%
-  \ifthenelse{\equal{\@journal}{Jfb}}{J. Funct. Biomater.}{}%
-  \ifthenelse{\equal{\@journal}{Jof}}{J. Fungi}{}%
-  \ifthenelse{\equal{\@journal}{Jimaging}}{J. Imaging}{}%
-  \ifthenelse{\equal{\@journal}{Joi}}{J. Intell.}{}%
-  \ifthenelse{\equal{\@journal}{Jlpea}}{J. Low Power Electron. Appl.}{}%
-  \ifthenelse{\equal{\@journal}{Jmse}}{J. Mar. Sci. Eng.}{}%??????
-  \ifthenelse{\equal{\@journal}{Jpm}}{J. Pers. Med.}{}%
-  \ifthenelse{\equal{\@journal}{Jrfm}}{J. Risk Financial Manag.}{}%
-  \ifthenelse{\equal{\@journal}{Jsan}}{J. Sens. Actuator Netw.}{}%
-  \ifthenelse{\equal{\@journal}{Land}}{Land}{}%
-  \ifthenelse{\equal{\@journal}{Laws}}{Laws}{}%
-  \ifthenelse{\equal{\@journal}{Life}}{Life}{}%
-  \ifthenelse{\equal{\@journal}{Lubricants}}{Lubricants}{}%
-  \ifthenelse{\equal{\@journal}{Machines}}{Machines}{}%
-  \ifthenelse{\equal{\@journal}{Magnetochemistry}}{Magnetochemistry}{}%
-  \ifthenelse{\equal{\@journal}{MarineDrugs}}{Mar. Drugs}{}%
-  \ifthenelse{\equal{\@journal}{Materials}}{Materials}{}%
-  \ifthenelse{\equal{\@journal}{Mathematics}}{Mathematics}{}%
-  \ifthenelse{\equal{\@journal}{MedicalSciences}}{Med. Sci.}{}%
-  \ifthenelse{\equal{\@journal}{Membranes}}{Membranes}{}%
-  \ifthenelse{\equal{\@journal}{Metabolites}}{Metabolites}{}%
-  \ifthenelse{\equal{\@journal}{Metals}}{Metals}{}%
-  \ifthenelse{\equal{\@journal}{Microarrays}}{Microarrays}{}%
-  \ifthenelse{\equal{\@journal}{Micromachines}}{Micromachines}{}%
-  \ifthenelse{\equal{\@journal}{Microorganisms}}{Microorganisms}{}%
-  \ifthenelse{\equal{\@journal}{Minerals}}{Minerals}{}%
-  \ifthenelse{\equal{\@journal}{Molbank}}{Molbank}{}%
-  \ifthenelse{\equal{\@journal}{Molecules}}{Molecules}{}%
-  \ifthenelse{\equal{\@journal}{Nanomaterials}}{Nanomaterials}{}%
-  \ifthenelse{\equal{\@journal}{Ncrna}}{Non-coding RNA}{}%
-  \ifthenelse{\equal{\@journal}{Nutrients}}{Nutrients}{}%
-  \ifthenelse{\equal{\@journal}{Pathogens}}{Pathogens}{}%
-  \ifthenelse{\equal{\@journal}{Pharmaceuticals}}{Pharmaceuticals}{}%
-  \ifthenelse{\equal{\@journal}{Pharmaceutics}}{Pharmaceutics}{}%
-  \ifthenelse{\equal{\@journal}{Pharmacy}}{Pharmacy}{}%
-  \ifthenelse{\equal{\@journal}{Photonics}}{Photonics}{}%
-  \ifthenelse{\equal{\@journal}{Plants}}{Plants}{}%
-  \ifthenelse{\equal{\@journal}{Polymers}}{Polymers}{}%
-  \ifthenelse{\equal{\@journal}{Processes}}{Processes}{}%
-  \ifthenelse{\equal{\@journal}{Proteomes}}{Proteomes}{}%
-  \ifthenelse{\equal{\@journal}{Publications}}{Publications}{}%
-  \ifthenelse{\equal{\@journal}{Religions}}{Religions}{}%
-  \ifthenelse{\equal{\@journal}{RemoteSensing}}{Remote Sens.}{}%
-  \ifthenelse{\equal{\@journal}{Resources}}{Resources}{}%
-  \ifthenelse{\equal{\@journal}{Risks}}{Risks}{}%
-  \ifthenelse{\equal{\@journal}{Robotics}}{Robotics}{}%
-  \ifthenelse{\equal{\@journal}{Safety}}{Safety}{}%
-  \ifthenelse{\equal{\@journal}{Sensors}}{Sensors}{}%
-  \ifthenelse{\equal{\@journal}{Sinusitis}}{Sinusitis}{}%
-  \ifthenelse{\equal{\@journal}{SocialSciences}}{Soc. Sci.}{}%
-  \ifthenelse{\equal{\@journal}{Societies}}{Societies}{}%
-  \ifthenelse{\equal{\@journal}{Sports}}{Sports}{}%
-  \ifthenelse{\equal{\@journal}{Standards}}{Standards}{}%
-  \ifthenelse{\equal{\@journal}{Sustainability}}{Sustainability}{}%
-  \ifthenelse{\equal{\@journal}{Symmetry}}{Symmetry}{}%
-  \ifthenelse{\equal{\@journal}{Systems}}{Systems}{}%
-  \ifthenelse{\equal{\@journal}{Technologies}}{Technologies}{}%
-  \ifthenelse{\equal{\@journal}{Toxics}}{Toxics}{}%
-  \ifthenelse{\equal{\@journal}{Toxins}}{Toxins}{}%
-  \ifthenelse{\equal{\@journal}{Universe}}{Universe}{}%
-  \ifthenelse{\equal{\@journal}{Vaccines}}{Vaccines}{}%
-  \ifthenelse{\equal{\@journal}{VeterinarySciences}}{Vet. Sci.}{}%
-  \ifthenelse{\equal{\@journal}{Viruses}}{Viruses}{}%
-  \ifthenelse{\equal{\@journal}{Water}}{Water}{}%
+  \ifthenelse{\equal{\@journal}{actuators}}{Actuators}{}%
+  \ifthenelse{\equal{\@journal}{admsci}}{Adm. Sci.}{}%
+  \ifthenelse{\equal{\@journal}{aerospace}}{Aerospace}{}%
+  \ifthenelse{\equal{\@journal}{agriculture}}{Agriculture}{}%
+  \ifthenelse{\equal{\@journal}{agronomy}}{Agronomy}{}%
+  \ifthenelse{\equal{\@journal}{algorithms}}{Algorithms}{}%
+  \ifthenelse{\equal{\@journal}{animals}}{Animals}{}%
+  \ifthenelse{\equal{\@journal}{antibiotics}}{Antibiotics}{}%
+  \ifthenelse{\equal{\@journal}{antibodies}}{Antibodies}{}%
+  \ifthenelse{\equal{\@journal}{antioxidants}}{Antioxidants}{}%
+  \ifthenelse{\equal{\@journal}{applsci}}{Appl. Sci.}{}%
+  \ifthenelse{\equal{\@journal}{arts}}{Arts}{}%
+  \ifthenelse{\equal{\@journal}{atmosphere}}{Atmosphere}{}%
+  \ifthenelse{\equal{\@journal}{atoms}}{Atoms}{}%
+  \ifthenelse{\equal{\@journal}{axioms}}{Axioms}{}%
+  \ifthenelse{\equal{\@journal}{batteries}}{Batteries}{}%
+  \ifthenelse{\equal{\@journal}{behavsci}}{Behav. Sci.}{}%
+  \ifthenelse{\equal{\@journal}{beverages}}{Beverages}{}%
+  \ifthenelse{\equal{\@journal}{bioengineering}}{Bioengineering}{}%
+  \ifthenelse{\equal{\@journal}{biology}}{Biology}{}%
+  \ifthenelse{\equal{\@journal}{biomedicines}}{Biomedicines}{}%
+  \ifthenelse{\equal{\@journal}{biomimetics}}{Biomimetics}{}%
+  \ifthenelse{\equal{\@journal}{biomolecules}}{Biomolecules}{}%
+  \ifthenelse{\equal{\@journal}{biosensors}}{Biosensors}{}%
+  \ifthenelse{\equal{\@journal}{brainsci}}{Brain Sci.}{}%
+  \ifthenelse{\equal{\@journal}{buildings}}{Buildings}{}%
+  \ifthenelse{\equal{\@journal}{c}}{C}{}%
+  \ifthenelse{\equal{\@journal}{cancers}}{Cancers}{}%
+  \ifthenelse{\equal{\@journal}{catalysts}}{Catalysts}{}%
+  \ifthenelse{\equal{\@journal}{cells}}{Cells}{}%
+  \ifthenelse{\equal{\@journal}{challenges}}{Challenges}{}%
+  \ifthenelse{\equal{\@journal}{chemosensors}}{Chemosensors}{}%
+  \ifthenelse{\equal{\@journal}{children}}{Children}{}%
+  \ifthenelse{\equal{\@journal}{chromatography}}{Chromatography}{}%
+  \ifthenelse{\equal{\@journal}{climate}}{Climate}{}%
+  \ifthenelse{\equal{\@journal}{coatings}}{Coatings}{}%
+  \ifthenelse{\equal{\@journal}{computation}}{Computation}{}%
+  \ifthenelse{\equal{\@journal}{computers}}{Computers}{}%
+  \ifthenelse{\equal{\@journal}{condensedmatter}}{Condensed Matter}{}%
+  \ifthenelse{\equal{\@journal}{cosmetics}}{Cosmetics}{}%
+  \ifthenelse{\equal{\@journal}{cryptography}}{Cryptography}{}%
+  \ifthenelse{\equal{\@journal}{crystals}}{Crystals}{}%
+  \ifthenelse{\equal{\@journal}{data}}{Data}{}%
+  \ifthenelse{\equal{\@journal}{dentistry}}{Dent. J.}{}%
+  \ifthenelse{\equal{\@journal}{diagnostics}}{Diagnostics}{}%
+  \ifthenelse{\equal{\@journal}{diseases}}{Diseases}{}%
+  \ifthenelse{\equal{\@journal}{diversity}}{Diversity}{}%
+  \ifthenelse{\equal{\@journal}{econometrics}}{Econometrics}{}%
+  \ifthenelse{\equal{\@journal}{economies}}{Economies}{}%
+  \ifthenelse{\equal{\@journal}{education}}{Educ. Sci.}{}%
+  \ifthenelse{\equal{\@journal}{electronics}}{Electronics}{}%
+  \ifthenelse{\equal{\@journal}{energies}}{Energies}{}%
+  \ifthenelse{\equal{\@journal}{entropy}}{Entropy}{}%
+  \ifthenelse{\equal{\@journal}{environments}}{Environments}{}%
+  \ifthenelse{\equal{\@journal}{epigenomes}}{Epigenomes}{}%
+  \ifthenelse{\equal{\@journal}{fermentation}}{Fermentation}{}%
+  \ifthenelse{\equal{\@journal}{fibers}}{Fibers}{}%
+  \ifthenelse{\equal{\@journal}{fishes}}{Fishes}{}%
+  \ifthenelse{\equal{\@journal}{fluids}}{Fluids}{}%
+  \ifthenelse{\equal{\@journal}{foods}}{Foods}{}%
+  \ifthenelse{\equal{\@journal}{forests}}{Forests}{}%
+  \ifthenelse{\equal{\@journal}{futureinternet}}{Future Internet}{}%
+  \ifthenelse{\equal{\@journal}{galaxies}}{Galaxies}{}%
+  \ifthenelse{\equal{\@journal}{games}}{Games}{}%
+  \ifthenelse{\equal{\@journal}{gels}}{Gels}{}%
+  \ifthenelse{\equal{\@journal}{genealogy}}{Genealogy}{}%
+  \ifthenelse{\equal{\@journal}{genes}}{Genes}{}%
+  \ifthenelse{\equal{\@journal}{geosciences}}{Geosciences}{}%
+  \ifthenelse{\equal{\@journal}{geriatrics}}{Geriatrics}{}%
+  \ifthenelse{\equal{\@journal}{healthcare}}{Healthcare}{}%
+  \ifthenelse{\equal{\@journal}{horticulturae}}{Horticulturae}{}%
+  \ifthenelse{\equal{\@journal}{humanities}}{Humanities}{}%
+  \ifthenelse{\equal{\@journal}{hydrology}}{Hydrology}{}%
+  \ifthenelse{\equal{\@journal}{informatics}}{Informatics}{}%
+  \ifthenelse{\equal{\@journal}{information}}{Information}{}%
+  \ifthenelse{\equal{\@journal}{infrastructures}}{Infrastructures}{}%
+  \ifthenelse{\equal{\@journal}{inorganics}}{Inorganics}{}%
+  \ifthenelse{\equal{\@journal}{insects}}{Insects}{}%
+  \ifthenelse{\equal{\@journal}{instruments}}{Instruments}{}%
+  \ifthenelse{\equal{\@journal}{ijerph}}{Int. J. Environ. Res. Public Health}{}%
+  \ifthenelse{\equal{\@journal}{ijfs}}{Int. J. Financial Stud.}{}%
+  \ifthenelse{\equal{\@journal}{ijms}}{Int. J. Mol. Sci.}{}%
+  \ifthenelse{\equal{\@journal}{ijgi}}{ISPRS Int. J. Geo-Inf.}{}%
+  \ifthenelse{\equal{\@journal}{inventions}}{Inventions}{}%
+  \ifthenelse{\equal{\@journal}{jcdd}}{J. Cardiovasc. Dev. Dis.}{}%
+  \ifthenelse{\equal{\@journal}{jcm}}{J. Clinical Medicine}{}%
+  \ifthenelse{\equal{\@journal}{jdb}}{J. Dev. Biol.}{}%
+  \ifthenelse{\equal{\@journal}{jfb}}{J. Funct. Biomater.}{}%   
+  \ifthenelse{\equal{\@journal}{jfmk}}{J. Funct. Morphol. Kinesiol.}{}%   
+  \ifthenelse{\equal{\@journal}{jof}}{J. Fungi}{}%
+  \ifthenelse{\equal{\@journal}{jimaging}}{J. Imaging}{}%
+  \ifthenelse{\equal{\@journal}{jintelligence}}{J. Intell.}{}% 
+  \ifthenelse{\equal{\@journal}{jlpea}}{J. Low Power Electron. Appl.}{}%
+  \ifthenelse{\equal{\@journal}{jmse}}{J. Mar. Sci. Eng.}{}%??????
+  \ifthenelse{\equal{\@journal}{jpm}}{J. Pers. Med.}{}%
+  \ifthenelse{\equal{\@journal}{jrfm}}{J. Risk Financial Manag.}{}%
+  \ifthenelse{\equal{\@journal}{jsan}}{J. Sens. Actuator Netw.}{}%
+  \ifthenelse{\equal{\@journal}{land}}{Land}{}%
+  \ifthenelse{\equal{\@journal}{languages}}{Languages}{}%
+  \ifthenelse{\equal{\@journal}{laws}}{Laws}{}%
+  \ifthenelse{\equal{\@journal}{life}}{Life}{}%
+  \ifthenelse{\equal{\@journal}{literature}}{Literature}{}%
+  \ifthenelse{\equal{\@journal}{lubricants}}{Lubricants}{}%
+  \ifthenelse{\equal{\@journal}{machines}}{Machines}{}%
+  \ifthenelse{\equal{\@journal}{magnetochemistry}}{Magnetochemistry}{}%
+  \ifthenelse{\equal{\@journal}{marinedrugs}}{Mar. Drugs}{}%
+  \ifthenelse{\equal{\@journal}{materials}}{Materials}{}%
+  \ifthenelse{\equal{\@journal}{mathematics}}{Mathematics}{}%
+  \ifthenelse{\equal{\@journal}{medsci}}{Med. Sci.}{}% 
+  \ifthenelse{\equal{\@journal}{medicines}}{Medicines}{}%
+  \ifthenelse{\equal{\@journal}{membranes}}{Membranes}{}%
+  \ifthenelse{\equal{\@journal}{metabolites}}{Metabolites}{}%
+  \ifthenelse{\equal{\@journal}{metals}}{Metals}{}%
+  \ifthenelse{\equal{\@journal}{microarrays}}{Microarrays}{}%
+  \ifthenelse{\equal{\@journal}{micromachines}}{Micromachines}{}%
+  \ifthenelse{\equal{\@journal}{microorganisms}}{Microorganisms}{}%
+  \ifthenelse{\equal{\@journal}{minerals}}{Minerals}{}%
+  \ifthenelse{\equal{\@journal}{molbank}}{Molbank}{}%
+  \ifthenelse{\equal{\@journal}{molecules}}{Molecules}{}%
+  \ifthenelse{\equal{\@journal}{mps}}{Methods and Protocols}{}%
+  \ifthenelse{\equal{\@journal}{nanomaterials}}{Nanomaterials}{}%
+  \ifthenelse{\equal{\@journal}{ncrna}}{Non-coding RNA}{}%
+  \ifthenelse{\equal{\@journal}{neonatalscreening}}{Int. J. Neonatal Screen.}{}%
+  \ifthenelse{\equal{\@journal}{nutrients}}{Nutrients}{}%
+  \ifthenelse{\equal{\@journal}{particles}}{Particles}{}%
+  \ifthenelse{\equal{\@journal}{pathogens}}{Pathogens}{}%
+  \ifthenelse{\equal{\@journal}{pharmaceuticals}}{Pharmaceuticals}{}%
+  \ifthenelse{\equal{\@journal}{pharmaceutics}}{Pharmaceutics}{}%
+  \ifthenelse{\equal{\@journal}{pharmacy}}{Pharmacy}{}%
+  \ifthenelse{\equal{\@journal}{philosophies}}{Philosophies}{}%
+  \ifthenelse{\equal{\@journal}{photonics}}{Photonics}{}%
+  \ifthenelse{\equal{\@journal}{plants}}{Plants}{}%
+  \ifthenelse{\equal{\@journal}{polymers}}{Polymers}{}%
+  \ifthenelse{\equal{\@journal}{processes}}{Processes}{}%
+  \ifthenelse{\equal{\@journal}{proteomes}}{Proteomes}{}%
+  \ifthenelse{\equal{\@journal}{publications}}{Publications}{}%
+  \ifthenelse{\equal{\@journal}{recycling}}{Recycling}{}%
+  \ifthenelse{\equal{\@journal}{religions}}{Religions}{}%
+  \ifthenelse{\equal{\@journal}{remotesensing}}{Remote Sens.}{}%
+  \ifthenelse{\equal{\@journal}{resources}}{Resources}{}%
+  \ifthenelse{\equal{\@journal}{risks}}{Risks}{}%
+  \ifthenelse{\equal{\@journal}{robotics}}{Robotics}{}%
+  \ifthenelse{\equal{\@journal}{safety}}{Safety}{}%
+  \ifthenelse{\equal{\@journal}{sensors}}{Sensors}{}%
+  \ifthenelse{\equal{\@journal}{sexes}}{Sexes}{}%
+  \ifthenelse{\equal{\@journal}{sinusitis}}{Sinusitis}{}%
+  \ifthenelse{\equal{\@journal}{socsci}}{Soc. Sci.}{}%
+  \ifthenelse{\equal{\@journal}{societies}}{Societies}{}%
+  \ifthenelse{\equal{\@journal}{soils}}{Soils}{}%
+  \ifthenelse{\equal{\@journal}{sports}}{Sports}{}%
+  \ifthenelse{\equal{\@journal}{standards}}{Standards}{}%
+  \ifthenelse{\equal{\@journal}{sustainability}}{Sustainability}{}%
+  \ifthenelse{\equal{\@journal}{symmetry}}{Symmetry}{}%
+  \ifthenelse{\equal{\@journal}{systems}}{Systems}{}%
+  \ifthenelse{\equal{\@journal}{technologies}}{Technologies}{}%
+  \ifthenelse{\equal{\@journal}{toxics}}{Toxics}{}%
+  \ifthenelse{\equal{\@journal}{toxins}}{Toxins}{}%
+  \ifthenelse{\equal{\@journal}{universe}}{Universe}{}%
+  \ifthenelse{\equal{\@journal}{vaccines}}{Vaccines}{}%
+  \ifthenelse{\equal{\@journal}{vetsci}}{Vet. Sci.}{}%
+  \ifthenelse{\equal{\@journal}{viruses}}{Viruses}{}%
+  \ifthenelse{\equal{\@journal}{visions}}{Visions}{}%
+  \ifthenelse{\equal{\@journal}{water}}{Water}{}%
   }
-
-%% Define the logo size of the journal using the ifthen package
-\newcommand{\logosize}{%
-  \ifthenelse{\equal{\@journal}{Actuators}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{AdministrativeSciences}}{\fontsize{27}{27}}{}%
-  \ifthenelse{\equal{\@journal}{Aerospace}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Agriculture}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Agronomy}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Algorithms}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Animals}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Antibiotics}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Antibodies}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Antioxidants}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{AppliedSciences}}{\fontsize{28}{28}}{}%
-  \ifthenelse{\equal{\@journal}{Arts}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Atmosphere}}{\fontsize{30}{30}}{}%
-  \ifthenelse{\equal{\@journal}{Atoms}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Axioms}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Batteries}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{BehavioralSciences}}{\fontsize{29}{29}}{}%
-  \ifthenelse{\equal{\@journal}{Bioengineering}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Biology}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Biomedicines}}{\fontsize{28}{28}}{}%
-  \ifthenelse{\equal{\@journal}{Biomimetics}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Biomolecules}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Biosensors}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{BrainSciences}}{\fontsize{24}{24}}{}%
-  \ifthenelse{\equal{\@journal}{Buildings}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Cancers}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Catalysts}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Cells}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Challenges}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Chemosensors}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Children}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Chromatography}}{\fontsize{26}{26}}{}%
-  \ifthenelse{\equal{\@journal}{Climate}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Coatings}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Computation}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Computers}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Cosmetics}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Crystals}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Data}}{\fontsize{48}{48}}{}%
-  \ifthenelse{\equal{\@journal}{DentistryJournal}}{\fontsize{25}{25}}{}%
-  \ifthenelse{\equal{\@journal}{Diagnostics}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Diseases}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Diversity}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Econometrics}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Economies}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Education}}{\fontsize{29}{29}}{}%
-  \ifthenelse{\equal{\@journal}{Electronics}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Energies}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Entropy}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{EnvironmentalSciences}}{\fontsize{30}{30}}{}%
-  \ifthenelse{\equal{\@journal}{Environments}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Epigenomes}}{\fontsize{36}{36}}{}
-  \ifthenelse{\equal{\@journal}{Fibers}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Foods}}{\fontsize{38}{38}}{}%
-  \ifthenelse{\equal{\@journal}{Forests}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{FutureInternet}}{\fontsize{28}{28}}{}%
-  \ifthenelse{\equal{\@journal}{Galaxies}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Games}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Gels}}{\fontsize{40}{40}}{}%
-  \ifthenelse{\equal{\@journal}{Genealogy}}{\fontsize{36}{36}}{}%might need to be adapted to Word template
-  \ifthenelse{\equal{\@journal}{Genes}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Geosciences}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Healthcare}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Horticulturae}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Humanities}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Hydrology}}{\fontsize{32}{32}}{}
-  \ifthenelse{\equal{\@journal}{Informatics}}{\fontsize{28}{28}}{}%
-  \ifthenelse{\equal{\@journal}{Information}}{\fontsize{28}{28}}{}%
-  \ifthenelse{\equal{\@journal}{Inorganics}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Insects}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Ijerph}}{\fontsize{13}{13}}{}%
-  \ifthenelse{\equal{\@journal}{Ijfs}}{\fontsize{13}{13}}{}%
-  \ifthenelse{\equal{\@journal}{Ijms}}{\fontsize{14}{14}}{}%
-  \ifthenelse{\equal{\@journal}{Ijgi}}{\fontsize{16}{16}}{}%
-  \ifthenelse{\equal{\@journal}{Jcdd}}{\fontsize{18}{18}}{}%
-  \ifthenelse{\equal{\@journal}{Jcm}}{\fontsize{20}{20}}{}%
-  \ifthenelse{\equal{\@journal}{Jdb}}{\fontsize{20}{20}}{}%
-  \ifthenelse{\equal{\@journal}{Jfb}}{\fontsize{19}{19}}{}%
-  \ifthenelse{\equal{\@journal}{Jof}}{\fontsize{22}{22}}{}%
-  \ifthenelse{\equal{\@journal}{Jimaging}}{\fontsize{19}{19}}{}%
-  \ifthenelse{\equal{\@journal}{Joi}}{\fontsize{19}{19}}{}%
-  \ifthenelse{\equal{\@journal}{Jlpea}}{\fontsize{17}{17}}{}%
-  \ifthenelse{\equal{\@journal}{Jmse}}{\fontsize{20}{20}}{}%
-  \ifthenelse{\equal{\@journal}{Jpm}}{\fontsize{20}{20}}{}%
-  \ifthenelse{\equal{\@journal}{Jrfm}}{\fontsize{13}{13}}{}%
-  \ifthenelse{\equal{\@journal}{Jsan}}{\fontsize{18}{18}}{}%
-  \ifthenelse{\equal{\@journal}{Land}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Laws}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Life}}{\fontsize{40}{40}}{}%
-  \ifthenelse{\equal{\@journal}{Lubricants}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Machines}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Magnetochemistry}}{\fontsize{28}{28}}{}
-  \ifthenelse{\equal{\@journal}{MarineDrugs}}{\fontsize{22}{22}}{}%
-  \ifthenelse{\equal{\@journal}{Materials}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Mathematics}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{MedicalSciences}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Membranes}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Metabolites}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Metals}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Microarrays}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Micromachines}}{\fontsize{26}{26}}{}%
-  \ifthenelse{\equal{\@journal}{Microorganisms}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Minerals}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Molbank}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Molecules}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Nanomaterials}}{\fontsize{26}{26}}{}%
-  \ifthenelse{\equal{\@journal}{Ncrna}}{\fontsize{20}{20}}{}%
-  \ifthenelse{\equal{\@journal}{Nutrients}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Pathogens}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Pharmaceuticals}}{\fontsize{26}{26}}{}%
-  \ifthenelse{\equal{\@journal}{Pharmaceutics}}{\fontsize{26}{26}}{}%
-  \ifthenelse{\equal{\@journal}{Pharmacy}}{\fontsize{28}{28}}{}%
-  \ifthenelse{\equal{\@journal}{Photonics}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Plants}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Polymers}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Processes}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Proteomes}}{\fontsize{28}{28}}{}%
-  \ifthenelse{\equal{\@journal}{Publications}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Religions}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{RemoteSensing}}{\fontsize{30}{30}}{}%
-  \ifthenelse{\equal{\@journal}{Resources}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Risks}}{\fontsize{38}{38}}{}%
-  \ifthenelse{\equal{\@journal}{Robotics}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Safety}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Sensors}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Sinusitis}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{SocialSciences}}{\fontsize{24}{24}}{}%
-  \ifthenelse{\equal{\@journal}{Societies}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Sports}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{Standards}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Sustainability}}{\fontsize{28}{28}}{}%
-  \ifthenelse{\equal{\@journal}{Symmetry}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Systems}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Technologies}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Toxics}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Toxins}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Universe}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Vaccines}}{\fontsize{36}{36}}{}%
-  \ifthenelse{\equal{\@journal}{VeterinarySciences}}{\fontsize{30}{30}}{}%
-  \ifthenelse{\equal{\@journal}{Viruses}}{\fontsize{32}{32}}{}%
-  \ifthenelse{\equal{\@journal}{Water}}{\fontsize{36}{36}}{}%
-  }
-
-%% Creates the command that makes the logo of the journal.
-\newcommand{\logo}{%
-    \ifthenelse{\equal{\@journal}{Actuators}}{actuators}{}%
-    \ifthenelse{\equal{\@journal}{AdministrativeSciences}}{\\[-42pt]administrative\\[10pt]sciences}{}%
-    \ifthenelse{\equal{\@journal}{Aerospace}}{aerospace}{}%
-    \ifthenelse{\equal{\@journal}{Agriculture}}{agriculture}{}%
-    \ifthenelse{\equal{\@journal}{Agronomy}}{agronomy}{}%
-    \ifthenelse{\equal{\@journal}{Algorithms}}{algorithms}{}%
-    \ifthenelse{\equal{\@journal}{Animals}}{animals}{}%
-    \ifthenelse{\equal{\@journal}{Antibiotics}}{antibiotics}{}%
-    \ifthenelse{\equal{\@journal}{Antibodies}}{antibodies}{}%
-    \ifthenelse{\equal{\@journal}{Antioxidants}}{antioxidants}{}%
-    \ifthenelse{\equal{\@journal}{AppliedSciences}}{applied sciences}{}%
-    \ifthenelse{\equal{\@journal}{Arts}}{arts}{}%
-    \ifthenelse{\equal{\@journal}{Atmosphere}}{atmosphere}{}%
-    \ifthenelse{\equal{\@journal}{Atoms}}{atoms}{}%
-    \ifthenelse{\equal{\@journal}{Axioms}}{axioms}{}%
-    \ifthenelse{\equal{\@journal}{Batteries}}{batteries}{}%
-    \ifthenelse{\equal{\@journal}{BehavioralSciences}}{\\[-44pt]behavioral\\[10pt]sciences}{}%
-    \ifthenelse{\equal{\@journal}{Bioengineering}}{bioengineering}{}%
-    \ifthenelse{\equal{\@journal}{Biology}}{biology}{}%
-    \ifthenelse{\equal{\@journal}{Biomedicines}}{biomedicines}{}%
-    \ifthenelse{\equal{\@journal}{Biomimetics}}{biomimetics}{}%
-    \ifthenelse{\equal{\@journal}{Biomolecules}}{biomolecules}{}%
-    \ifthenelse{\equal{\@journal}{Biosensors}}{biosensors}{}%
-    \ifthenelse{\equal{\@journal}{BrainSciences}}{brain sciences}{}%
-    \ifthenelse{\equal{\@journal}{Buildings}}{buildings}{}%
-    \ifthenelse{\equal{\@journal}{Cancers}}{cancers}{}%
-    \ifthenelse{\equal{\@journal}{Catalysts}}{catalysts}{}%
-    \ifthenelse{\equal{\@journal}{Cells}}{cells}{}%
-    \ifthenelse{\equal{\@journal}{Challenges}}{challenges}{}%
-    \ifthenelse{\equal{\@journal}{Chemosensors}}{chemosensors}{}%
-    \ifthenelse{\equal{\@journal}{Children}}{children}{}%
-    \ifthenelse{\equal{\@journal}{Chromatography}}{chromatography}{}%
-    \ifthenelse{\equal{\@journal}{Climate}}{climate}{}%
-    \ifthenelse{\equal{\@journal}{Coatings}}{coatings}{}%
-    \ifthenelse{\equal{\@journal}{Computation}}{computation}{}%
-    \ifthenelse{\equal{\@journal}{Computers}}{computers}{}%
-    \ifthenelse{\equal{\@journal}{Cosmetics}}{cosmetics}{}%
-    \ifthenelse{\equal{\@journal}{Crystals}}{crystals}{}%
-    \ifthenelse{\equal{\@journal}{Data}}{data}{}%
-    \ifthenelse{\equal{\@journal}{DentistryJournal}}{dentistry journal}{}%
-    \ifthenelse{\equal{\@journal}{Diagnostics}}{diagnostics}{}%
-    \ifthenelse{\equal{\@journal}{Diseases}}{diseases}{}%
-    \ifthenelse{\equal{\@journal}{Diversity}}{diversity}{}%
-    \ifthenelse{\equal{\@journal}{Econometrics}}{econometrics}{}%
-    \ifthenelse{\equal{\@journal}{Economies}}{economies}{}%
-    \ifthenelse{\equal{\@journal}{Education}}{\\[-48pt]education\\[4pt]sciences}{}%
-    \ifthenelse{\equal{\@journal}{Electronics}}{electronics}{}%
-    \ifthenelse{\equal{\@journal}{Energies}}{energies}{}%
-    \ifthenelse{\equal{\@journal}{Entropy}}{entropy}{}%
-    \ifthenelse{\equal{\@journal}{EnvironmentalSciences}}{evironmental\\sciences}{}%
-    \ifthenelse{\equal{\@journal}{Environments}}{environments}{}%
-    \ifthenelse{\equal{\@journal}{Epigenomes}}{epigenomes}{}%
-    \ifthenelse{\equal{\@journal}{Fibers}}{f\mbox{}ibers}{}%
-    \ifthenelse{\equal{\@journal}{Foods}}{foods}{}%
-    \ifthenelse{\equal{\@journal}{Forests}}{forests}{}%
-    \ifthenelse{\equal{\@journal}{FutureInternet}}{future internet}{}%
-    \ifthenelse{\equal{\@journal}{Galaxies}}{galaxies}{}%
-    \ifthenelse{\equal{\@journal}{Games}}{games}{}%
-    \ifthenelse{\equal{\@journal}{Gels}}{\vspace{1.2 mm}gels}{}%
-    \ifthenelse{\equal{\@journal}{Genealogy}}{\vspace{1.2 mm}genealogy}{}%
-    \ifthenelse{\equal{\@journal}{Genes}}{genes}{}%
-    \ifthenelse{\equal{\@journal}{Geosciences}}{geosciences}{}%
-    \ifthenelse{\equal{\@journal}{Healthcare}}{healthcare}{}%
-    \ifthenelse{\equal{\@journal}{Horticulturae}}{horticulturae}{}%
-    \ifthenelse{\equal{\@journal}{Humanities}}{humanities}{}%
-    \ifthenelse{\equal{\@journal}{Hydrology}}{hydrology}{}%
-    \ifthenelse{\equal{\@journal}{Informatics}}{informatics}{}%
-    \ifthenelse{\equal{\@journal}{Information}}{information}{}%
-    \ifthenelse{\equal{\@journal}{Inorganics}}{inorganics}{}%
-    \ifthenelse{\equal{\@journal}{Insects}}{insects}{}%
-    \ifthenelse{\equal{\@journal}{Ijerph}}{\normalfont{International Journal of}\\\normalfont\bfseries{Environmental Research and\\Public Health}}{}%
-    \ifthenelse{\equal{\@journal}{Ijfs}}  {\normalfont\fontsize{18}{18}{International Journal of}\\\normalfont\bfseries\itshape{Financial Studies}}{}%
-    \ifthenelse{\equal{\@journal}{Ijms}}{\normalfont\fontsize{18}{18}{International Journal of}\\[4pt]\normalfont\bfseries\selectfont{Molecular Sciences}}{}%
-    \ifthenelse{\equal{\@journal}{Ijgi}}  {\normalfont{\color{black}{ISPRS International Journal of}}\\[9pt]\normalfont\itshape\bfseries\fontsize{25}{25}\selectfont{Geo-Information}}{}%
-    \ifthenelse{\equal{\@journal}{Jcdd}}{\normalfont\fontsize{20}{20}{Journal of}\\\normalfont\bfseries\itshape\selectfont{Cardiovascular\\[6pt] Development and Disease}}{}%
-    \ifthenelse{\equal{\@journal}{Jcm}}{\normalfont\fontsize{22}{22}{Journal of}\\[6pt]\normalfont\bfseries\itshape\selectfont{Clinical Medicine}}{}%
-    \ifthenelse{\equal{\@journal}{Jdb}}{\normalfont{Journal of}\\\normalfont\bfseries\itshape\fontsize{23}{20}\selectfont{Developmental}\\[4pt]\normalfont\bfseries\itshape\fontsize{23}{23}\selectfont{Biology}}{}%
-    \ifthenelse{\equal{\@journal}{Jfb}}{\normalfont\fontsize{23}{23}{Journal of}\\\normalfont\bfseries\itshape\selectfont{Functional}\\[8pt]\normalfont\itshape\bfseries\selectfont{Biomaterials}}{}%
-    \ifthenelse{\equal{\@journal}{Jof}}{Journal of Fungi}{}%
-    \ifthenelse{\equal{\@journal}{Jimaging}}{\normalfont\fontsize{22}{27}{Journal of}\\[8pt]\normalfont\bfseries\itshape\selectfont{Imaging}}{}%
-    \ifthenelse{\equal{\@journal}{Joi}}{\normalfont\fontsize{22}{27}{Journal of}\\[8pt]\normalfont\bfseries\itshape\selectfont{Intelligence}}{}%
-    \ifthenelse{\equal{\@journal}{Jlpea}}{\normalfont\fontsize{19}{19}{Journal of}\\[-4pt]\normalfont\bfseries\selectfont\itshape{Low Power Electronics}\\[4pt]\normalfont\bfseries\selectfont\itshape{and Applications}}{}%
-    \ifthenelse{\equal{\@journal}{Jmse}}{\normalfont\fontsize{22}{22}{\color{black}{Journal of}}\\\normalfont\itshape\bfseries\selectfont{Marine Science\\[6pt] and Engineering}}{}%
-    \ifthenelse{\equal{\@journal}{Jpm}}{\normalfont\fontsize{22}{22}{Journal of}\\\normalfont\bfseries\itshape\selectfont{Personalized\\[6pt] Medicine}}{}%
-    \ifthenelse{\equal{\@journal}{Jrfm}}{\normalfont\fontsize{18}{18}{Journal of}\\[-4pt]\normalfont\bfseries\itshape\selectfont{Risk and Financial\\Management}}{}%
-    \ifthenelse{\equal{\@journal}{Jsan}}{\bfseries\itshape{Journal of Sensor\\[6pt] and Actuator Networks}}{}%
-    \ifthenelse{\equal{\@journal}{Land}}{land}{}%
-    \ifthenelse{\equal{\@journal}{Laws}}{laws}{}%
-    \ifthenelse{\equal{\@journal}{Life}}{\vspace{1.2 mm}life}{}%
-    \ifthenelse{\equal{\@journal}{Lubricants}}{lubricants}{}%
-    \ifthenelse{\equal{\@journal}{Machines}}{machines}{}%
-    \ifthenelse{\equal{\@journal}{Magnetochemistry}}{magnetochemistry}{}%
-    \ifthenelse{\equal{\@journal}{MarineDrugs}}{marine drugs}{}%
-    \ifthenelse{\equal{\@journal}{Materials}}{materials}{}%
-    \ifthenelse{\equal{\@journal}{Mathematics}}{mathematics}{}%
-    \ifthenelse{\equal{\@journal}{MedicalSciences}}{medical sciences}{}%
-    \ifthenelse{\equal{\@journal}{Membranes}}{membranes}{}%
-    \ifthenelse{\equal{\@journal}{Metabolites}}{metabolites}{}%
-    \ifthenelse{\equal{\@journal}{Metals}}{metals}{}%
-    \ifthenelse{\equal{\@journal}{Microarrays}}{microarrays}{}%
-    \ifthenelse{\equal{\@journal}{Micromachines}}{micromachines}{}%
-    \ifthenelse{\equal{\@journal}{Microorganisms}}{microorganisms}{}%
-    \ifthenelse{\equal{\@journal}{Minerals}}{minerals}{}%
-    \ifthenelse{\equal{\@journal}{Molbank}}{molbank}{}%
-    \ifthenelse{\equal{\@journal}{Molecules}}{molecules}{}%
-    \ifthenelse{\equal{\@journal}{Nanomaterials}}{nanomaterials}{}%
-    \ifthenelse{\equal{\@journal}{Ncrna}}{\normalfont\bfseries\itshape\fontsize{28}{28}{non-coding }\normalfont\bfseries\itshape\selectfont{RNA}}{}%
-    \ifthenelse{\equal{\@journal}{Nutrients}}{nutrients}{}%
-    \ifthenelse{\equal{\@journal}{Pathogens}}{pathogens}{}%
-    \ifthenelse{\equal{\@journal}{Pharmaceuticals}}{pharmaceuticals}{}%
-    \ifthenelse{\equal{\@journal}{Pharmaceutics}}{pharmaceutics}{}%
-    \ifthenelse{\equal{\@journal}{Pharmacy}}{pharmacy}{}%
-    \ifthenelse{\equal{\@journal}{Photonics}}{photonics}{}%
-    \ifthenelse{\equal{\@journal}{Plants}}{plants}{}%
-    \ifthenelse{\equal{\@journal}{Polymers}}{polymers}{}%
-    \ifthenelse{\equal{\@journal}{Processes}}{processes}{}%
-    \ifthenelse{\equal{\@journal}{Proteomes}}{proteomes}{}%
-    \ifthenelse{\equal{\@journal}{Publications}}{publications}{}%
-    \ifthenelse{\equal{\@journal}{Religions}}{religions}{}%
-    \ifthenelse{\equal{\@journal}{RemoteSensing}}{remote sensing}{}%
-    \ifthenelse{\equal{\@journal}{Resources}}{resources}{}%
-    \ifthenelse{\equal{\@journal}{Risks}}{risks}{}%
-    \ifthenelse{\equal{\@journal}{Robotics}}{robotics}{}%
-    \ifthenelse{\equal{\@journal}{Safety}}{safety}{}%
-    \ifthenelse{\equal{\@journal}{Sensors}}{sensors}{}%
-    \ifthenelse{\equal{\@journal}{Sinusitis}}{sinusitis}{}%
-    \ifthenelse{\equal{\@journal}{SocialSciences}}{social sciences}{}%
-    \ifthenelse{\equal{\@journal}{Societies}}{societies}{}%
-    \ifthenelse{\equal{\@journal}{Sports}}{\vspace{1.2 mm}sports}{}%
-    \ifthenelse{\equal{\@journal}{Standards}}{standards}{}%
-    \ifthenelse{\equal{\@journal}{Sustainability}}{sustainability}{}%
-    \ifthenelse{\equal{\@journal}{Symmetry}}{symmetry}{}%
-    \ifthenelse{\equal{\@journal}{Systems}}{systems}{}%
-    \ifthenelse{\equal{\@journal}{Technologies}}{technologies}{}%
-    \ifthenelse{\equal{\@journal}{Toxics}}{toxics}{}%
-    \ifthenelse{\equal{\@journal}{Toxins}}{toxins}{}%
-    \ifthenelse{\equal{\@journal}{Universe}}{universe}{}%
-    \ifthenelse{\equal{\@journal}{Vaccines}}{vaccines}{}%
-    \ifthenelse{\equal{\@journal}{VeterinarySciences}}{veterinary sciences}{}%
-    \ifthenelse{\equal{\@journal}{Viruses}}{viruses}{}%
-    \ifthenelse{\equal{\@journal}{Water}}{water}{}%
+    
+%%%% Header and footer on first page
+%% The plain page style needs to be redefined because with \maketitle in the article class, LaTeX applies the the plain page style automatically to the first page.
+\ifthenelse{\equal{\@arttype}{Supfile}}{
+\fancypagestyle{plain}{
+\fancyhf{}
+\fancyhead[R]{
+\fontsize{8}{8}\selectfont S\thepage{} of S\pageref*{LastPage}}
+\fancyhead[L]{\fontsize{8}{8}\selectfont
+\ifthenelse{\equal{\@status}{submit}}{Version {\@ \today} submitted to {\em \journalname}}{{\em \journalname} {\bfseries \@pubyear}, {\em \@pubvolume}, \ifthenelse{\equal{\@articlenumber}{}}{\@firstpage --\pageref*{LastPage}}{\@articlenumber}; doi:\@doinum}
+}}
 }
-
-%% Creates the ISSN for the journal using the ifthen package
-\newcommand{\issn}{%
-  \ifthenelse{\equal{\@journal}{Actuators}}{2076-0825}{}%
-  \ifthenelse{\equal{\@journal}{AdministrativeSciences}}{2076-3387}{}%
-  \ifthenelse{\equal{\@journal}{Aerospace}}{2226-4310}{}%
-  \ifthenelse{\equal{\@journal}{Agriculture}}{2077-0472}{}%
-  \ifthenelse{\equal{\@journal}{Agronomy}}{2073-4395}{}%
-  \ifthenelse{\equal{\@journal}{Algorithms}}{1999-4893}{}%
-  \ifthenelse{\equal{\@journal}{Animals}}{2076-2615}{}%
-  \ifthenelse{\equal{\@journal}{Antibiotics}}{2079-6382}{}%
-  \ifthenelse{\equal{\@journal}{Antibodies}}{2073-4468}{}%
-  \ifthenelse{\equal{\@journal}{Antioxidants}}{2076-3921}{}%
-  \ifthenelse{\equal{\@journal}{AppliedSciences}}{2076-3417}{}%
-  \ifthenelse{\equal{\@journal}{Arts}}{2076-0752}{}%
-  \ifthenelse{\equal{\@journal}{Atmosphere}}{2073-4433}{}%
-  \ifthenelse{\equal{\@journal}{Atoms}}{2218-2004}{}%
-  \ifthenelse{\equal{\@journal}{Axioms}}{2075-1680}{}%
-  \ifthenelse{\equal{\@journal}{Batteries}}{2313-0105}{}%
-  \ifthenelse{\equal{\@journal}{BehavioralSciences}}{2076-328X}{}%
-  \ifthenelse{\equal{\@journal}{Bioengineering}}{2306-5354}{}%
-  \ifthenelse{\equal{\@journal}{Biology}}{2079-7737}{}%
-  \ifthenelse{\equal{\@journal}{Biomedicines}}{2075-4426}{}%
-  \ifthenelse{\equal{\@journal}{Biomimetics}}{2313-7673}{}%
-  \ifthenelse{\equal{\@journal}{Biomolecules}}{2218-273X}{}%
-  \ifthenelse{\equal{\@journal}{Biosensors}}{2079-6374}{}%
-  \ifthenelse{\equal{\@journal}{BrainSciences}}{2076-3425}{}%
-  \ifthenelse{\equal{\@journal}{Buildings}}{2075-5309}{}%
-  \ifthenelse{\equal{\@journal}{Cancers}}{2072-6694}{}%
-  \ifthenelse{\equal{\@journal}{Catalysts}}{2073-4344}{}%
-  \ifthenelse{\equal{\@journal}{Cells}}{2073-4409}{}%
-  \ifthenelse{\equal{\@journal}{Challenges}}{2078-1547}{}%
-  \ifthenelse{\equal{\@journal}{Chemosensors}}{2227-9040}{}%
-  \ifthenelse{\equal{\@journal}{Children}}{2075-4426}{}%
-  \ifthenelse{\equal{\@journal}{Chromatography}}{2227-9075}{}%
-  \ifthenelse{\equal{\@journal}{Climate}}{2225-1154}{}%
-  \ifthenelse{\equal{\@journal}{Coatings}}{2079-6412}{}%
-  \ifthenelse{\equal{\@journal}{Computation}}{2079-3197}{}%
-  \ifthenelse{\equal{\@journal}{Computers}}{2073-431X}{}%
-  \ifthenelse{\equal{\@journal}{Cosmetics}}{2079-9284}{}%
-  \ifthenelse{\equal{\@journal}{Crystals}}{2073-4352}{}%
-  \ifthenelse{\equal{\@journal}{Data}}{2306-5729}{}%
-  \ifthenelse{\equal{\@journal}{DentistryJournal}}{2304-6767}{}%
-  \ifthenelse{\equal{\@journal}{Diagnostics}}{2075-4418}{}%
-  \ifthenelse{\equal{\@journal}{Diseases}}{2079-9721}{}%
-  \ifthenelse{\equal{\@journal}{Diversity}}{1424-2818}{}%
-  \ifthenelse{\equal{\@journal}{Econometrics}}{2225-1146}{}%
-  \ifthenelse{\equal{\@journal}{Economies}}{2227-7099}{}%
-  \ifthenelse{\equal{\@journal}{Education}}{2076-3344}{}%
-  \ifthenelse{\equal{\@journal}{Electronics}}{2079-9292}{}%
-  \ifthenelse{\equal{\@journal}{Energies}}{1996-1073}{}%
-  \ifthenelse{\equal{\@journal}{Entropy}}{1099-4300}{}%
-  \ifthenelse{\equal{\@journal}{EnvironmentalSciences}}{2076-3298}{}%
-  \ifthenelse{\equal{\@journal}{Environments}}{2076-3298}{}%
-  \ifthenelse{\equal{\@journal}{Epigenomes}}{2075-4655}{}%
-  \ifthenelse{\equal{\@journal}{Fibers}}{2079-6439}{}%
-  \ifthenelse{\equal{\@journal}{Foods}}{2304-8158}{}%
-  \ifthenelse{\equal{\@journal}{Forests}}{1999-4907}{}%
-  \ifthenelse{\equal{\@journal}{FutureInternet}}{1999-5903}{}%
-  \ifthenelse{\equal{\@journal}{Galaxies}}{2075-4434}{}%
-  \ifthenelse{\equal{\@journal}{Games}}{2073-4336}{}%
-  \ifthenelse{\equal{\@journal}{Gels}}{2310-2861}{}%
-  \ifthenelse{\equal{\@journal}{Genealogy}}{2313-5778}{}%
-  \ifthenelse{\equal{\@journal}{Genes}}{2073-4425}{}%
-  \ifthenelse{\equal{\@journal}{Geosciences}}{2076-3263}{}%
-  \ifthenelse{\equal{\@journal}{Healthcare}}{2227-9032}{}%
-  \ifthenelse{\equal{\@journal}{Horticulturae}}{2311-7524}{}%
-  \ifthenelse{\equal{\@journal}{Humanities}}{2076-0787}{}%
-  \ifthenelse{\equal{\@journal}{Hydrology}}{2306-5338}{}%
-  \ifthenelse{\equal{\@journal}{Informatics}}{2227-9709}{}%
-  \ifthenelse{\equal{\@journal}{Information}}{2078-2489}{}%
-  \ifthenelse{\equal{\@journal}{Inorganics}}{2304-6740}{}%
-  \ifthenelse{\equal{\@journal}{Insects}}{2075-4450}{}%
-  \ifthenelse{\equal{\@journal}{Ijerph}}{1660-4601}{}%
-  \ifthenelse{\equal{\@journal}{Ijfs}}{2227-7072}{}%
-  \ifthenelse{\equal{\@journal}{Ijms}}{1422-0067}{}%
-  \ifthenelse{\equal{\@journal}{Ijgi}}{2220-9964}{}%
-  \ifthenelse{\equal{\@journal}{Jcdd}}{2308-3425}{}%
-  \ifthenelse{\equal{\@journal}{Jcm}}{2077-0383}{}%
-  \ifthenelse{\equal{\@journal}{Jdb}}{2221-3759}{}%
-  \ifthenelse{\equal{\@journal}{Jfb}}{2079-4983}{}%
-  \ifthenelse{\equal{\@journal}{Jof}}{2309-608X}{}%
-  \ifthenelse{\equal{\@journal}{Jimaging}}{2313-433X}{}%
-  \ifthenelse{\equal{\@journal}{Joi}}{2079-3200}{}%
-  \ifthenelse{\equal{\@journal}{Jlpea}}{2079-9268}{}%
-  \ifthenelse{\equal{\@journal}{Jmse}}{2077-1312}{}%
-  \ifthenelse{\equal{\@journal}{Jpm}}{2075-4426}{}%
-  \ifthenelse{\equal{\@journal}{Jrfm}}{1911-8074}{}%
-  \ifthenelse{\equal{\@journal}{Jsan}}{2224-2708}{}%
-  \ifthenelse{\equal{\@journal}{Land}}{2073-445X}{}%
-  \ifthenelse{\equal{\@journal}{Laws}}{2075-471X}{}%
-  \ifthenelse{\equal{\@journal}{Life}}{2075-1729}{}%
-  \ifthenelse{\equal{\@journal}{Lubricants}}{2075-4442}{}%
-  \ifthenelse{\equal{\@journal}{Machines}}{2075-1702}{}%
-  \ifthenelse{\equal{\@journal}{Magnetochemistry}}{2312-7481}{}%
-  \ifthenelse{\equal{\@journal}{MarineDrugs}}{1660-3397}{}%
-  \ifthenelse{\equal{\@journal}{Materials}}{1996-1944}{}%
-  \ifthenelse{\equal{\@journal}{Mathematics}}{2227-7390}{}%
-  \ifthenelse{\equal{\@journal}{MedicalSciences}}{2076-3271}{}%
-  \ifthenelse{\equal{\@journal}{Membranes}}{2077-0375}{}%
-  \ifthenelse{\equal{\@journal}{Metabolites}}{2218-1989}{}%
-  \ifthenelse{\equal{\@journal}{Metals}}{2075-4701}{}%
-  \ifthenelse{\equal{\@journal}{Microarrays}}{2076-3905}{}%
-  \ifthenelse{\equal{\@journal}{Micromachines}}{2072-666X}{}%
-  \ifthenelse{\equal{\@journal}{Microorganisms}}{2076-2607}{}%
-  \ifthenelse{\equal{\@journal}{Minerals}}{2075-163X}{}%
-  \ifthenelse{\equal{\@journal}{Molbank}}{1422-8599}{}%
-  \ifthenelse{\equal{\@journal}{Molecules}}{1420-3049}{}%
-  \ifthenelse{\equal{\@journal}{Nanomaterials}}{2079-4991}{}%
-  \ifthenelse{\equal{\@journal}{Ncrna}}{2311-553X}{}%
-  \ifthenelse{\equal{\@journal}{Nutrients}}{2072-6643}{}%
-  \ifthenelse{\equal{\@journal}{Pathogens}}{2076-0817}{}%
-  \ifthenelse{\equal{\@journal}{Pharmaceuticals}}{1424-8247}{}%
-  \ifthenelse{\equal{\@journal}{Pharmaceutics}}{1999-4923}{}%
-  \ifthenelse{\equal{\@journal}{Pharmacy}}{2226-4787}{}%
-  \ifthenelse{\equal{\@journal}{Photonics}}{2304-6732}{}%
-  \ifthenelse{\equal{\@journal}{Plants}}{2223-7747}{}%
-  \ifthenelse{\equal{\@journal}{Polymers}}{2073-4360}{}%
-  \ifthenelse{\equal{\@journal}{Processes}}{2227-9717}{}%
-  \ifthenelse{\equal{\@journal}{Proteomes}}{2227-7382}{}%
-  \ifthenelse{\equal{\@journal}{Publications}}{2304-6775}{}%
-  \ifthenelse{\equal{\@journal}{Religions}}{2077-1444}{}%
-  \ifthenelse{\equal{\@journal}{RemoteSensing}}{2072-4292}{}%
-  \ifthenelse{\equal{\@journal}{Resources}}{2079-9276}{}%
-  \ifthenelse{\equal{\@journal}{Risks}}{2227-9091}{}%
-  \ifthenelse{\equal{\@journal}{Robotics}}{2218-6581}{}%
-  \ifthenelse{\equal{\@journal}{Safety}}{2313-576X}{}%
-  \ifthenelse{\equal{\@journal}{Sensors}}{1424-8220}{}%
-  \ifthenelse{\equal{\@journal}{Sinusitis}}{2309-107X}{}%
-  \ifthenelse{\equal{\@journal}{SocialSciences}}{2076-0760}{}%
-  \ifthenelse{\equal{\@journal}{Societies}}{2075-4698}{}%
-  \ifthenelse{\equal{\@journal}{Sports}}{2075-4663}{}%
-  \ifthenelse{\equal{\@journal}{Standards}}{2305-6703}{}%
-  \ifthenelse{\equal{\@journal}{Sustainability}}{2071-1050}{}%
-  \ifthenelse{\equal{\@journal}{Symmetry}}{2073-8994}{}%
-  \ifthenelse{\equal{\@journal}{Systems}}{2079-8954}{}%
-  \ifthenelse{\equal{\@journal}{Technologies}}{2227-7080}{}%
-  \ifthenelse{\equal{\@journal}{Toxics}}{2305-6304}{}%
-  \ifthenelse{\equal{\@journal}{Toxins}}{2072-6651}{}%
-  \ifthenelse{\equal{\@journal}{Universe}}{2218-1997}{}%
-  \ifthenelse{\equal{\@journal}{Vaccines}}{2076-393X}{}%
-  \ifthenelse{\equal{\@journal}{VeterinarySciences}}{2306-7381}{}%
-  \ifthenelse{\equal{\@journal}{Viruses}}{1999-4915}{}%
-  \ifthenelse{\equal{\@journal}{Water}}{2073-4441}{}%
-  }
-
-%% www.mdpi.com/journal/\logo
-\newcommand{\web}{%
-  \ifthenelse{\equal{\@journal}{Actuators}}{www.mdpi.com/journal/actuators}{}%
-  \ifthenelse{\equal{\@journal}{AdministrativeSciences}}{www.mdpi.com/journal/admsci}{}%
-  \ifthenelse{\equal{\@journal}{Aerospace}}{www.mdpi.com/journal/aerospace}{}%
-  \ifthenelse{\equal{\@journal}{Agriculture}}{www.mdpi.com/journal/agriculture}{}%
-  \ifthenelse{\equal{\@journal}{Agronomy}}{www.mdpi.com/journal/agronomy}{}%
-  \ifthenelse{\equal{\@journal}{Algorithms}}{www.mdpi.com/journal/algorithms}{}%
-  \ifthenelse{\equal{\@journal}{Animals}}{www.mdpi.com/journal/animals}{}%
-  \ifthenelse{\equal{\@journal}{Antibiotics}}{http://www.mdpi.com/journal/antibiotics}{}%
-  \ifthenelse{\equal{\@journal}{Antibodies}}{www.mdpi.com/journal/antibodies}{}%
-  \ifthenelse{\equal{\@journal}{Antioxidants}}{www.mdpi.com/journal/antioxidants}{}%
-  \ifthenelse{\equal{\@journal}{AppliedSciences}}{www.mdpi.com/journal/applsci}{}%
-  \ifthenelse{\equal{\@journal}{Arts}}{http://www.mdpi.com/journal/arts}{}%
-  \ifthenelse{\equal{\@journal}{Atmosphere}}{www.mdpi.com/journal/atmosphere}{}%
-  \ifthenelse{\equal{\@journal}{Atoms}}{www.mdpi.com/journal/atoms}{}%
-  \ifthenelse{\equal{\@journal}{Axioms}}{www.mdpi.com/journal/axioms}{}%
-  \ifthenelse{\equal{\@journal}{Batteries}}{www.mdpi.com/journal/batteries}{}%
-  \ifthenelse{\equal{\@journal}{BehavioralSciences}}{www.mdpi.com/journal/behavsci}{}%
-  \ifthenelse{\equal{\@journal}{Bioengineering}}{www.mdpi.com/journal/bioengineering}{}%
-  \ifthenelse{\equal{\@journal}{Biology}}{www.mdpi.com/journal/biology}{}%
-  \ifthenelse{\equal{\@journal}{Biomedicines}}{www.mdpi.com/journal/biomedicines}{}%
-  \ifthenelse{\equal{\@journal}{Biomimetics}}{www.mdpi.com/journal/biomimetics}{}%
-  \ifthenelse{\equal{\@journal}{Biomolecules}}{www.mdpi.com/journal/biomolecules}{}%
-  \ifthenelse{\equal{\@journal}{Biosensors}}{www.mdpi.com/journal/biosensors}{}%
-  \ifthenelse{\equal{\@journal}{BrainSciences}}{www.mdpi.com/journal/brainsci}{}%
-  \ifthenelse{\equal{\@journal}{Buildings}}{www.mdpi.com/journal/buildings}{}%
-  \ifthenelse{\equal{\@journal}{Cancers}}{www.mdpi.com/journal/cancers}{}%
-  \ifthenelse{\equal{\@journal}{Catalysts}}{www.mdpi.com/journal/catalysts}{}%
-  \ifthenelse{\equal{\@journal}{Cells}}{www.mdpi.com/journal/cells}{}%
-  \ifthenelse{\equal{\@journal}{Challenges}}{www.mdpi.com/journal/challenges}{}%
-  \ifthenelse{\equal{\@journal}{Chemosensors}}{www.mdpi.com/journal/chemosensors}{}%
-  \ifthenelse{\equal{\@journal}{Children}}{www.mdpi.com/journal/children}{}%
-  \ifthenelse{\equal{\@journal}{Chromatography}}{www.mdpi.com/journal/chromatography}{}%
-  \ifthenelse{\equal{\@journal}{Climate}}{www.mdpi.com/journal/climate}{}%
-  \ifthenelse{\equal{\@journal}{Coatings}}{www.mdpi.com/journal/coatings}{}%
-  \ifthenelse{\equal{\@journal}{Computation}}{www.mdpi.com/journal/computation}{}%
-  \ifthenelse{\equal{\@journal}{Computers}}{www.mdpi.com/journal/computers}{}%
-  \ifthenelse{\equal{\@journal}{Cosmetics}}{www.mdpi.com/journal/cosmetics}{}%
-  \ifthenelse{\equal{\@journal}{Crystals}}{www.mdpi.com/journal/crystals}{}%
-  \ifthenelse{\equal{\@journal}{Data}}{www.mdpi.com/journal/data}{}%
-  \ifthenelse{\equal{\@journal}{DentistryJournal}}{http://www.mdpi.com/journal/dentistry}{}%
-  \ifthenelse{\equal{\@journal}{Diagnostics}}{www.mdpi.com/journal/diagnostics}{}%
-  \ifthenelse{\equal{\@journal}{Diseases}}{www.mdpi.com/journal/diseases}{}%
-  \ifthenelse{\equal{\@journal}{Diversity}}{www.mdpi.com/journal/diversity}{}%
-  \ifthenelse{\equal{\@journal}{Econometrics}}{www.mdpi.com/journal/econometrics}{}%
-  \ifthenelse{\equal{\@journal}{Economies}}{www.mdpi.com/journal/economies}{}%
-  \ifthenelse{\equal{\@journal}{Education}}{www.mdpi.com/journal/education}{}%
-  \ifthenelse{\equal{\@journal}{Electronics}}{www.mdpi.com/journal/electronics}{}%
-  \ifthenelse{\equal{\@journal}{Energies}}{www.mdpi.com/journal/energies}{}%
-  \ifthenelse{\equal{\@journal}{Entropy}}{www.mdpi.com/journal/entropy}{}%
-  \ifthenelse{\equal{\@journal}{EnvironmentalSciences}}{www.mdpi.com/journal/environsci}{}%
-  \ifthenelse{\equal{\@journal}{Environments}}{www.mdpi.com/journal/environments}{}%
-  \ifthenelse{\equal{\@journal}{Epigenomes}}{www.mdpi.com/journal/epigenomes}{}%
-  \ifthenelse{\equal{\@journal}{Fibers}}{www.mdpi.com/journal/f\mbox{}ibers}{}%
-  \ifthenelse{\equal{\@journal}{Foods}}{www.mdpi.com/journal/foods}{}%
-  \ifthenelse{\equal{\@journal}{Forests}}{www.mdpi.com/journal/forests}{}%
-  \ifthenelse{\equal{\@journal}{FutureInternet}}{www.mdpi.com/journal/futureinternet}{}%
-  \ifthenelse{\equal{\@journal}{Galaxies}}{www.mdpi.com/journal/galaxies}{}%
-  \ifthenelse{\equal{\@journal}{Games}}{www.mdpi.com/journal/games}{}%
-  \ifthenelse{\equal{\@journal}{Gels}}{www.mdpi.com/journal/gels}{}%
-  \ifthenelse{\equal{\@journal}{Genealogy}}{www.mdpi.com/journal/genealogy}{}%
-  \ifthenelse{\equal{\@journal}{Genes}}{www.mdpi.com/journal/genes}{}%
-  \ifthenelse{\equal{\@journal}{Geosciences}}{www.mdpi.com/journal/geosciences}{}%
-  \ifthenelse{\equal{\@journal}{Healthcare}}{http://www.mdpi.com/journal/healthcare}{}%
-  \ifthenelse{\equal{\@journal}{Horticulturae}}{www.mdpi.com/journal/horticulturae}{}%
-  \ifthenelse{\equal{\@journal}{Humanities}}{www.mdpi.com/journal/humanities}{}%
-  \ifthenelse{\equal{\@journal}{Hydrology}}{www.mdpi.com/journal/hydrology}{}%
-  \ifthenelse{\equal{\@journal}{Informatics}}{www.mdpi.com/journal/informatics}{}%
-  \ifthenelse{\equal{\@journal}{Information}}{www.mdpi.com/journal/information}{}%
-  \ifthenelse{\equal{\@journal}{Inorganics}}{www.mdpi.com/journal/inorganics}{}%
-  \ifthenelse{\equal{\@journal}{Insects}}{www.mdpi.com/journal/insects}{}%
-  \ifthenelse{\equal{\@journal}{Ijerph}}{www.mdpi.com/journal/ijerph}{}%
-  \ifthenelse{\equal{\@journal}{Ijfs}}{www.mdpi.com/journal/ijfs}{}%
-  \ifthenelse{\equal{\@journal}{Ijms}}{www.mdpi.com/journal/ijms}{}%
-  \ifthenelse{\equal{\@journal}{Ijgi}}{www.mdpi.com/journal/ijgi}{}%
-  \ifthenelse{\equal{\@journal}{Jcdd}}{http://www.mdpi.com/journal/jcdd}{}%
-  \ifthenelse{\equal{\@journal}{Jcm}}{www.mdpi.com/journal/jcm}{}%
-  \ifthenelse{\equal{\@journal}{Jdb}}{www.mdpi.com/journal/jdb}{}%
-  \ifthenelse{\equal{\@journal}{Jfb}}{www.mdpi.com/journal/jfb}{}%
-  \ifthenelse{\equal{\@journal}{Jof}}{www.mdpi.com/journal/jof}{}%
-  \ifthenelse{\equal{\@journal}{Jimaging}}{http://www.mdpi.com/journal/jimaging}{}%
-  \ifthenelse{\equal{\@journal}{Joi}}{http://www.mdpi.com/journal/jintelligence}{}%
-  \ifthenelse{\equal{\@journal}{Jlpea}}{www.mdpi.com/journal/jlpea}{}%
-  \ifthenelse{\equal{\@journal}{Jmse}}{www.mdpi.com/journal/jmse}{}%
-  \ifthenelse{\equal{\@journal}{Jpm}}{www.mdpi.com/journal/jpm}{}%
-  \ifthenelse{\equal{\@journal}{Jrfm}}{www.mdpi.com/journal/jrfm}{}%
-  \ifthenelse{\equal{\@journal}{Jsan}}{www.mdpi.com/journal/jsan}{}%
-  \ifthenelse{\equal{\@journal}{Land}}{www.mdpi.com/journal/land}{}%
-  \ifthenelse{\equal{\@journal}{Laws}}{www.mdpi.com/journal/laws}{}%
-  \ifthenelse{\equal{\@journal}{Life}}{www.mdpi.com/journal/life}{}%
-  \ifthenelse{\equal{\@journal}{Lubricants}}{www.mdpi.com/journal/lubricants}{}%
-  \ifthenelse{\equal{\@journal}{Machines}}{www.mdpi.com/journal/machines}{}%
-  \ifthenelse{\equal{\@journal}{Magnetochemistry}}{www.mdpi.com/journal/magnetochemistry}{}%
-  \ifthenelse{\equal{\@journal}{MarineDrugs}}{www.mdpi.com/journal/marinedrugs}{}%
-  \ifthenelse{\equal{\@journal}{Materials}}{www.mdpi.com/journal/materials}{}%
-  \ifthenelse{\equal{\@journal}{Mathematics}}{www.mdpi.com/journal/mathematics}{}%
-  \ifthenelse{\equal{\@journal}{MedicalSciences}}{http://www.mdpi.com/journal/medsci}{}%
-  \ifthenelse{\equal{\@journal}{Membranes}}{www.mdpi.com/journal/membranes}{}%
-  \ifthenelse{\equal{\@journal}{Metabolites}}{www.mdpi.com/journal/metabolites}{}%
-  \ifthenelse{\equal{\@journal}{Metals}}{www.mdpi.com/journal/metals}{}%
-  \ifthenelse{\equal{\@journal}{Microarrays}}{www.mdpi.com/journal/microarrays}{}%
-  \ifthenelse{\equal{\@journal}{Micromachines}}{www.mdpi.com/journal/micromachines}{}%
-  \ifthenelse{\equal{\@journal}{Microorganisms}}{www.mdpi.com/journal/microorganisms}{}%
-  \ifthenelse{\equal{\@journal}{Minerals}}{www.mdpi.com/journal/minerals}{}%
-  \ifthenelse{\equal{\@journal}{Molbank}}{www.mdpi.com/journal/molbank}{}%
-  \ifthenelse{\equal{\@journal}{Molecules}}{www.mdpi.com/journal/molecules}{}%
-  \ifthenelse{\equal{\@journal}{Nanomaterials}}{www.mdpi.com/journal/nanomaterials}{}%
-  \ifthenelse{\equal{\@journal}{Ncrna}}{www.mdpi.com/journal/ncRNA}{}%
-  \ifthenelse{\equal{\@journal}{Nutrients}}{www.mdpi.com/journal/nutrients}{}%
-  \ifthenelse{\equal{\@journal}{Pathogens}}{www.mdpi.com/journal/pathogens}{}%
-  \ifthenelse{\equal{\@journal}{Pharmaceuticals}}{www.mdpi.com/journal/pharmaceuticals}{}%
-  \ifthenelse{\equal{\@journal}{Pharmaceutics}}{www.mdpi.com/journal/pharmaceutics}{}%
-  \ifthenelse{\equal{\@journal}{Pharmacy}}{http://www.mdpi.com/journal/pharmacy}{}%
-  \ifthenelse{\equal{\@journal}{Photonics}}{www.mdpi.com/journal/photonics}{}%
-  \ifthenelse{\equal{\@journal}{Plants}}{www.mdpi.com/journal/plants}{}%
-  \ifthenelse{\equal{\@journal}{Polymers}}{www.mdpi.com/journal/polymers}{}%
-  \ifthenelse{\equal{\@journal}{Processes}}{www.mdpi.com/journal/processes}{}%
-  \ifthenelse{\equal{\@journal}{Proteomes}}{www.mdpi.com/journal/proteomes}{}%
-  \ifthenelse{\equal{\@journal}{Publications}}{www.mdpi.com/journal/publications}{}%
-  \ifthenelse{\equal{\@journal}{Religions}}{www.mdpi.com/journal/religions}{}%
-  \ifthenelse{\equal{\@journal}{RemoteSensing}}{www.mdpi.com/journal/remotesensing}{}%
-  \ifthenelse{\equal{\@journal}{Resources}}{www.mdpi.com/journal/resources}{}%
-  \ifthenelse{\equal{\@journal}{Risks}}{www.mdpi.com/journal/risks}{}%
-  \ifthenelse{\equal{\@journal}{Robotics}}{www.mdpi.com/journal/robotics}{}%
-  \ifthenelse{\equal{\@journal}{Safety}}{www.mdpi.com/journal/safety}{}%
-  \ifthenelse{\equal{\@journal}{Sensors}}{www.mdpi.com/journal/sensors}{}%
-  \ifthenelse{\equal{\@journal}{Sinusitis}}{www.mdpi.com/journal/sinusitis}{}%
-  \ifthenelse{\equal{\@journal}{SocialSciences}}{www.mdpi.com/journal/socsci}{}%
-  \ifthenelse{\equal{\@journal}{Societies}}{www.mdpi.com/journal/societies}{}%
-  \ifthenelse{\equal{\@journal}{Sports}}{www.mdpi.com/journal/sports}{}%
-  \ifthenelse{\equal{\@journal}{Standards}}{www.mdpi.com/journal/standards}{}%
-  \ifthenelse{\equal{\@journal}{Sustainability}}{www.mdpi.com/journal/sustainability}{}%
-  \ifthenelse{\equal{\@journal}{Symmetry}}{www.mdpi.com/journal/symmetry}{}%
-  \ifthenelse{\equal{\@journal}{Systems}}{www.mdpi.com/journal/systems}{}%
-  \ifthenelse{\equal{\@journal}{Technologies}}{www.mdpi.com/journal/technologies}{}%
-  \ifthenelse{\equal{\@journal}{Toxics}}{http://www.mdpi.com/journal/toxics}{}%
-  \ifthenelse{\equal{\@journal}{Toxins}}{www.mdpi.com/journal/toxins}{}%
-  \ifthenelse{\equal{\@journal}{Universe}}{www.mdpi.com/journal/universe}{}%
-  \ifthenelse{\equal{\@journal}{Vaccines}}{www.mdpi.com/journal/vaccines}{}%
-  \ifthenelse{\equal{\@journal}{VeterinarySciences}}{www.mdpi.com/journal/vetsci}{}%
-  \ifthenelse{\equal{\@journal}{Viruses}}{www.mdpi.com/journal/viruses}{}%
-  \ifthenelse{\equal{\@journal}{Water}}{www.mdpi.com/journal/water}{}%
+{
+\fancypagestyle{plain}{
+\fancyhf{}
+\fancyfoot[L]{
+\fontsize{8}{8}\selectfont
+  {\ifthenelse{\equal{\@status}{submit}}{\normalfont Submitted to {\em \journalname}, pages \thepage \ -- \color{black}{\pageref*{LastPage}}}
+  {\normalfont {\em \journalname}\ {\bfseries {\@pubyear}}, {\em \@pubvolume}, \ifthenelse{\equal{\@articlenumber}{}}{\@firstpage --\pageref*{LastPage}}{\@articlenumber}; doi:\@doinum}}
 }
+ \fancyfoot[R]{\fontsize{8}{8}\selectfont{\changeurlcolor{black}\href{http://www.mdpi.com/journal/\@journal}{www.mdpi.com/journal/\@journal}}}
+ \fancyhead{}
+ \renewcommand{\headrulewidth}{0.0pt}%
+}}
 
-%% Define the length of the header on the front page
-\newcommand{\logolength}{%
-  \ifthenelse{\equal{\@journal}{Actuators}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{AdministrativeSciences}}{\begin{minipage}[t][26mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Aerospace}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Agriculture}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Agronomy}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Algorithms}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Animals}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Antibiotics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Antibodies}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Antioxidants}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{AppliedSciences}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Arts}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Atmosphere}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Atoms}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Axioms}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Batteries}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{BehavioralSciences}}{\begin{minipage}[t][30mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Bioengineering}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Biology}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Biomedicines}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Biomimetics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Biomolecules}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Biosensors}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{BrainSciences}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Buildings}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Cancers}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Catalysts}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Cells}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Challenges}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Chemosensors}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Children}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Chromatography}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Climate}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Coatings}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Computation}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Computers}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Cosmetics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Crystals}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Data}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{DentistryJournal}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Diagnostics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Diseases}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Diversity}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Econometrics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Economies}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Education}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Electronics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Energies}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Entropy}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{EnvironmentalSciences}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Environments}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Epigenomes}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Fibers}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Foods}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Forests}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{FutureInternet}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Galaxies}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Games}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Gels}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Genealogy}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Genes}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Geosciences}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Healthcare}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Horticulturae}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Humanities}}{\begin{minipage}[t][21mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Hydrology}}{\begin{minipage}[t][21mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Informatics}}{\begin{minipage}[t][21mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Information}}{\begin{minipage}[t][21mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Inorganics}}{\begin{minipage}[t][21mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Insects}}{\begin{minipage}[t][21mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Ijerph}}{\begin{minipage}[t][25mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Ijfs}}{\begin{minipage}[t][21mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Ijms}}{\begin{minipage}[t][21mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Ijgi}}{\begin{minipage}[t][21mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jcdd}}{\begin{minipage}[t][30mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jcm}}{\begin{minipage}[t][25mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jdb}}{\begin{minipage}[t][30mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jfb}}{\begin{minipage}[t][30mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jof}}{\begin{minipage}[t][25mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jimaging}}{\begin{minipage}[t][25mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Joi}}{\begin{minipage}[t][25mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jlpea}}{\begin{minipage}[t][25mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jmse}}{\begin{minipage}[t][30mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jpm}}{\begin{minipage}[t][30mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jrfm}}{\begin{minipage}[t][30mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Jsan}}{\begin{minipage}[t][21mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Land}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Laws}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Life}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Lubricants}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Machines}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Magnetochemistry}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{MarineDrugs}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Materials}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Mathematics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{MedicalSciences}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Membranes}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Metals}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Metabolites}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Microarrays}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Micromachines}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Microorganisms}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Minerals}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}
-  \ifthenelse{\equal{\@journal}{Molbank}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Molecules}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Nanomaterials}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Ncrna}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Nutrients}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Pathogens}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Pharmaceuticals}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Pharmaceutics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Pharmacy}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Photonics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Plants}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Polymers}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Processes}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Proteomes}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Publications}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Religions}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{RemoteSensing}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Resources}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Risks}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Robotics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Safety}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Sensors}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Sinusitis}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{SocialSciences}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Societies}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Sports}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Standards}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Sustainability}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Symmetry}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Systems}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Technologies}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Toxics}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Toxins}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Universe}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Vaccines}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{VeterinarySciences}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Viruses}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-  \ifthenelse{\equal{\@journal}{Water}}{\begin{minipage}[t][17mm][t]{0.97\textwidth}}{}%
-}
-
-%% Definde the header for the front page
-\ifthenelse{\equal{\@arttype}{Supfile}}
-{%
-  \newcommand{\header}{%
-    \thispagestyle{empty}%
-  \begin{flushleft}%
-    \vspace*{-50pt}%
-    \textbf{Supplementary file}%
-  \end{flushleft}%
-  }%
-}%
-{%
-  \newcommand{\header}{%
-\thispagestyle{empty}
-\logolength
+%%%% Maketitle
+\renewcommand{\@maketitle}{
+\ifthenelse{\equal{\@arttype}{Supfile}}{
+\fontsize{18}{18}\selectfont
+\noindent\textbf{Supplementary Materials: \@Title}
+\par
+\vspace{12pt}
+\fontsize{10}{10}\selectfont
+\noindent\boldmath\bfseries{\@Author}
+}{
 \begin{flushleft}
-  \vspace{-36pt}
-  \hspace{-5mm}{\ifthenelse{\equal{\@status}{submit}}{\normalfont Submitted to {\em \journalname}. Pages \thepage \ - \color{black}{\pageref{LastPage}}.
-}{\normalfont {\em \journalname}\ {\bfseries {\@pubyear}}, {\em \@pubvolume},
-\thepage -\@lastpage; doi:\@doinum}}
-\end{flushleft}
-
-%% Creates command that produces the logo on the first page of an accepted paper. For drafts the logo is made in white so that it cannot be seen, but leave the formatting unchanged
-\vspace{-28pt}
-\begin{flushright}
-      {\fontsize{10}{10}\selectfont\bfseries{\colorbox{cyan}{\textcolor{white}{OPEN ACCESS}}}}\\[3pt]
-% {\fontsize{10}{10}\selectfont\bfseries{\colorbox{cyan}{\textcolor{white}{~OPEN ACCESS~}}}}\\[8pt]
-% This is the solution to be really comparable to the Word template
+\vspace*{-1.75cm}
+{%0
 \ifthenelse{\equal{\@status}{submit}}{
-        {{\logosize}{\logosize}\selectfont\bfseries\itshape\textcolor{white}{\logo}}\\
-        \normalfont\bfseries\textcolor{white}{ISSN \issn}\\[-2pt]
-        \normalfont \textcolor{white}{www.mdpi.com/journal/\logo}
-        }
-        {{\logosize\selectfont\bfseries\itshape \textcolor{logocolor}{\logo}}\\
-        \normalfont\bfseries ISSN \issn\\[-2pt]
-        \normalfont \web
-        }
-\end{flushright}
- \end{minipage}}
-}
-
-%% Maketitle
-\renewcommand{\@maketitle}{%
-\header
-
-%%Title,author, address, abstract, keywords
-\ifthenelse{\equal{\@arttype}{Supfile}}{}{
-\begin{flushleft}%
- {%
- %
- \fontsize{12}{12}\selectfont
-  \vspace{0pt}
- \textit{\@arttype\\}
- \vspace{6pt}
- }%
-  {%3
-   \fontsize{18}{18}\selectfont
-   \bfseries{\@Title}
-   \par
-  }%3
-  \vspace{12pt}%
-  {%4
- \boldmath  \bfseries{\@Author}
-   \par
-  }%4
-  \vspace{12pt}%
-{%6
-\ifthenelse{\equal{\firstargument}{1}}{}{\hangafter=1\hangindent=0.7em\noindent}%
+\hfill \href{http://www.mdpi.com}{\includegraphics[height=1cm]{logo-mdpi}}\vspace{0.5cm}}
+{\href{http://www.mdpi.com/journal/\@journal}{\includegraphics[height=1.2cm]{\@journal-logo}} \hfill \href{http://www.mdpi.com}{\includegraphics[height=1cm]{logo-mdpi}} \hspace{-6pt}}
+\par
+}%0
+{%1
+\vspace{14pt}
+\fontsize{10}{10}\selectfont
+\textit{\@arttype}
+\par
+}%1
+{%2
+\vspace{-1pt}
+\fontsize{18}{18}\selectfont
+\bfseries{\@Title}
+\par
+\vspace{15pt}
+}%2
+{%3
+\fontsize{10}{10}\selectfont
+\boldmath\bfseries{\@Author}
+\par
+\vspace{6pt}
+}%3
+\begin{spacing}{1.35}
+{%4
+\leftskip0.2cm
+\fontsize{9}{9}\selectfont
+\ifthenelse{\equal{\firstargument}{1}}{}{\hangafter=1\hangindent=1.7em \noindent}%
 \@address
 \par
-\vspace{12pt}
+}%4
+{%5
+\leftskip0.2cm
+\fontsize{9}{9}\selectfont
+\ifthenelse{\equal{\@authornum}{authors}}{
+\ifthenelse{\equal{\@corres}{\@empty}}{}{\hangafter=1\hangindent=1.7em\noindent \textbf{*} \quad \@corres}
+\par
+}{}
+}%5
+{%6
+\leftskip0.2cm
+\fontsize{9}{9}\selectfont
+\ifthenelse{\equal{\@firstnote}{\@empty}}{}{\hangafter=1\hangindent=1.7em\noindent  
+$\dagger$ \quad \@firstnote}
+\par
 }%6
-%\vspace{12pt}%
-{%
-\ifthenelse{\equal{\@conference}{\@empty}}{}{\hangafter=1\hangindent=0.7em\noindent $^\dagger$ This paper is an extended version of our paper published in\space \@conference.
+{%7
+\leftskip0.2cm
+\fontsize{9}{9}\selectfont
+\ifthenelse{\equal{\@secondnote}{\@empty}}{}{\hangafter=1\hangindent=1.7em \noindent $\ddagger$ \quad \@secondnote}
 \par
-\vspace{12pt}}
-}
-{
-\ifthenelse{\equal{\@contributed}{\@empty}}{}
-{\@contributed
+}%7
+{%8
+\leftskip0.2cm
+\fontsize{9}{9}\selectfont
+\ifthenelse{\equal{\@conference}{\@empty}}{}{\hangafter=1\hangindent=1.7em\noindent \textsection
+ \quad This paper is an extended version of our paper published in\space \@conference.}
 \par
-\vspace{12pt}}
-}
-{%
-\ifthenelse{\equal{\@authornum}{authors}}{\hangafter=1\hangindent=0.7em\noindent
-{\textbf{*}} \ifthenelse{\equal{\corresfirstargument}{2}}{Authors}{Author} to whom correspondence should be addressed; \@corres
-\par
-\vspace{12pt}}{}
 }%8
-
-{
-\ifthenelse{\equal{\@externaleditor}{\@empty}}{}
-{\@externaleditor
-\par
-\vspace{12pt}}
-}
-
-\em
 {%9
-\ifthenelse{\equal{\@status}{submit}}{Version {\@ \today} submitted to {\em
-\@journal}. Typeset by \LaTeX{} using class file mdpi.cls}{\@history}\par
+\vspace{6pt}
+\leftskip0.2cm
+\fontsize{9}{9}\selectfont
+\ifthenelse{\equal{\@externaleditor}{\@empty}}{}{\@externaleditor}
+\par
 }%9
+{%10
+\leftskip0.2cm
+\fontsize{9}{9}\selectfont 
+\ifthenelse{\equal{\@status}{submit}}{Version {\@ \today} submitted to \journalname; Typeset by \LaTeX{} using class file mdpi.cls}{\@history}
+\par
+}%10
+\end{spacing}
 \end{flushleft}
 }
-}%End of maketitle
+}
 
-%% Command for typsetting abstract, kewyords, PACS, MSC, and JEL
+%%%% Abstract, keywords, journal data, PACS, MSC, JEL
 \newcommand{\abstractkeywords}{%
-\vspace{12pt}%
-\hrule
-
-%% Specifies how the abstract should be typeset
 {%10
 \begingroup
- \vspace{6mm}
-\leftskip1cm
-\rightskip\leftskip
-\parindent0em
-  \noindent\textbf{Abstract:\space}\@abstract
-  \vspace{3mm}
+\vspace{-15pt}
+\leftskip0.2cm 
+\ifthenelse{\equal{\@simplesumm}{\@empty}}{}{
+  \noindent\textbf{Simple Summary:\space}\@simplesumm
+  \vspace{12pt}
   \par
-  \endgroup
+}
+\ifthenelse{\equal{\@abstract}{\@empty}}{}{
+\noindent\textbf{Abstract:\space}\@abstract
+\vspace{12pt}
+\par
+}
+\endgroup
 }%10
-
-%% Specifies how the keywords should be typeset and inserts a horizontal line afterwards if PACS and/or MSC and/or JEL are specified they are inserted after keywords, but before the line
 {%11
 \begingroup
- \vspace{3pt}
-\leftskip1cm
-\rightskip\leftskip
-\parindent0em
-     \textbf{Keywords:\space}\@keyword
- \vspace{12pt}
- \par
- \endgroup
+\leftskip0.2cm
+\ifthenelse{\equal{\@keyword}{\@empty}}{}{
+\noindent\textbf{Keywords:\space}\@keyword
+\vspace{12pt}
+\par
+}
+\endgroup
 }%11
-
-%% For journal Data:
-{%11
-\ifthenelse{\equal{\@dataset}{\@empty}}{}{%
+{% For journal Data:
+\ifthenelse{\equal{\@dataset}{\@empty}}{}{
 \begingroup
- \vspace{3pt}
-\leftskip1cm
-\rightskip\leftskip
-\parindent0em
-     \textbf{Data Set:\space}\@dataset
- \vspace{12pt}
- \par
- \endgroup}
- }%11
-{%11
-\ifthenelse{\equal{\@datasetlicense}{\@empty}}{}{%
+\leftskip0.2cm
+\noindent\textbf{Data Set:\space}\@dataset
+\vspace{12pt}
+\par
+\endgroup}
+}%
+{%For journal Data:
+\ifthenelse{\equal{\@datasetlicense}{\@empty}}{}{
 \begingroup
- \vspace{3pt}
-\leftskip1cm
-\rightskip\leftskip
-\parindent0em
-     \textbf{Data Set License:\space}\@datasetlicense
- \vspace{12pt}
- \par
- \endgroup}
- }%11
-
-%% Specifies how PACS should be typeset
+\leftskip0.2cm
+\noindent\textbf{Data Set License:\space}\@datasetlicense
+\vspace{12pt}
+\par
+\endgroup}
+}%
 {%12
-\ifthenelse{\equal{\@pacs}{\@empty}}{}{%
+\ifthenelse{\equal{\@pacs}{\@empty}}{}{
 \begingroup
-\leftskip1cm
-\rightskip\leftskip
-\parindent0em
-  \noindent\textbf{PACS classifications:\space}\@pacs
-  \vspace{12pt}
-  \par
-  \endgroup}%
+\leftskip0.2cm
+\noindent\textbf{PACS:\space}\@pacs
+\vspace{12pt}
+\par
+\endgroup}
 }%12
-
-%% Specifies how MSC should be typeset
 {%13
-\ifthenelse{\equal{\@msc}{\@empty}}{}{%
+\ifthenelse{\equal{\@msc}{\@empty}}{}{
 \begingroup
-\leftskip1cm
-\rightskip\leftskip
-\parindent0em
-\noindent\textbf{MSC classifications:\space}\@msc
-  \vspace{12pt}
-   \par
-  \endgroup}%%
+\leftskip0.2cm
+\noindent\textbf{MSC:\space}\@msc
+\vspace{12pt}
+\par
+\endgroup}
 }%13
-
-%% Specifies how JEL should be typeset
-{%13
-\ifthenelse{\equal{\@jel}{\@empty}}{}{%
+{%14
+\ifthenelse{\equal{\@jel}{\@empty}}{}{
 \begingroup
-\leftskip1cm
-\rightskip\leftskip
-\parindent0em
-\noindent\textbf{JEL classifications:\space}\@jel
-  \vspace{12pt}
-   \par
-  \endgroup}%%
-}%13
-\vspace{6pt}
+\leftskip0.2cm
+\noindent\textbf{JEL:\space}\@jel
+\vspace{12pt}
+\par
+\endgroup}
+}%14
+\vspace{4pt}
 \hrule
 \vspace{12pt}
-}%End of Abstract and Keywords
-%
-%
-\ifthenelse{\equal{\@arttype}{Supfile}}%
-{%
-  \AtBeginDocument{%
-    \maketitle%
-    \thispagestyle{empty}%
-    \let\maketitle\relax%
-    \ifthenelse{\equal{\@status}{submit}}{\linenumbers}{}%
-  }%
-}%
-{%
-  \AtBeginDocument{%
-    \maketitle
-    \thispagestyle{empty}
-    \let\maketitle\relax
-    \ifthenelse{\equal{\@status}{submit}}{\linenumbers}{}
-    \abstractkeywords
-  }%
-}%
-
-%% Specifies how section headings should be typeset
-\renewcommand{\thesection}{\arabic{section}}
-\renewcommand{\section}{ %
-  \@startsection{section}{1}{0pt}{12pt}{12pt}{\normalsize\bfseries}}
-
-\renewcommand{\thesubsection}{\arabic{section}.\arabic{subsection}}
-\renewcommand{\subsection}{ %
-  \@startsection{subsection}{2}{0pt}{12pt}{12pt}{\normalsize\itshape}}
-
-\renewcommand{\thesubsubsection}{\arabic{section}.\arabic{subsection}.\arabic{subsubsection}}
-\renewcommand{\subsubsection}{ %
-  \@startsection{subsubsection}{3}{0pt}{12pt}{12pt}{\normalsize}}
-
-%% Dot after number of section, but not in ref
-\let\@@seccntformat\@seccntformat
-\renewcommand*{\@seccntformat}[1]{%
-  \expandafter\ifx\csname @seccntformat@#1\endcsname\relax
-    \expandafter\@@seccntformat
-  \else
-    \expandafter
-      \csname @seccntformat@#1\expandafter\endcsname
-  \fi
-    {#1}%
 }
 
-%\newcommand*{\@seccntformat@subsubsection}[1]{%
-%  \csname the#1\endcsname
-%}
-
-\renewcommand*{\@@seccntformat}[1]{%
-  \csname the#1\endcsname.
+%%%% Print maketitle and abstractkeywords
+\ifthenelse{\equal{\@arttype}{Supfile}}{
+\AfterEndPreamble{
+\maketitle
+\let\maketitle\relax
+\ifthenelse{\equal{\@status}{submit}}{\linenumbers}{}
+}
+}
+{\AfterEndPreamble{
+\maketitle
+\let\maketitle\relax
+\ifthenelse{\equal{\@status}{submit}}{\linenumbers}{}
+\abstractkeywords
+}
 }
 
-%% Special section title style
-\newcommand{\acknowledgments}[1]{%
-    \par\vspace{12pt}\noindent\textbf{#1}%
-    \par\vspace{12pt}}
+%%%% Section headings
+\titleformat {\section} [block] {\raggedright \fontsize{10}{10}\selectfont\bfseries} {\thesection. \space} {0pt} {}
+\titlespacing {\section} {0pt} {12pt} {6pt}
 
-%% Special section title style
+\titleformat {\subsection} [block] {\raggedright \fontsize{10}{10}\selectfont\itshape} {\thesubsection .\space} {0pt} {}
+\titlespacing {\subsection} {0pt} {12pt} {6pt}
+
+\titleformat {\subsubsection} [block] {\raggedright \fontsize{10}{10}\selectfont} {\thesubsubsection .\space} {0pt} {}
+\titlespacing {\subsubsection} {0pt} {12pt} {6pt}
+
+\titleformat {\paragraph} [block] {\raggedright \fontsize{10}{10}\selectfont} {} {0pt} {}
+\titlespacing {\paragraph} {0pt} {12pt} {6pt}
+
+%%%% Special section title style
+\newcommand{\supplementary}[1]{
+\par\vspace{6pt}\noindent{\fontsize{9}{9}\selectfont{#1}\par}}
+
+\newcommand{\acknowledgments}[1]{
+\vspace{6pt}\noindent{\fontsize{9}{9}\selectfont{#1}\par}}
+
 \newcommand{\authorcontributions}[1]{%
-    \par\vspace{12pt}\noindent\textbf{#1}%
-    \par\vspace{12pt}}
+\vspace{6pt}\noindent{\fontsize{9}{9}\selectfont{#1}\par}}
 
-%% Special section title style
 \newcommand{\conflictofinterests}[1]{%
-    \par\vspace{12pt}\noindent\textbf{#1}%
-    \par\vspace{12pt}}
+\vspace{6pt}\noindent{\fontsize{9}{9}\selectfont{#1}\par}}
 
-%% Special section title style
-\newcommand{\abbreviations}[1]{%
-    \par\vspace{12pt}\noindent\textbf{#1}%
-    \par\vspace{12pt}}
+\newcommand{\sampleavailability}[1]{%
+\vspace{6pt}\noindent{\fontsize{9}{9}\selectfont{#1}\par}}
 
-%% Fix for two line titles in section
-\def\section{\@ifstar\unnumberedsection\numberedsection}
-\def\numberedsection{\@ifnextchar[%]
-  \numberedsectionwithtwoarguments\numberedsectionwithoneargument}
-\def\unnumberedsection{\@ifnextchar[%]
-  \unnumberedsectionwithtwoarguments\unnumberedsectionwithoneargument}
-\def\numberedsectionwithoneargument#1{\numberedsectionwithtwoarguments[#1]{#1}}
-\def\unnumberedsectionwithoneargument#1{\unnumberedsectionwithtwoarguments[#1]{#1}}
-\def\numberedsectionwithtwoarguments[#1]#2{%
-  \ifhmode\par\fi
-  \removelastskip
-  \vskip 3ex\goodbreak
-  \refstepcounter{section}%
-  \noindent
-  \leavevmode
-  \begingroup
-  \normalsize\bfseries
-  \thesection.\
-  #2 \vspace{12pt}
-  \endgroup
-  \addcontentsline{toc}{section}{%
-    \protect\numberline{\thesection}%
-    #1}%
-  }
-\def\unnumberedsectionwithtwoarguments[#1]#2{%
-  \ifhmode\par\fi
-  \removelastskip
-  \vskip 3ex\goodbreak
-%  \refstepcounter{section}%
-  \noindent
-  \leavevmode
-  \begingroup
-  \bfseries
-
-%  \thesection\
-  #2\quad
-  \endgroup
-  \addcontentsline{toc}{section}{%
-%    \protect\numberline{\thesection}%
-    #1}%
-  }
-
-%% Subsection fix for line indent
-\def\subsection{\@ifstar\unnumberedsubsection\numberedsubsection}
-\def\numberedsubsection{\@ifnextchar[%]
-  \numberedsubsectionwithtwoarguments\numberedsubsectionwithoneargument}
-\def\unnumberedsubsection{\@ifnextchar[%]
-  \unnumberedsubsectionwithtwoarguments\unnumberedsubsectionwithoneargument}
-\def\numberedsubsectionwithoneargument#1{\numberedsubsectionwithtwoarguments[#1]{#1}}
-\def\unnumberedsubsectionwithoneargument#1{\unnumberedsubsectionwithtwoarguments[#1]{#1}}
-\def\numberedsubsectionwithtwoarguments[#1]#2{%
-  \ifhmode\par\fi
-  \removelastskip
-  \vskip 3ex\goodbreak
-  \refstepcounter{subsection}%
-  \noindent
-  \leavevmode
-  \begingroup
-  \normalsize\itshape
-  \thesubsection.\
-  #2 \vspace{12pt}
-  \endgroup
-  \addcontentsline{toc}{subsection}{%
-    \protect\numberline{\thesubsection}%
-    #1}%
-  }
-\def\unnumberedsubsectionwithtwoarguments[#1]#2{%
-  \ifhmode\par\fi
-  \removelastskip
-  \vskip 3ex\goodbreak
-%  \refstepcounter{subsection}%
-  \noindent
-  \leavevmode
-  \begingroup
-  \bfseries
-%  \thesubsection\
-  #2\quad
-  \endgroup
-  \addcontentsline{toc}{subsection}{%
-%    \protect\numberline{\the}%
-    #1}%
-  }
-
-%\renewcommand*{\p@section}{\arabic{section}.}
-%\renewcommand*{\p@subsection}{\p@section\thesection~}
-%\renewcommand*{\p@subsubsection}{\p@subsection\thesubsection~}
-
-%% Defines the appendix
+%%%% Defines the appendix
 \renewcommand{\appendix}{\par
   \setcounter{section}{0}%
   \setcounter{subsection}{0}%
   \setcounter{subsubsection}{0}%
-  \gdef\thesection{\@Alph\c@section}%
+  \gdef\thesection{}%
   \gdef\thesubsection{\@Alph\c@section.\@arabic\c@subsection}%
   \gdef\theHsection{\@Alph\c@section.}%
   \gdef\theHsubsection{\@Alph\c@section.\@arabic\c@subsection}%
   \csname appendixmore\endcsname
 }
 
-%% Specifies how captions should be typeset
-\renewcommand{\@makecaption}[2]{%
-  \vskip\abovecaptionskip
-  \sbox\@tempboxa{\normalsize{\bfseries #1}. #2}%
-  \ifdim \wd\@tempboxa >\hsize
-    \normalsize{\bfseries #1}. #2\par
-  \else
-    \global \@minipagefalse
-    \hb@xt@\hsize{\hfil\box\@tempboxa\hfil}%
-  \fi
-  \vskip\belowcaptionskip}
+%%%% Layout
+\RequirePackage[left=2.7cm,right=2.7cm,top=1.8cm,bottom=1.5cm, includehead,includefoot]{geometry}
+\linespread{1.13} 
+\setlength{\parindent}{0.75cm}
 
+%%%% Figures and tables
 \floatstyle{plain}
 \restylefloat{figure}
-
 \floatstyle{plaintop}
 \restylefloat{table}
+\floatstyle{plaintop}
+\restylefloat{boxenv}
+\floatstyle{plain}
+\restylefloat{scheme}
+\RequirePackage{caption} 
+\captionsetup[figure]{position=bottom, margin=0.75cm, labelfont={bf, small, stretch=1.17}, labelsep=period, textfont={small, stretch=1.17}, aboveskip=6pt, belowskip=12pt, justification=justified}
+\captionsetup[scheme]{position=bottom, margin=0.75cm, labelfont={bf, small, stretch=1.17}, labelsep=period, textfont={small, stretch=1.17}, aboveskip=6pt, belowskip=12pt, justification=justified}
+\captionsetup[table]{position=top, margin=0.75cm, labelfont={bf, small, stretch=1.17}, labelsep=period, textfont={small, stretch=1.17}, aboveskip=12pt, belowskip=6pt, justification=justified}
+\captionsetup[boxenv]{position=top, margin=0.75cm, labelfont={bf, small, stretch=1.17}, labelsep=period, textfont={small, stretch=1.17}, aboveskip=12pt, belowskip=6pt, justification=justified}
 
-\usepackage{caption}
-\captionsetup[figure]{position=bottom, margin=1cm, labelfont=bf, labelsep=period, skip=12pt, justification=justified}
-\captionsetup[table]{position=top, margin=1cm, labelfont=bf, labelsep=period, skip=12pt, justification=justified}
+%% For table footnotes
+\newsavebox{\@justcentbox}
+\newcommand{\justifyorcenter}[1]{
+\sbox \@justcentbox{#1}
+\ifdim \wd \@justcentbox >\hsize #1
+\else \centerline{#1} \fi
+}
 
-\setlength{\oddsidemargin}{17.5mm}
-\setlength{\voffset}{-1in}
-\setlength{\hoffset}{-1in}
-\setlength{\topmargin}{17.5mm}
-\setlength{\headsep}{0mm}
-\setlength{\textheight}{250mm}
-\setlength{\textwidth}{175mm}
-\setlength{\textfloatsep}{12pt}
-\setlength{\abovedisplayskip}{0pt}
-\setlength{\belowdisplayskip}{0pt}
-\setlength{\parindent}{5mm}
-\setlength{\abovecaptionskip}{6pt}
-\setlength{\belowcaptionskip}{12pt}
-\setlength{\itemsep}{0pt}
-\setlength{\partopsep}{0pt}
-\setlength{\parsep}{0pt}
+%%%% Bullet lists
+\newlength{\wideitemsep}
+\setlength{\wideitemsep}{.5\itemsep}
+\addtolength{\wideitemsep}{-7pt}
+\let\olditem\item
+\renewcommand{\item}{\setlength{\itemsep}{\wideitemsep}\olditem}
+
+%%%% Supplementary file
 \ifthenelse{\equal{\@arttype}{Supfile}}
 {%
   \renewcommand{\thefigure}{S\arabic{figure}}%
   \renewcommand{\thetable}{S\arabic{table}}%
 }{}%
 
-%% Create headings for pages except the first
-\newcommand{\heading}[1]{\gdef\@heading{#1}}
-\setlength{\headheight}{8.5pt}
-\setlength{\headsep}{25.5pt}
-
-\def\ps@myheadings{%
-    \def\@oddfoot{}
-    \let\@evenfoot\@oddfoot
-    \def\@evenhead{%
-
-     {\ifthenelse{\equal{\@status}{submit}}{ \ifthenelse{\equal{\@arttype}{Supfile}}{}{Version {\@ \today} submitted to {\em \journalname}}%
-        \hfil {\bfseries \thepage \ of \pageref{LastPage}}%
-}{\ifthenelse{\equal{\@arttype}{Supfile}}{}{{\em \journalname} {\bfseries \@pubyear}, {\em \@pubvolume}}%
-        \hfill {\bfseries \thepage}}%
-        \vspace{50pt}}%
-       }
-    \let\@oddhead\@evenhead
-    \let\@mkboth\@gobbletwo
-    \let\sectionmark\@gobble
-    \let\subsectionmark\@gobble
+%%%% Header and footer (all pages except the first)
+\renewcommand\headrule{} %% set line (from fancyhdr) in header to nothing
+\pagestyle{fancy}
+\lhead{
+\fontsize{8}{8}\selectfont
+\ifthenelse{\equal{\@status}{submit}}{Version {\@ \today} submitted to {\em \journalname}}{
+\ifthenelse{\equal{\@arttype}{Supfile}}{{\em \journalname} {\bfseries \@pubyear}, {\em \@pubvolume}, \ifthenelse{\equal{\@articlenumber}{}}{\@firstpage --\pageref*{LastPage}}{\@articlenumber}; doi:\@doinum}{
+{\em \journalname} {\bfseries \@pubyear}, {\em \@pubvolume}, \ifthenelse{\equal{\@articlenumber}{}}{\@firstpage --\pageref*{LastPage}}{\@articlenumber}}}
 }
+\ifthenelse{\equal{\@journal}{recycling}}{
+\rhead{
+\ifthenelse{\equal{\@arttype}{Supfile}}{\fontsize{8}{8}\selectfont S\thepage{}}{
+\ifthenelse{\equal{\@status}{submit}}{\fontsize{8}{8}\selectfont\thepage}{
+\fontsize{8}{8}\selectfont\thepage{}}}
+}
+}
+{
+\rhead{
+\ifthenelse{\equal{\@arttype}{Supfile}}{
+\fontsize{8}{8}\selectfont S\thepage{} of S\pageref*{LastPage}
+}
+{
+\ifthenelse{\equal{\@status}{submit}}{\fontsize{8}{8}\selectfont\thepage \ of \pageref*{LastPage}}{
+\fontsize{8}{8}\selectfont\thepage{} of \pageref*{LastPage}}
+}}
+}
+\cfoot{}
 
-\pagestyle{myheadings}
-
-%% Bibliography
-\renewcommand\@biblabel[1]{#1. }
-
-\def\thebibliography#1{\vspace{12pt}
-\noindent{{\bfseries References}}\vspace{12pt}%
-\list{{\arabic{enumi}}}{\def\makelabel##1{\hss{##1}}\topsep=0\p@\parsep=0\p@
-\partopsep=0\p@\itemsep=0\p@
-\labelsep=1ex
+%%%% Bibliography
+\renewcommand\@biblabel[1]{#1.\hfill}
+\def\thebibliography#1{
+\linespread{1.44} 
+\vspace{12pt}
+\fontsize{10}{10}\selectfont
+\noindent{{\bfseries \bibname}}
+\vspace{6pt}
+\fontsize{9}{9}\selectfont
+\list{{\arabic{enumi}}}{\def\makelabel##1{\hss{##1}}
+\topsep=0\p@
+\parsep=5\p@
+\partopsep=0\p@
+\itemsep=0\p@
+\labelsep=1.5mm
 \itemindent=0\p@
 \settowidth\labelwidth{\footnotesize[#1]}%
 \leftmargin\labelwidth
@@ -1984,18 +1107,31 @@ pdfkeywords={\@keyword}
 }
 \let\endthebibliography=\endlist
 
-%% Creates command that produces the copyright information
+%%%% Copyright info
 \newcommand{\cright}{%
 \ifthenelse{\equal{\@arttype}{Supfile}}{}{%
-\vspace{12pt}\noindent \copyright
-\ifthenelse{\equal{\@status}{submit}}{\ {\@ \today} by the
-\@authornum; submitted to {\em \journalname} for possible open
+\vspace{12pt}
+\noindent
+\linespread{1.44} 
+\fontsize{9}{9}\selectfont 
+\ifthenelse{\equal{\@status}{submit}}{\noindent \copyright{} {\@ \the\year} by the
+\@authornum. Submitted to {\em \journalname} for possible open
 access publication under the terms and conditions of the
 Creative Commons Attribution license
-http://creativecommons.org/licenses/by/4.0/. }{\ {\@pubyear} by
+(\changeurlcolor{black}\href{http://creativecommons.org/licenses/by/4.0/.}{http://creativecommons.org/licenses/by/4.0/}) }{
+\begin{minipage}{.2\textwidth}
+\hspace{-1.2mm}\vspace{2mm}\href{http://creativecommons.org/}{\includegraphics[height=1cm]{logo-ccby}}
+\end{minipage}% This must go next to `\end{minipage}`
+\begin{minipage}{.8\textwidth}
+\copyright
+\ {\@copyrightyear} by
 the \@authornum; licensee MDPI, Basel, Switzerland. This article is an
-open access article \linebreak distributed under the terms and conditions
-of the Creative Commons Attribution license \linebreak
-(http://creativecommons.org/licenses/by/4.0/).}}}
+open access article distributed under the terms and conditions
+of the Creative Commons by Attribution (CC-BY) license
+(\changeurlcolor{black}\href{http://creativecommons.org/licenses/by/4.0/}{http://creativecommons.org/licenses/by/4.0/}).
+\end{minipage}
+}
+}
+}
 
 \endinput
