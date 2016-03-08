@@ -1,16 +1,3 @@
-commit 6fa09feb875a3a5e0d024c94df90a268ea07970b
-Author: Jonghoon Seo <jonghoon.seo@gmail.com>
-Date:   Sat Mar 5 13:46:16 2016 +0900
-
-    Proof-reading done
-
-diff --git a/Fast_Contour_Tracing_Algorithm.pdf b/Fast_Contour_Tracing_Algorithm.pdf
-index 4ffbeb4..2459b1e 100644
-Binary files a/Fast_Contour_Tracing_Algorithm.pdf and b/Fast_Contour_Tracing_Algorithm.pdf differ
-diff --git a/sensors-113427-for proof.tex b/sensors-113427-for proof.tex
-index b8a4f2f..06ff90c 100644
---- a/sensors-113427-for proof.tex	
-+++ b/sensors-113427-for proof.tex	
 @@ -130,8 +130,8 @@
  %=================================================================
  
@@ -138,7 +125,7 @@ index b8a4f2f..06ff90c 100644
  	\subfloat{ \includegraphics[height=2cm]{2.RelatedWorks/fig4-g.png} }
  	 
 -	\caption{Contour cases of the improved SBF (ISBF) \cite{Cheong2012Advanced}: (\textbf{a}) left neighbor; (\textbf{b}) inner-outer corner at the left-rear; (\textbf{c}) inner-outer corner at the front-left; (\textbf{d}) inner corner at the front; (\textbf{e}) front neighbor; (\textbf{f}) outer corner.}
-+	\caption{Contour cases of the improved SBF (ISBF) \cite{Cheong2006Advanced}: (\textbf{a}) left neighbor; (\textbf{b}) inner-outer corner at the left-rear; (\textbf{c}) inner-outer corner at the front-left; (\textbf{d}) inner corner at the front; (\textbf{e}) front neighbor; (\textbf{f}) outer corner. Reproduced with permission from Cheong, C., Seo, J., and Han, T.D., in proceedings of the 33rd KISS conference; published by KIISE, 2006.}
++	\caption{Contour cases of the improved SBF (ISBF) \cite{Cheong2006Advanced}: (\textbf{a}) left neighbor; (\textbf{b}) inner-outer corner at the left-rear; (\textbf{c}) inner-outer corner at the front-left; (\textbf{d}) inner corner at the front; (\textbf{e}) front neighbor; (\textbf{f}) outer corner. Reproduced with permission from \cite{Cheong2006Advanced}.}
  	\label{fig:image4}
  \end{figure}
  
